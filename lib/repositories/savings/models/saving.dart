@@ -54,7 +54,7 @@ class Saving extends Equatable {
         isCompleted,
       ];
 
-  // copy with
+  // copy with method
 
   Saving copyWith({
     String? id,
