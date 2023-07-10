@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "610396238684",
+    "project_id": "crypto-coins-fcce1",
+    "storage_bucket": "crypto-coins-fcce1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610396238684:android:22bcbb4caed4edcc218799",
+        "android_client_info": {
+          "package_name": "com.example.flutter_my_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610396238684-hodv6rtqj2fl8cm4nl30276l3k19ivr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBozEe5LRcafYZN0_9kizymYRo4wrlpEOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610396238684-hodv6rtqj2fl8cm4nl30276l3k19ivr5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
