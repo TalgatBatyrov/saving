@@ -19,12 +19,12 @@ class SavingsRepository implements AbstractSavingsRepository {
   Future<List<Saving>> getSavingsList() async {
     List<Saving> savingList = [];
     try {
-      CollectionReference saving = FirebaseFirestore.instance.collection('savings');
+      final saving = firestore.collection('savings');
 
       final response = await saving.get();
 
       savingList = response.docs.map((e) {
-        return Saving.fromJson(e.data() as Map<String, dynamic>);
+        return Saving.fromJson(e.data());
       }).toList();
 
       final savingListMap = {for (var e in savingList) e.id: e};
@@ -42,7 +42,7 @@ class SavingsRepository implements AbstractSavingsRepository {
     required String goal,
     required int total,
   }) async {
-    CollectionReference savingCollection = FirebaseFirestore.instance.collection('savings');
+    final savingCollection = firestore.collection('savings');
 
     final docId = savingCollection.doc().id;
 
@@ -58,9 +58,7 @@ class SavingsRepository implements AbstractSavingsRepository {
     savingCollection
         .doc(docId)
         .set(saving.toJson())
-        .then(
-          (value) => print("Success add Saving"),
-        )
+        .then((value) => print("Success add Saving"))
         .catchError(
           (error) => print("Failed to add Saving: $error"),
         );
@@ -68,16 +66,20 @@ class SavingsRepository implements AbstractSavingsRepository {
 
   @override
   Future<void> deleteSaving(String id) async {
-    CollectionReference savingCollection = FirebaseFirestore.instance.collection('savings');
+    final savingCollection = firestore.collection('savings');
 
-    savingCollection.doc(id).delete().then((value) => print("User Deleted")).catchError(
+    savingCollection
+        .doc(id)
+        .delete()
+        .then((value) => print("User Deleted"))
+        .catchError(
           (error) => print("Failed to delete user: $error"),
         );
   }
 
   @override
   Future<void> updateSaving(Saving saving) async {
-    CollectionReference savingCollection = FirebaseFirestore.instance.collection('savings');
+    final savingCollection = firestore.collection('savings');
 
     savingCollection
         .doc(saving.id)

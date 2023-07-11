@@ -18,6 +18,21 @@ class SavingTile extends StatefulWidget {
 
 class _SavingTileState extends State<SavingTile> {
   final _addController = TextEditingController();
+  final _goalController = TextEditingController();
+  bool _isEditing = false;
+
+  void _changeGoalName(SavingCubit savingCubit) {
+    final saving = widget.saving;
+    final goalName = _goalController.text;
+    final valueExists = goalName.isNotEmpty;
+
+    if (valueExists) {
+      savingCubit.updateSaving(
+        saving.copyWith(goal: goalName),
+      );
+    }
+    _isEditing = !_isEditing;
+  }
 
   void _addSaving(SavingCubit savingCubit) {
     final saving = widget.saving;
@@ -30,7 +45,7 @@ class _SavingTileState extends State<SavingTile> {
 
       savingCubit.updateSaving(
         saving.copyWith(
-          current: current,
+          current: current <= 0 ? 0 : current,
           remaining: saving.remaining - addValueInt,
         ),
       );
@@ -49,7 +64,7 @@ class _SavingTileState extends State<SavingTile> {
 
       savingCubit.updateSaving(
         saving.copyWith(
-          current: current,
+          current: current <= 0 ? 0 : current,
           remaining: saving.remaining + addValueInt,
         ),
       );
@@ -81,12 +96,43 @@ class _SavingTileState extends State<SavingTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              Center(
-                child: Text(
-                  saving.goal,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+              Visibility(
+                visible: _isEditing,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: TextField(
+                        controller: _goalController,
+                        decoration: const InputDecoration(
+                          labelText: 'Название цели',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: IconButton(
+                        onPressed: () => _changeGoalName(savingCubit),
+                        icon: const Icon(Icons.edit),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: !_isEditing ? 0 : 10),
+              InkWell(
+                onTap: () {
+                  _isEditing = !_isEditing;
+                  _goalController.text = saving.goal;
+                  setState(() {});
+                },
+                child: Center(
+                  child: Text(
+                    saving.goal,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -158,7 +204,8 @@ class _SavingTileState extends State<SavingTile> {
                           builder: (context) {
                             return AlertDialog(
                               title: const Text('Удалить цель?'),
-                              content: const Text('Вы уверены, что хотите удалить цель?'),
+                              content: const Text(
+                                  'Вы уверены, что хотите удалить цель?'),
                               actions: [
                                 TextButton(
                                     onPressed: () {
@@ -166,11 +213,12 @@ class _SavingTileState extends State<SavingTile> {
                                     },
                                     child: const Text('Нет')),
                                 TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      savingCubit.deleteSaving(saving.id);
-                                    },
-                                    child: const Text('Да')),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    savingCubit.deleteSaving(saving.id);
+                                  },
+                                  child: const Text('Да'),
+                                ),
                               ],
                             );
                           },

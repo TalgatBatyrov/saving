@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_my_app/features/app_widgets/app_empty.dart';
 import 'package:flutter_my_app/features/saving/bloc/saving_state.dart';
 import 'package:flutter_my_app/features/app_widgets/app_error.dart';
 
@@ -31,23 +32,18 @@ class _SavingsPageState extends State<SavingsPage> {
                   return const AppLoading();
                 }
                 if (state is SavingEmpty) {
-                  return const Center(
-                      child: Text(
-                    'No savings yet',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.red,
-                    ),
-                  ));
+                  return const AppEmpty();
                 }
                 if (state is SavingError) {
                   return AppError(message: state.message);
                 }
                 if (state is SavingLoaded) {
                   return ListView.separated(
-                    separatorBuilder: (context, index) => const Divider(
-                      thickness: 2,
-                    ),
+                    separatorBuilder: (context, index) {
+                      return const Divider(
+                        thickness: 2,
+                      );
+                    },
                     itemCount: state.savings.length,
                     itemBuilder: (context, index) {
                       final saving = state.savings[index];

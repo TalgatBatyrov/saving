@@ -97,7 +97,9 @@ class SavingCubit extends Cubit<SavingState> {
               isCompleted: true,
             )
           : saving.copyWith(
-              remaining: saving.remaining <= 0 ? saving.total : saving.total - saving.current,
+              remaining: saving.remaining <= 0
+                  ? saving.total
+                  : saving.total - saving.current,
               isCompleted: false,
             );
 
