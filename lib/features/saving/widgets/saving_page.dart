@@ -1,19 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/features/saving/bloc/saving_cubit.dart';
+import 'package:flutter_my_app/features/saving/bloc/statistic/statistic_cubit.dart';
+import 'package:flutter_my_app/features/saving/bloc/statistic/statistic_state.dart';
 import 'package:flutter_my_app/repositories/savings/models/saving.dart';
-
-import '../bloc/saving_state.dart';
+import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 
 @RoutePage()
 class SavingPage extends StatefulWidget {
   final Saving saving;
-  final SavingCubit savingCubit;
   const SavingPage({
     super.key,
     required this.saving,
-    required this.savingCubit,
   });
 
   @override
@@ -21,51 +20,90 @@ class SavingPage extends StatefulWidget {
 }
 
 class _SavingPageState extends State<SavingPage> {
-  final _addController = TextEditingController();
+  @override
+  void initState() {
+    context.read<StatisticCubit>().load(widget.saving.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SavingCubit, SavingState>(
-        bloc: widget.savingCubit,
-        builder: (context, state) {
-          if (state is SavingLoaded) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(widget.saving.goal),
-              ),
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Всего ${widget.saving.total}'),
-                  Text('Осталось ${widget.saving.remaining}'),
-                  Text('Сейчас ${widget.saving.current}'),
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    controller: _addController,
-                    decoration: const InputDecoration(
-                      labelText: 'Добавить',
-                    ),
-                  ),
-                  TextButton(
-                      onPressed: () async {
-                        final saving = widget.saving;
-                        final valueExists = _addController.text.isNotEmpty;
-                        final addValue = int.parse(_addController.text);
-                        final current = valueExists ? (saving.current + addValue) : 0;
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          BlocBuilder<StatisticCubit, StatisticState>(
+            builder: (context, state) {
+              if (state is StatisticLoaded) {
+                return IconButton(
+                  onPressed: () {
+                    final statistic = state.statistics
+                        .map((e) => '${e.date} - ${e.money} com')
+                        .toList();
 
-                        await context.read<SavingCubit>().updateSaving(
-                              saving.copyWith(
-                                current: current,
-                                remaining: saving.remaining - addValue,
-                              ),
+                    Share.share(statistic.join('\n'));
+                  },
+                  icon: const Icon(Icons.share),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: BlocBuilder<StatisticCubit, StatisticState>(
+              builder: (context, state) {
+                if (state is StatisticLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (state is StatisticLoaded) {
+                  return Column(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: state.statistics.map(
+                          (e) {
+                            DateFormat dateFormat =
+                                DateFormat("dd/MM/yyyy HH:mm");
+                            String date = dateFormat.format(e.date);
+
+                            return Row(
+                              children: [
+                                Text(date),
+                                const SizedBox(width: 20),
+                                Text('${e.money} com'),
+                              ],
                             );
-                      },
-                      child: const Text('Добавить')),
-                ],
-              ),
-            );
-          }
-          return const SizedBox.shrink();
-        });
+                          },
+                        ).toList(),
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Среднестатический в день ${state.averagePrice}',
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Всего накоплено: ${widget.saving.current}',
+                        ),
+                      ),
+                      if (widget.saving.total > widget.saving.current)
+                        Expanded(
+                          child: Text(
+                            'Такими темпами еще ${((widget.saving.total - widget.saving.current) / state.averagePrice).round()} день (дней)',
+                          ),
+                        ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

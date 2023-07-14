@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_app/features/saving/bloc/saving_cubit.dart';
 import 'package:flutter_my_app/features/saving/widgets/saving_item.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../repositories/savings/models/saving.dart';
+import '../../../router/router.dart';
+import '../bloc/statistic/statistic_cubit.dart';
 
 class SavingTile extends StatefulWidget {
   final Saving saving;
@@ -49,7 +52,13 @@ class _SavingTileState extends State<SavingTile> {
           remaining: saving.remaining - addValueInt,
         ),
       );
+
+      context.read<StatisticCubit>().add(
+            money: addValueInt,
+            savingId: saving.id,
+          );
     }
+
     _addController.clear();
   }
 
@@ -68,6 +77,10 @@ class _SavingTileState extends State<SavingTile> {
           remaining: saving.remaining + addValueInt,
         ),
       );
+      context.read<StatisticCubit>().add(
+            money: -addValueInt,
+            savingId: saving.id,
+          );
     }
     _addController.clear();
   }
@@ -205,7 +218,8 @@ class _SavingTileState extends State<SavingTile> {
                             return AlertDialog(
                               title: const Text('Удалить цель?'),
                               content: const Text(
-                                  'Вы уверены, что хотите удалить цель?'),
+                                'Вы уверены, что хотите удалить цель?',
+                              ),
                               actions: [
                                 TextButton(
                                     onPressed: () {
@@ -224,7 +238,10 @@ class _SavingTileState extends State<SavingTile> {
                           },
                         );
                       },
-                      icon: const Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                   // share
@@ -235,6 +252,15 @@ class _SavingTileState extends State<SavingTile> {
                         await Share.share(message);
                       },
                       icon: const Icon(Icons.share, color: Colors.blue),
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      onPressed: () async {
+                        AutoRouter.of(context)
+                            .push(SavingRoute(saving: saving));
+                      },
+                      icon: const Icon(Icons.history, color: Colors.green),
                     ),
                   ),
                 ],

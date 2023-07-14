@@ -28,7 +28,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: SavingPage(
           key: args.key,
           saving: args.saving,
-          savingCubit: args.savingCubit,
         ),
       );
     },
@@ -55,14 +54,12 @@ class SavingRoute extends PageRouteInfo<SavingRouteArgs> {
   SavingRoute({
     Key? key,
     required Saving saving,
-    required SavingCubit savingCubit,
     List<PageRouteInfo>? children,
   }) : super(
           SavingRoute.name,
           args: SavingRouteArgs(
             key: key,
             saving: saving,
-            savingCubit: savingCubit,
           ),
           initialChildren: children,
         );
@@ -76,17 +73,14 @@ class SavingRouteArgs {
   const SavingRouteArgs({
     this.key,
     required this.saving,
-    required this.savingCubit,
   });
 
   final Key? key;
 
   final Saving saving;
 
-  final SavingCubit savingCubit;
-
   @override
   String toString() {
-    return 'SavingRouteArgs{key: $key, saving: $saving, savingCubit: $savingCubit}';
+    return 'SavingRouteArgs{key: $key, saving: $saving}';
   }
 }

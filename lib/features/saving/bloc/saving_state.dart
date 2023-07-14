@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../repositories/savings/models/saving.dart';
 
-class SavingState extends Equatable {
+abstract class SavingState extends Equatable {
   const SavingState();
 
   @override

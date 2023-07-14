@@ -11,14 +11,9 @@ import '../widgets/add_saving_button.dart';
 import '../widgets/saving_tile.dart';
 
 @RoutePage()
-class SavingsPage extends StatefulWidget {
+class SavingsPage extends StatelessWidget {
   const SavingsPage({super.key});
 
-  @override
-  State<SavingsPage> createState() => _SavingsPageState();
-}
-
-class _SavingsPageState extends State<SavingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
