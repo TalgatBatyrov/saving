@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_my_app/repositories/savings/abstract_savings_repository.dart';
 import 'package:flutter_my_app/repositories/savings/models/saving.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class SavingsRepository implements AbstractSavingsRepository {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore firestore;
 
   final Dio dio;
   final Box<Saving> savingsBox;
@@ -13,15 +14,15 @@ class SavingsRepository implements AbstractSavingsRepository {
   SavingsRepository({
     required this.dio,
     required this.savingsBox,
+    required this.firestore,
   });
 
   @override
-  Future<List<Saving>> getSavingsList() async {
+  Future<List<Saving>> getSavingsList({required String userId}) async {
     List<Saving> savingList = [];
     try {
       final saving = firestore.collection('savings');
-
-      final response = await saving.get();
+      final response = await saving.where('userId', isEqualTo: userId).get();
 
       savingList = response.docs.map((e) {
         return Saving.fromJson(e.data());
@@ -42,8 +43,9 @@ class SavingsRepository implements AbstractSavingsRepository {
     required String goal,
     required int total,
   }) async {
-    final savingCollection = firestore.collection('savings');
-
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final savingsPath = 'users/$userId/savings';
+    final savingCollection = firestore.collection(savingsPath);
     final docId = savingCollection.doc().id;
 
     Saving saving = Saving(
@@ -53,6 +55,7 @@ class SavingsRepository implements AbstractSavingsRepository {
       total: total,
       current: 0,
       isCompleted: false,
+      userId: userId,
     );
 
     savingCollection
@@ -65,13 +68,16 @@ class SavingsRepository implements AbstractSavingsRepository {
   }
 
   @override
-  Future<void> deleteSaving(String id) async {
-    final savingCollection = firestore.collection('savings');
+  Future<void> deleteSaving(Saving saving) async {
+    // final savingCollection = firestore.collection('savings');
+
+    final savingsPath = 'users/${saving.userId}/savings';
+    final savingCollection = firestore.collection(savingsPath);
 
     savingCollection
-        .doc(id)
+        .doc(saving.id)
         .delete()
-        .then((value) => print("User Deleted"))
+        .then((value) => print("Saving Deleted"))
         .catchError(
           (error) => print("Failed to delete user: $error"),
         );
@@ -79,8 +85,8 @@ class SavingsRepository implements AbstractSavingsRepository {
 
   @override
   Future<void> updateSaving(Saving saving) async {
-    final savingCollection = firestore.collection('savings');
-
+    final savingsPath = 'users/${saving.userId}/savings';
+    final savingCollection = firestore.collection(savingsPath);
     savingCollection
         .doc(saving.id)
         .update(saving.toJson())

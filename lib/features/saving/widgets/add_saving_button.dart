@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/saving_cubit.dart';
+import '../blocs/saving_cubit.dart';
 
 class AddSavingButton extends StatelessWidget {
   const AddSavingButton({super.key});
@@ -45,16 +45,17 @@ class AddSavingButton extends StatelessWidget {
                     onPressed: () {
                       context.read<SavingCubit>().createSaving(
                             goal: goalController.text,
-                            total: totalController.text.isNotEmpty ? int.parse(totalController.text) : 0,
+                            total: totalController.text.isNotEmpty
+                                ? int.parse(totalController.text)
+                                : 0,
                           );
                       context.router.pop();
                     },
                     child: const Text('Add Saving')),
                 TextButton(
-                    onPressed: () {
-                      context.router.pop();
-                    },
-                    child: const Text('Cancel')),
+                  onPressed: context.router.pop,
+                  child: const Text('Cancel'),
+                ),
               ],
             );
           },

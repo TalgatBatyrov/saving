@@ -1,0 +1,86 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_my_app/features/auth/blocs/auth_cubit.dart';
+import 'package:flutter_my_app/router/router.dart';
+
+@RoutePage()
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                labelText: 'Name',
+              ),
+            ),
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+              ),
+            ),
+            TextField(
+              controller: _passwordController,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+              ),
+            ),
+            BlocListener<AuthCubit, AuthState>(
+              listener: (context, state) async {
+                state.whenOrNull(
+                  error: (message) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Error'),
+                        content: Text(message),
+                        actions: [
+                          TextButton(
+                            onPressed: () => context.router.pop(),
+                            child: const Text('Ok'),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: ElevatedButton(
+                onPressed: () async {
+                  await context.read<AuthCubit>().signUp(
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                },
+                child: const Text('Sign Up'),
+              ),
+            ),
+            TextButton(
+              onPressed: () => context.router.replace(const SignInRoute()),
+              child: const Text('Login'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

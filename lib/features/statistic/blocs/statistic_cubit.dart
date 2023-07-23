@@ -1,0 +1,41 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_my_app/repositories/savings/models/saving.dart';
+import 'package:flutter_my_app/repositories/statistics/abstract_statistics_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../repositories/statistics/models/statistic.dart';
+
+part 'statistic_cubit.freezed.dart';
+part 'statistic_state.dart';
+
+class StatisticCubit extends Cubit<StatisticState> {
+  final AbstractStatisticsRepository _statisticsRepository;
+
+  StatisticCubit(this._statisticsRepository)
+      : super(const StatisticState.loading());
+
+  void getStatistics(Saving saving) async {
+    emit(const StatisticState.loading());
+
+    final statistics = await _statisticsRepository.getStatisticsList(saving);
+    if (statistics.isEmpty) {
+      emit(const StatisticState.empty());
+      return;
+    }
+    emit(StatisticState.loaded(statistics: statistics));
+  }
+
+  Future<void> addStatistic({
+    required Saving saving,
+    required int money,
+  }) async {
+    await _statisticsRepository.addStatistic(
+      saving: saving,
+      money: money,
+    );
+  }
+
+  Future<void> deleteStatistic(Saving saving) async {
+    await _statisticsRepository.deleteStatistic(saving);
+  }
+}

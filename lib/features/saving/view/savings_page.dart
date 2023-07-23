@@ -1,58 +1,91 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/features/app_widgets/app_empty.dart';
-import 'package:flutter_my_app/features/saving/bloc/saving_state.dart';
-import 'package:flutter_my_app/features/app_widgets/app_error.dart';
+import 'package:flutter_my_app/features/auth/blocs/auth_cubit.dart';
+import 'package:flutter_my_app/repositories/user/models/auth_user.dart';
 
-import '../../app_widgets/app_loading.dart';
-import '../bloc/saving_cubit.dart';
+import '../../../app_widgets/app_empty.dart';
+import '../../../app_widgets/app_error.dart';
+import '../../../app_widgets/app_loading.dart';
+import '../../../router/router.dart';
+import '../blocs/saving_cubit.dart';
 import '../widgets/add_saving_button.dart';
-import '../widgets/saving_tile.dart';
+import '../widgets/savings_list.dart';
 
 @RoutePage()
 class SavingsPage extends StatelessWidget {
-  const SavingsPage({super.key});
+  final AuthUser user;
+  const SavingsPage({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('SavingPage')),
-      body: Column(
-        children: [
-          Expanded(
-            child: BlocBuilder<SavingCubit, SavingState>(
-              builder: (context, state) {
-                if (state is SavingLoading) {
-                  return const AppLoading();
-                }
-                if (state is SavingEmpty) {
-                  return const AppEmpty();
-                }
-                if (state is SavingError) {
-                  return AppError(message: state.message);
-                }
-                if (state is SavingLoaded) {
-                  return ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return const Divider(
-                        thickness: 2,
-                      );
-                    },
-                    itemCount: state.savings.length,
-                    itemBuilder: (context, index) {
-                      final saving = state.savings[index];
-                      return SavingTile(saving: saving);
-                    },
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            _onSignOut(context);
+          },
+          icon: const Icon(Icons.logout),
+        ),
+        title: Text(user.name),
+      ),
+      body: BlocBuilder<SavingCubit, SavingState>(
+        builder: (context, state) {
+          return state.when(
+            loading: () {
+              return const AppLoading();
+            },
+            loaded: (savings) {
+              return SavingsList(savings: savings);
+            },
+            error: (errorMessage) {
+              return AppError(message: errorMessage);
+            },
+            empty: () {
+              return const AppEmpty();
+            },
+          );
+        },
       ),
       floatingActionButton: const AddSavingButton(),
+    );
+  }
+
+  Future<void> _onSignOut(BuildContext context) async {
+    final isConfirmed = await _showSignOutDialog(context);
+
+    if (isConfirmed == true) {
+      context.router.replace(const SignInRoute());
+      context.read<AuthCubit>().logout();
+    }
+  }
+
+  Future<bool?> _showSignOutDialog(BuildContext context) {
+    return showDialog<bool>(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Выход'),
+          content: const Text('Вы уверены, что хотите выйти?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.router.pop(false);
+              },
+              child: const Text('Нет'),
+            ),
+            TextButton(
+              onPressed: () {
+                context.router.pop(true);
+              },
+              child: const Text('Да'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

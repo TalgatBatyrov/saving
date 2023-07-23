@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/features/saving/bloc/saving_cubit.dart';
 import 'package:flutter_my_app/features/saving/widgets/saving_item.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../repositories/savings/models/saving.dart';
 import '../../../router/router.dart';
-import '../bloc/statistic/statistic_cubit.dart';
+import '../../statistic/blocs/statistic_cubit.dart';
+import '../blocs/saving_cubit.dart';
+import 'delete_saving_button.dart';
 
 class SavingTile extends StatefulWidget {
   final Saving saving;
@@ -22,6 +23,7 @@ class SavingTile extends StatefulWidget {
 class _SavingTileState extends State<SavingTile> {
   final _addController = TextEditingController();
   final _goalController = TextEditingController();
+
   bool _isEditing = false;
 
   void _changeGoalName(SavingCubit savingCubit) {
@@ -37,51 +39,40 @@ class _SavingTileState extends State<SavingTile> {
     _isEditing = !_isEditing;
   }
 
-  void _addSaving(SavingCubit savingCubit) {
+  void _addSaving(SavingCubit savingCubit, [bool isAdd = true]) {
     final saving = widget.saving;
     final addValue = _addController.text;
     final valueExists = addValue.isNotEmpty;
 
     if (valueExists) {
       final addValueInt = int.parse(addValue);
-      final current = valueExists ? (saving.current + addValueInt) : 0;
+      final current = valueExists
+          ? isAdd
+              ? (saving.current + addValueInt)
+              : (saving.current - addValueInt)
+          : 0;
 
       savingCubit.updateSaving(
         saving.copyWith(
           current: current <= 0 ? 0 : current,
-          remaining: saving.remaining - addValueInt,
+          remaining: isAdd
+              ? saving.remaining - addValueInt
+              : saving.remaining + addValueInt,
         ),
+        // addValueInt,
       );
 
-      context.read<StatisticCubit>().add(
-            money: addValueInt,
-            savingId: saving.id,
-          );
+      context
+          .read<StatisticCubit>()
+          .addStatistic(
+              money: isAdd ? addValueInt : -addValueInt, saving: saving)
+          .onError((error, stackTrace) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.toString())),
+        );
+      });
     }
 
-    _addController.clear();
-  }
-
-  void _subtractSaving(SavingCubit savingCubit) {
-    final saving = widget.saving;
-    final addValue = _addController.text;
-    final valueExists = addValue.isNotEmpty;
-
-    if (valueExists) {
-      final addValueInt = int.parse(addValue);
-      final current = valueExists ? (saving.current - addValueInt) : 0;
-
-      savingCubit.updateSaving(
-        saving.copyWith(
-          current: current <= 0 ? 0 : current,
-          remaining: saving.remaining + addValueInt,
-        ),
-      );
-      context.read<StatisticCubit>().add(
-            money: -addValueInt,
-            savingId: saving.id,
-          );
-    }
     _addController.clear();
   }
 
@@ -201,7 +192,7 @@ class _SavingTileState extends State<SavingTile> {
                   ),
                   Expanded(
                     child: IconButton(
-                      onPressed: () => _subtractSaving(savingCubit),
+                      onPressed: () => _addSaving(savingCubit, false),
                       icon: const Icon(
                         Icons.remove,
                         color: Colors.red,
@@ -209,41 +200,7 @@ class _SavingTileState extends State<SavingTile> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Удалить цель?'),
-                              content: const Text(
-                                'Вы уверены, что хотите удалить цель?',
-                              ),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('Нет')),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    savingCubit.deleteSaving(saving.id);
-                                  },
-                                  child: const Text('Да'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
+                  DeleteSavingButton(saving: saving),
                   // share
                   Expanded(
                     child: IconButton(
@@ -257,8 +214,7 @@ class _SavingTileState extends State<SavingTile> {
                   Expanded(
                     child: IconButton(
                       onPressed: () async {
-                        AutoRouter.of(context)
-                            .push(SavingRoute(saving: saving));
+                        context.router.push(StatisticRoute(saving: saving));
                       },
                       icon: const Icon(Icons.history, color: Colors.green),
                     ),

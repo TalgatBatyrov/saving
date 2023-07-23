@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO: create Class for theme, ex: SavingsTheme
 final darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     elevation: 0,
