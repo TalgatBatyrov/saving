@@ -44,8 +44,8 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       emit(AuthState.loggedIn(user: user));
-    } catch (e) {
-      emit(AuthState.error(e.toString()));
+    } on Exception catch (e) {
+      emit(AuthState.error(e));
     }
   }
 
@@ -62,8 +62,8 @@ class AuthCubit extends Cubit<AuthState> {
         email: email,
         password: password,
       );
-    } catch (e) {
-      emit(AuthState.error(e.toString()));
+    } on Exception catch (e) {
+      emit(AuthState.error(e));
     }
   }
 

@@ -11,12 +11,16 @@ class Saving with _$Saving {
   factory Saving({
     @HiveField(0) required String id,
     @HiveField(1) required String goal,
-    @HiveField(2) required int remaining,
-    @HiveField(3) required int total,
-    @HiveField(4) required int current,
-    @HiveField(5) required bool isCompleted,
-    @HiveField(6) required String userId,
+    @HiveField(2) required int total,
+    @HiveField(3) required int current,
+    @HiveField(4) required String userId,
   }) = _Saving;
+
+  get percent => (current / total) * 100;
+
+  bool get isCompleted => current >= total;
+
+  int get remainder => current >= total ? 0 : total - current;
 
   factory Saving.fromJson(Map<String, dynamic> json) => _$SavingFromJson(json);
 }

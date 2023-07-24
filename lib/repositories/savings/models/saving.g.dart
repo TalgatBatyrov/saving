@@ -19,31 +19,25 @@ class SavingAdapter extends TypeAdapter<Saving> {
     return Saving(
       id: fields[0] as String,
       goal: fields[1] as String,
-      remaining: fields[2] as int,
-      total: fields[3] as int,
-      current: fields[4] as int,
-      isCompleted: fields[5] as bool,
-      userId: fields[6] as String,
+      total: fields[2] as int,
+      current: fields[3] as int,
+      userId: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Saving obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.goal)
       ..writeByte(2)
-      ..write(obj.remaining)
-      ..writeByte(3)
       ..write(obj.total)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.current)
-      ..writeByte(5)
-      ..write(obj.isCompleted)
-      ..writeByte(6)
+      ..writeByte(4)
       ..write(obj.userId);
   }
 
@@ -65,19 +59,15 @@ class SavingAdapter extends TypeAdapter<Saving> {
 _$_Saving _$$_SavingFromJson(Map<String, dynamic> json) => _$_Saving(
       id: json['id'] as String,
       goal: json['goal'] as String,
-      remaining: json['remaining'] as int,
       total: json['total'] as int,
       current: json['current'] as int,
-      isCompleted: json['isCompleted'] as bool,
       userId: json['userId'] as String,
     );
 
 Map<String, dynamic> _$$_SavingToJson(_$_Saving instance) => <String, dynamic>{
       'id': instance.id,
       'goal': instance.goal,
-      'remaining': instance.remaining,
       'total': instance.total,
       'current': instance.current,
-      'isCompleted': instance.isCompleted,
       'userId': instance.userId,
     };

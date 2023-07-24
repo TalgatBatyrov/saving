@@ -51,10 +51,8 @@ class SavingsRepository implements AbstractSavingsRepository {
     Saving saving = Saving(
       id: docId,
       goal: goal,
-      remaining: total,
       total: total,
       current: 0,
-      isCompleted: false,
       userId: userId,
     );
 
@@ -69,8 +67,6 @@ class SavingsRepository implements AbstractSavingsRepository {
 
   @override
   Future<void> deleteSaving(Saving saving) async {
-    // final savingCollection = firestore.collection('savings');
-
     final savingsPath = 'users/${saving.userId}/savings';
     final savingCollection = firestore.collection(savingsPath);
 

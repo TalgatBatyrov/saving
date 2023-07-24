@@ -97,27 +97,13 @@ class SavingCubit extends Cubit<SavingState> {
     }
   }
 
-  Future<void> updateSaving(Saving saving, [int? money]) async {
+  Future<void> updateSaving(Saving saving) async {
     try {
       if (state is! _Loaded) {
         emit(const SavingState.loading());
       }
 
-      final isCurrentMoreThanTotal = saving.current >= saving.total;
-
-      final updatedSaving = isCurrentMoreThanTotal
-          ? saving.copyWith(
-              remaining: 0,
-              isCompleted: true,
-            )
-          : saving.copyWith(
-              remaining: saving.remaining <= 0
-                  ? saving.total
-                  : saving.total - saving.current,
-              isCompleted: false,
-            );
-
-      await _savingsRepository.updateSaving(updatedSaving);
+      await _savingsRepository.updateSaving(saving);
 
       // _statisticCubit.addStatistic(
       //   money: money ?? 0,

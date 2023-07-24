@@ -21,7 +21,7 @@ mixin _$AuthState {
     required TResult Function() loading,
     required TResult Function(AuthUser user) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(String message) error,
+    required TResult Function(Exception message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$AuthState {
     TResult? Function()? loading,
     TResult? Function(AuthUser user)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(String message)? error,
+    TResult? Function(Exception message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$AuthState {
     TResult Function()? loading,
     TResult Function(AuthUser user)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(String message)? error,
+    TResult Function(Exception message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ class _$_Loading extends _Loading {
     required TResult Function() loading,
     required TResult Function(AuthUser user) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(String message) error,
+    required TResult Function(Exception message) error,
   }) {
     return loading();
   }
@@ -136,7 +136,7 @@ class _$_Loading extends _Loading {
     TResult? Function()? loading,
     TResult? Function(AuthUser user)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(String message)? error,
+    TResult? Function(Exception message)? error,
   }) {
     return loading?.call();
   }
@@ -147,7 +147,7 @@ class _$_Loading extends _Loading {
     TResult Function()? loading,
     TResult Function(AuthUser user)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(String message)? error,
+    TResult Function(Exception message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -276,7 +276,7 @@ class _$_LoggedIn extends _LoggedIn {
     required TResult Function() loading,
     required TResult Function(AuthUser user) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(String message) error,
+    required TResult Function(Exception message) error,
   }) {
     return loggedIn(user);
   }
@@ -287,7 +287,7 @@ class _$_LoggedIn extends _LoggedIn {
     TResult? Function()? loading,
     TResult? Function(AuthUser user)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(String message)? error,
+    TResult? Function(Exception message)? error,
   }) {
     return loggedIn?.call(user);
   }
@@ -298,7 +298,7 @@ class _$_LoggedIn extends _LoggedIn {
     TResult Function()? loading,
     TResult Function(AuthUser user)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(String message)? error,
+    TResult Function(Exception message)? error,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
@@ -396,7 +396,7 @@ class _$_LoggedOut extends _LoggedOut {
     required TResult Function() loading,
     required TResult Function(AuthUser user) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(String message) error,
+    required TResult Function(Exception message) error,
   }) {
     return loggedOut();
   }
@@ -407,7 +407,7 @@ class _$_LoggedOut extends _LoggedOut {
     TResult? Function()? loading,
     TResult? Function(AuthUser user)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(String message)? error,
+    TResult? Function(Exception message)? error,
   }) {
     return loggedOut?.call();
   }
@@ -418,7 +418,7 @@ class _$_LoggedOut extends _LoggedOut {
     TResult Function()? loading,
     TResult Function(AuthUser user)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(String message)? error,
+    TResult Function(Exception message)? error,
     required TResult orElse(),
   }) {
     if (loggedOut != null) {
@@ -475,7 +475,7 @@ abstract class _$$_ErrorCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({Exception message});
 }
 
 /// @nodoc
@@ -494,7 +494,7 @@ class __$$_ErrorCopyWithImpl<$Res>
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Exception,
     ));
   }
 }
@@ -505,7 +505,7 @@ class _$_Error extends _Error {
   const _$_Error(this.message) : super._();
 
   @override
-  final String message;
+  final Exception message;
 
   @override
   String toString() {
@@ -535,7 +535,7 @@ class _$_Error extends _Error {
     required TResult Function() loading,
     required TResult Function(AuthUser user) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(String message) error,
+    required TResult Function(Exception message) error,
   }) {
     return error(message);
   }
@@ -546,7 +546,7 @@ class _$_Error extends _Error {
     TResult? Function()? loading,
     TResult? Function(AuthUser user)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(String message)? error,
+    TResult? Function(Exception message)? error,
   }) {
     return error?.call(message);
   }
@@ -557,7 +557,7 @@ class _$_Error extends _Error {
     TResult Function()? loading,
     TResult Function(AuthUser user)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(String message)? error,
+    TResult Function(Exception message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -605,10 +605,10 @@ class _$_Error extends _Error {
 }
 
 abstract class _Error extends AuthState {
-  const factory _Error(final String message) = _$_Error;
+  const factory _Error(final Exception message) = _$_Error;
   const _Error._() : super._();
 
-  String get message;
+  Exception get message;
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
       throw _privateConstructorUsedError;

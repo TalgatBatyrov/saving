@@ -23,29 +23,23 @@ class SavingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            _onSignOut(context);
-          },
-          icon: const Icon(Icons.logout),
-        ),
         title: Text(user.name),
+        actions: [
+          IconButton(
+            onPressed: () {
+              _onSignOut(context);
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: BlocBuilder<SavingCubit, SavingState>(
         builder: (context, state) {
           return state.when(
-            loading: () {
-              return const AppLoading();
-            },
-            loaded: (savings) {
-              return SavingsList(savings: savings);
-            },
-            error: (errorMessage) {
-              return AppError(message: errorMessage);
-            },
-            empty: () {
-              return const AppEmpty();
-            },
+            loading: () => const AppLoading(),
+            loaded: (savings) => SavingsList(savings: savings),
+            error: (errorMessage) => AppError(message: errorMessage),
+            empty: () => const AppEmpty(),
           );
         },
       ),

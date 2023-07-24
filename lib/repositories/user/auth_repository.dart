@@ -10,15 +10,6 @@ class AuthRepository implements AbstractAuthRepository {
 
   AuthRepository(this._firebaseAuth, this.firestore);
 
-  // AuthUser? get currentUser {
-  //   final user = _firebaseAuth.currentUser;
-  //   if (user != null) {
-  //     return AuthUser.fromFirebase(user);
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   @override
   Future<AuthUser> signIn({
     required email,
@@ -29,8 +20,6 @@ class AuthRepository implements AbstractAuthRepository {
         email: email,
         password: password,
       );
-      // final user = currentUser;
-
       final user = _firebaseAuth.currentUser;
 
       if (user != null) {
@@ -38,13 +27,6 @@ class AuthRepository implements AbstractAuthRepository {
       } else {
         throw Exception();
       }
-
-      // if (user != null) {
-      //   return user;
-      // } else {
-      //   throw Exception();
-      //   // throw UserNotLoggedInAuthException();
-      // }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw Exception('No user found for that email.');

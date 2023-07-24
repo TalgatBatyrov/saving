@@ -17,68 +17,85 @@ class _SignUpPageState extends State<SignUpPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  Future<dynamic> _showAuthErrorDialog(BuildContext context, String message) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => context.router.pop(),
+            child: const Text('Ok'),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Name',
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) async {
+        state.whenOrNull(
+          loggedIn: (user) {
+            context.router.replace(SavingsRoute(user: user));
+          },
+          error: (message) {
+            _showAuthErrorDialog(context, message.toString());
+          },
+        );
+      },
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                ),
               ),
-            ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
               ),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
               ),
-            ),
-            BlocListener<AuthCubit, AuthState>(
-              listener: (context, state) async {
-                state.whenOrNull(
-                  error: (message) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Error'),
-                        content: Text(message),
-                        actions: [
-                          TextButton(
-                            onPressed: () => context.router.pop(),
-                            child: const Text('Ok'),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-              child: ElevatedButton(
-                onPressed: () async {
-                  await context.read<AuthCubit>().signUp(
-                        name: _nameController.text,
-                        email: _emailController.text,
-                        password: _passwordController.text,
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    orElse: () {
+                      return ElevatedButton(
+                        onPressed: () async {
+                          await context.read<AuthCubit>().signUp(
+                                name: _nameController.text,
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
+                        },
+                        child: const Text('Login'),
                       );
+                    },
+                  );
                 },
-                child: const Text('Sign Up'),
               ),
-            ),
-            TextButton(
-              onPressed: () => context.router.replace(const SignInRoute()),
-              child: const Text('Login'),
-            ),
-          ],
+              TextButton(
+                onPressed: () => context.router.replace(const SignInRoute()),
+                child: const Text('Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );

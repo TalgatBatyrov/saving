@@ -30,6 +30,7 @@ class _StatisticPageState extends State<StatisticPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(widget.saving.goal),
         actions: const [StatisticAppBarAction()],
       ),
       body: BlocBuilder<StatisticCubit, StatisticState>(
@@ -37,7 +38,8 @@ class _StatisticPageState extends State<StatisticPage> {
           return state.map(
             empty: (_) => const AppEmpty(),
             loading: (_) => const AppLoading(),
-            loaded: (v) => StatisticsList(statistics: v.statistics),
+            loaded: (v) =>
+                StatisticsList(statistics: v.statistics, saving: widget.saving),
             error: (v) => AppError(message: v.message),
           );
         },

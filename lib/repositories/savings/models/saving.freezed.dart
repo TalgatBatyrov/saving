@@ -25,14 +25,10 @@ mixin _$Saving {
   @HiveField(1)
   String get goal => throw _privateConstructorUsedError;
   @HiveField(2)
-  int get remaining => throw _privateConstructorUsedError;
-  @HiveField(3)
   int get total => throw _privateConstructorUsedError;
-  @HiveField(4)
+  @HiveField(3)
   int get current => throw _privateConstructorUsedError;
-  @HiveField(5)
-  bool get isCompleted => throw _privateConstructorUsedError;
-  @HiveField(6)
+  @HiveField(4)
   String get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,11 +44,9 @@ abstract class $SavingCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String goal,
-      @HiveField(2) int remaining,
-      @HiveField(3) int total,
-      @HiveField(4) int current,
-      @HiveField(5) bool isCompleted,
-      @HiveField(6) String userId});
+      @HiveField(2) int total,
+      @HiveField(3) int current,
+      @HiveField(4) String userId});
 }
 
 /// @nodoc
@@ -70,10 +64,8 @@ class _$SavingCopyWithImpl<$Res, $Val extends Saving>
   $Res call({
     Object? id = null,
     Object? goal = null,
-    Object? remaining = null,
     Object? total = null,
     Object? current = null,
-    Object? isCompleted = null,
     Object? userId = null,
   }) {
     return _then(_value.copyWith(
@@ -85,10 +77,6 @@ class _$SavingCopyWithImpl<$Res, $Val extends Saving>
           ? _value.goal
           : goal // ignore: cast_nullable_to_non_nullable
               as String,
-      remaining: null == remaining
-          ? _value.remaining
-          : remaining // ignore: cast_nullable_to_non_nullable
-              as int,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -97,10 +85,6 @@ class _$SavingCopyWithImpl<$Res, $Val extends Saving>
           ? _value.current
           : current // ignore: cast_nullable_to_non_nullable
               as int,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -118,11 +102,9 @@ abstract class _$$_SavingCopyWith<$Res> implements $SavingCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String goal,
-      @HiveField(2) int remaining,
-      @HiveField(3) int total,
-      @HiveField(4) int current,
-      @HiveField(5) bool isCompleted,
-      @HiveField(6) String userId});
+      @HiveField(2) int total,
+      @HiveField(3) int current,
+      @HiveField(4) String userId});
 }
 
 /// @nodoc
@@ -137,10 +119,8 @@ class __$$_SavingCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? goal = null,
-    Object? remaining = null,
     Object? total = null,
     Object? current = null,
-    Object? isCompleted = null,
     Object? userId = null,
   }) {
     return _then(_$_Saving(
@@ -152,10 +132,6 @@ class __$$_SavingCopyWithImpl<$Res>
           ? _value.goal
           : goal // ignore: cast_nullable_to_non_nullable
               as String,
-      remaining: null == remaining
-          ? _value.remaining
-          : remaining // ignore: cast_nullable_to_non_nullable
-              as int,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -164,10 +140,6 @@ class __$$_SavingCopyWithImpl<$Res>
           ? _value.current
           : current // ignore: cast_nullable_to_non_nullable
               as int,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -182,11 +154,9 @@ class _$_Saving extends _Saving {
   _$_Saving(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.goal,
-      @HiveField(2) required this.remaining,
-      @HiveField(3) required this.total,
-      @HiveField(4) required this.current,
-      @HiveField(5) required this.isCompleted,
-      @HiveField(6) required this.userId})
+      @HiveField(2) required this.total,
+      @HiveField(3) required this.current,
+      @HiveField(4) required this.userId})
       : super._();
 
   factory _$_Saving.fromJson(Map<String, dynamic> json) =>
@@ -200,23 +170,17 @@ class _$_Saving extends _Saving {
   final String goal;
   @override
   @HiveField(2)
-  final int remaining;
-  @override
-  @HiveField(3)
   final int total;
   @override
-  @HiveField(4)
+  @HiveField(3)
   final int current;
   @override
-  @HiveField(5)
-  final bool isCompleted;
-  @override
-  @HiveField(6)
+  @HiveField(4)
   final String userId;
 
   @override
   String toString() {
-    return 'Saving(id: $id, goal: $goal, remaining: $remaining, total: $total, current: $current, isCompleted: $isCompleted, userId: $userId)';
+    return 'Saving(id: $id, goal: $goal, total: $total, current: $current, userId: $userId)';
   }
 
   @override
@@ -226,19 +190,15 @@ class _$_Saving extends _Saving {
             other is _$_Saving &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.goal, goal) || other.goal == goal) &&
-            (identical(other.remaining, remaining) ||
-                other.remaining == remaining) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.current, current) || other.current == current) &&
-            (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted) &&
             (identical(other.userId, userId) || other.userId == userId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, goal, remaining, total, current, isCompleted, userId);
+  int get hashCode =>
+      Object.hash(runtimeType, id, goal, total, current, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -258,11 +218,9 @@ abstract class _Saving extends Saving {
   factory _Saving(
       {@HiveField(0) required final String id,
       @HiveField(1) required final String goal,
-      @HiveField(2) required final int remaining,
-      @HiveField(3) required final int total,
-      @HiveField(4) required final int current,
-      @HiveField(5) required final bool isCompleted,
-      @HiveField(6) required final String userId}) = _$_Saving;
+      @HiveField(2) required final int total,
+      @HiveField(3) required final int current,
+      @HiveField(4) required final String userId}) = _$_Saving;
   _Saving._() : super._();
 
   factory _Saving.fromJson(Map<String, dynamic> json) = _$_Saving.fromJson;
@@ -275,18 +233,12 @@ abstract class _Saving extends Saving {
   String get goal;
   @override
   @HiveField(2)
-  int get remaining;
-  @override
-  @HiveField(3)
   int get total;
   @override
-  @HiveField(4)
+  @HiveField(3)
   int get current;
   @override
-  @HiveField(5)
-  bool get isCompleted;
-  @override
-  @HiveField(6)
+  @HiveField(4)
   String get userId;
   @override
   @JsonKey(ignore: true)

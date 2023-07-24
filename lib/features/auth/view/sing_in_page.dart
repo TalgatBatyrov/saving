@@ -16,6 +16,22 @@ class _SignInPageState extends State<SignInPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
+  bool isEmailValid(String email) {
+    // Регулярное выражение для проверки email
+    // Этот паттерн может не покрыть все возможные варианты email, но подойдет для большинства случаев.
+    // При необходимости, вы можете использовать более сложный паттерн для более точной валидации.
+    final RegExp emailRegExp =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+
+    return emailRegExp.hasMatch(email);
+  }
+
+  bool isPasswordValid(String password) {
+    return password.length >= 6;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
@@ -25,54 +41,59 @@ class _SignInPageState extends State<SignInPage> {
             context.router.replace(SavingsRoute(user: user));
           },
           error: (message) {
-            _showAuthErrorDialog(context, message);
+            _showAuthErrorDialog(context, message.toString());
           },
         );
       },
-      child: Scaffold(
-          body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
+      child: Form(
+        key: _formKey,
+        child: Scaffold(
+            body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomInputField(
+                controller: _emailController,
+                isValidate: (value) => isEmailValid(value),
+                title: 'Email',
+                validate: () => _formKey.currentState!.validate(),
               ),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              CustomInputField(
+                controller: _passwordController,
+                isValidate: (value) => isPasswordValid(value),
+                title: 'Passowrd',
+                validate: () => _formKey.currentState!.validate(),
               ),
-            ),
-            BlocBuilder<AuthCubit, AuthState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  orElse: () {
-                    return ElevatedButton(
-                      onPressed: () async {
-                        await context.read<AuthCubit>().signIn(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
-                      },
-                      child: const Text('Login'),
-                    );
-                  },
-                );
-              },
-            ),
-            TextButton(
-              onPressed: () => context.router.replace(const SignUpRoute()),
-              child: const Text('SignUp'),
-            ),
-          ],
-        ),
-      )),
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    orElse: () {
+                      return ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            await context.read<AuthCubit>().signIn(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                );
+                          }
+                        },
+                        child: const Text('Login'),
+                      );
+                    },
+                  );
+                },
+              ),
+              TextButton(
+                onPressed: () => context.router.replace(const SignUpRoute()),
+                child: const Text('SignUp'),
+              ),
+            ],
+          ),
+        )),
+      ),
     );
   }
 
@@ -89,6 +110,43 @@ class _SignInPageState extends State<SignInPage> {
           )
         ],
       ),
+    );
+  }
+}
+
+class CustomInputField extends StatelessWidget {
+  final TextEditingController controller;
+  final bool Function() validate;
+  final bool Function(String) isValidate;
+
+  final String title;
+  const CustomInputField({
+    super.key,
+    required this.controller,
+    required this.validate,
+    required this.isValidate,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: title,
+      ),
+      onChanged: (value) {
+        validate();
+      },
+      validator: (value) {
+        if (value != null) {
+          final isValid = isValidate(value);
+          if (isValid) {
+            return null;
+          }
+        }
+        return 'Введите валидный $title';
+      },
     );
   }
 }

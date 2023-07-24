@@ -16,6 +16,7 @@ class StatisticsRepository implements AbstractStatisticsRepository {
 
     final response = await statisticsCollection
         .where('savingId', isEqualTo: saving.id)
+        .orderBy('date', descending: true)
         .get();
 
     final statistiscList = response.docs.map((e) {

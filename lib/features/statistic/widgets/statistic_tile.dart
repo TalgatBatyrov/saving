@@ -13,15 +13,13 @@ class StatisticTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateFormat dateFormat = DateFormat("dd/MM/yyyy HH:mm");
+    DateFormat dateFormat = DateFormat.yMMMMd('en_US');
     String date = dateFormat.format(statistic.date);
 
-    return Row(
-      children: [
-        Text(date),
-        const SizedBox(width: 20),
-        Text('${statistic.money} com'),
-      ],
+    return ListTile(
+      leading: const Text('KGS'),
+      title: Text(date),
+      trailing: Text('${statistic.money}'),
     );
   }
 }

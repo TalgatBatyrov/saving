@@ -39,7 +39,7 @@ class _SavingTileState extends State<SavingTile> {
     _isEditing = !_isEditing;
   }
 
-  void _addSaving(SavingCubit savingCubit, [bool isAdd = true]) {
+  void addSaving(SavingCubit savingCubit, [bool isAdd = true]) {
     final saving = widget.saving;
     final addValue = _addController.text;
     final valueExists = addValue.isNotEmpty;
@@ -55,11 +55,7 @@ class _SavingTileState extends State<SavingTile> {
       savingCubit.updateSaving(
         saving.copyWith(
           current: current <= 0 ? 0 : current,
-          remaining: isAdd
-              ? saving.remaining - addValueInt
-              : saving.remaining + addValueInt,
         ),
-        // addValueInt,
       );
 
       context
@@ -77,8 +73,7 @@ class _SavingTileState extends State<SavingTile> {
   }
 
   String _buildSavingMessage(Saving saving) {
-    final percentage = (saving.current / saving.total * 100).toInt();
-    return 'Цель: ${saving.goal}\nНакоплено: ${saving.current}\nОсталось: ${saving.remaining}\nВ %: $percentage';
+    return 'Цель: ${saving.goal}\nНакоплено: ${saving.current}\nОсталось: ${saving.remainder}\nВ %: ${saving.percent}';
   }
 
   @override
@@ -159,10 +154,10 @@ class _SavingTileState extends State<SavingTile> {
                 children: [
                   SavingItem(title: 'Цель', value: saving.total),
                   SavingItem(title: 'Накоплено', value: saving.current),
-                  SavingItem(title: 'Осталось', value: saving.remaining),
+                  SavingItem(title: 'Осталось', value: saving.remainder),
                   SavingItem(
                     title: 'В %',
-                    value: (saving.current / saving.total * 100).toInt(),
+                    value: saving.percent.toInt(),
                   ),
                 ],
               ),
@@ -182,7 +177,7 @@ class _SavingTileState extends State<SavingTile> {
                   ),
                   Expanded(
                     child: IconButton(
-                      onPressed: () => _addSaving(savingCubit),
+                      onPressed: () => addSaving(savingCubit),
                       icon: const Icon(
                         Icons.add,
                         color: Colors.green,
@@ -192,7 +187,7 @@ class _SavingTileState extends State<SavingTile> {
                   ),
                   Expanded(
                     child: IconButton(
-                      onPressed: () => _addSaving(savingCubit, false),
+                      onPressed: () => addSaving(savingCubit, false),
                       icon: const Icon(
                         Icons.remove,
                         color: Colors.red,
@@ -201,7 +196,6 @@ class _SavingTileState extends State<SavingTile> {
                     ),
                   ),
                   DeleteSavingButton(saving: saving),
-                  // share
                   Expanded(
                     child: IconButton(
                       onPressed: () async {
