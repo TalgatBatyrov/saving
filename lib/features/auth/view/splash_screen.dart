@@ -33,6 +33,9 @@ class _SplashScreenState extends State<SplashScreen> {
           loggedIn: (user) {
             context.router.replace(SavingsRoute(user: user));
           },
+          needVerification: () {
+            context.router.replace(const VerifyEmailRoute());
+          },
           loggedOut: () {
             context.router.replace(const SignInRoute());
           },

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_app/features/saving/widgets/saving_item.dart';
 import 'package:share_plus/share_plus.dart';
@@ -27,48 +28,48 @@ class _SavingTileState extends State<SavingTile> {
   bool _isEditing = false;
 
   void _changeGoalName(SavingCubit savingCubit) {
-    final saving = widget.saving;
     final goalName = _goalController.text;
-    final valueExists = goalName.isNotEmpty;
+    final isGoalNameEquals = goalName == widget.saving.goal;
 
-    if (valueExists) {
-      savingCubit.updateSaving(
-        saving.copyWith(goal: goalName),
+    if (goalName.isNotEmpty && !isGoalNameEquals) {
+      savingCubit.changeSavingTitle(
+        title: goalName,
+        savingId: widget.saving.id,
       );
     }
     _isEditing = !_isEditing;
+    setState(() {});
   }
 
   void addSaving(SavingCubit savingCubit, [bool isAdd = true]) {
     final saving = widget.saving;
     final addValue = _addController.text;
     final valueExists = addValue.isNotEmpty;
-
     if (valueExists) {
       final addValueInt = int.parse(addValue);
-      final current = valueExists
-          ? isAdd
-              ? (saving.current + addValueInt)
-              : (saving.current - addValueInt)
-          : 0;
 
-      savingCubit.updateSaving(
-        saving.copyWith(
-          current: current <= 0 ? 0 : current,
-        ),
-      );
+      if (addValueInt > 0) {
+        final money = isAdd
+            ? (saving.current + addValueInt)
+            : (saving.current - addValueInt);
 
-      context
-          .read<StatisticCubit>()
-          .addStatistic(
-              money: isAdd ? addValueInt : -addValueInt, saving: saving)
-          .onError((error, stackTrace) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.toString())),
-        );
-      });
+        // savingCubit.updateSaving(
+        //   saving.copyWith(current: current <= 0 ? 0 : current),
+        // );
+
+        savingCubit.updateSaving2(savingId: saving.id, money: money);
+
+        context
+            .read<StatisticCubit>()
+            .addStatistic(
+                money: isAdd ? addValueInt : -addValueInt, saving: saving)
+            .onError((error, stackTrace) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(error.toString())),
+          );
+        });
+      }
     }
-
     _addController.clear();
   }
 
@@ -119,19 +120,17 @@ class _SavingTileState extends State<SavingTile> {
                 ),
               ),
               SizedBox(height: !_isEditing ? 0 : 10),
-              InkWell(
+              ListTile(
                 onTap: () {
                   _isEditing = !_isEditing;
                   _goalController.text = saving.goal;
                   setState(() {});
                 },
-                child: Center(
-                  child: Text(
-                    saving.goal,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                leading: Text(
+                  saving.goal,
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -149,18 +148,10 @@ class _SavingTileState extends State<SavingTile> {
                 value: saving.current / saving.total,
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SavingItem(title: 'Цель', value: saving.total),
-                  SavingItem(title: 'Накоплено', value: saving.current),
-                  SavingItem(title: 'Осталось', value: saving.remainder),
-                  SavingItem(
-                    title: 'В %',
-                    value: saving.percent.toInt(),
-                  ),
-                ],
-              ),
+              SavingItem(title: 'Цель', value: saving.total),
+              SavingItem(title: 'Накоплено', value: saving.current),
+              SavingItem(title: 'Осталось', value: saving.remainder),
+              SavingItem(title: '%', value: saving.percent.toInt()),
               const SizedBox(height: 20),
               Row(
                 children: [
@@ -168,6 +159,9 @@ class _SavingTileState extends State<SavingTile> {
                     flex: 2,
                     child: TextField(
                       keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
                       controller: _addController,
                       decoration: const InputDecoration(
                         labelText: 'Добавить',

@@ -11,4 +11,6 @@ class AuthState with _$AuthState {
   const factory AuthState.loggedOut() = _LoggedOut;
 
   const factory AuthState.error(Exception message) = _Error;
+
+  const factory AuthState.needVerification() = _NeedVerification;
 }

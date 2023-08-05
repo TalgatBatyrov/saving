@@ -13,16 +13,22 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._userRepository) : super(const AuthState.loading()) {
     FirebaseAuth.instance.authStateChanges().listen(_onAuthStateChanged);
-    _onAuthStateChanged(FirebaseAuth.instance.currentUser);
+    // _onAuthStateChanged(FirebaseAuth.instance.currentUser);
   }
 
   Future<void> _onAuthStateChanged(User? firebaseUser) async {
+    print("firebaseUser: $firebaseUser");
     try {
       if (firebaseUser == null) {
         emit(const AuthState.loggedOut());
         return;
       }
 
+      if (!firebaseUser.emailVerified) {
+        print('User is not verified');
+        emit(const AuthState.needVerification());
+        return;
+      }
       final user = await _userRepository.getUser(firebaseUser.uid);
 
       emit(AuthState.loggedIn(user: user));

@@ -5,4 +5,12 @@ abstract class AbstractSavingsRepository {
   Future<void> createSaving({required String goal, required int total});
   Future<void> deleteSaving(Saving saving);
   Future<void> updateSaving(Saving saving);
+  Future<void> updateSaving2({
+    required String savingId,
+    required int money,
+  });
+  Future<void> changeSavingTitle({
+    required String savingId,
+    required String newTitle,
+  });
 }

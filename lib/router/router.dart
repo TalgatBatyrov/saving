@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_my_app/features/auth/view/verify_email_screen.dart';
 import '../features/auth/view/splash_screen.dart';
 import '../features/auth/view/sign_up_page.dart';
 import '../features/auth/view/sing_in_page.dart';
@@ -16,11 +17,11 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         // TODO: AutoRoute(page: SplashRoute.page, initial: true),
         // Splash route: isAuth ? replase(HomeRoute) : replase(SignInRoute)
-
         AutoRoute(page: SplashRoute.page, initial: true),
         AutoRoute(page: SignUpRoute.page),
         AutoRoute(page: SignInRoute.page),
         AutoRoute(page: SavingsRoute.page),
         AutoRoute(page: StatisticRoute.page),
+        AutoRoute(page: VerifyEmailRoute.page),
       ];
 }

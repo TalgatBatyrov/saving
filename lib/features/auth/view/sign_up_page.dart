@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_my_app/app_widgets/app_loading.dart';
 import 'package:flutter_my_app/features/auth/blocs/auth_cubit.dart';
 import 'package:flutter_my_app/router/router.dart';
 
@@ -73,8 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   return state.maybeWhen(
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
+                    loading: () => const AppLoading(),
                     orElse: () {
                       return ElevatedButton(
                         onPressed: () async {
@@ -84,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 password: _passwordController.text,
                               );
                         },
-                        child: const Text('Login'),
+                        child: const Text('Sign up'),
                       );
                     },
                   );

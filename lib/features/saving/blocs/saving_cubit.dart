@@ -38,10 +38,9 @@ class SavingCubit extends Cubit<SavingState> {
     }).toList();
 
     if (savingList.isEmpty) {
-      emit(const SavingState.empty());
-    } else {
-      emit(SavingState.loaded(savings: savingList));
+      return emit(const SavingState.empty());
     }
+    emit(SavingState.loaded(savings: savingList));
   }
 
   @override
@@ -97,6 +96,24 @@ class SavingCubit extends Cubit<SavingState> {
     }
   }
 
+  Future<void> updateSaving2({
+    required String savingId,
+    required int money,
+  }) async {
+    try {
+      if (state is! _Loaded) {
+        emit(const SavingState.loading());
+      }
+
+      await _savingsRepository.updateSaving2(
+        savingId: savingId,
+        money: money,
+      );
+    } catch (e) {
+      emit(SavingState.error(e.toString()));
+    }
+  }
+
   Future<void> updateSaving(Saving saving) async {
     try {
       if (state is! _Loaded) {
@@ -109,6 +126,24 @@ class SavingCubit extends Cubit<SavingState> {
       //   money: money ?? 0,
       //   savingId: saving.id,
       // );
+    } catch (e) {
+      emit(SavingState.error(e.toString()));
+    }
+  }
+
+  Future<void> changeSavingTitle({
+    required String title,
+    required String savingId,
+  }) async {
+    try {
+      if (state is! _Loaded) {
+        emit(const SavingState.loading());
+      }
+
+      await _savingsRepository.changeSavingTitle(
+        newTitle: title,
+        savingId: savingId,
+      );
     } catch (e) {
       emit(SavingState.error(e.toString()));
     }

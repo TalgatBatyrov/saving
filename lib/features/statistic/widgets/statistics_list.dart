@@ -36,15 +36,19 @@ class StatisticsList extends StatelessWidget {
               ListTile(
                 leading: const Text('Дней'),
                 title: const Text('Такими темпами еще'),
-                trailing: Text('$dayForOver'),
+                trailing: Text('${dayForOver > 0 ? dayForOver : 0}'),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        // const SizedBox(height: 16),
         Expanded(
-          child: ListView.separated(
-            separatorBuilder: (context, index) => const Divider(thickness: 2),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 2,
+            ),
+            // separatorBuilder: (context, index) => const Divider(thickness: 2),
             itemCount: statistics.length,
             itemBuilder: (context, index) =>
                 StatisticTile(statistic: statistics[index]),

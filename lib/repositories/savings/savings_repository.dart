@@ -89,4 +89,34 @@ class SavingsRepository implements AbstractSavingsRepository {
         .then((value) => print("Saving Updated"))
         .catchError((er) => print("Failed to update Saving: $er"));
   }
+
+  @override
+  Future<void> updateSaving2({
+    required String savingId,
+    required int money,
+  }) async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final savingsPath = 'users/$userId/savings';
+    final savingCollection = firestore.collection(savingsPath);
+    savingCollection
+        .doc(savingId)
+        .update({'current': money <= 0 ? 0 : money})
+        .then((value) => print("Saving Updated"))
+        .catchError((er) => print("Failed to update Saving: $er"));
+  }
+
+  @override
+  Future<void> changeSavingTitle({
+    required String savingId,
+    required String newTitle,
+  }) async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final savingsPath = 'users/$userId/savings';
+    final savingCollection = firestore.collection(savingsPath);
+    savingCollection
+        .doc(savingId)
+        .update({'goal': newTitle})
+        .then((value) => print("Saving Updated"))
+        .catchError((er) => print("Failed to update Saving: $er"));
+  }
 }

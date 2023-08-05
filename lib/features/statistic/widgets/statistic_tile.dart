@@ -13,13 +13,19 @@ class StatisticTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateFormat dateFormat = DateFormat.yMMMMd('en_US');
+    DateFormat dateFormat = DateFormat.yMMMd('en_US');
     String date = dateFormat.format(statistic.date);
 
-    return ListTile(
-      leading: const Text('KGS'),
-      title: Text(date),
-      trailing: Text('${statistic.money}'),
+    return Card(
+      color: statistic.money > 0 ? Colors.green : Colors.red,
+      elevation: 4,
+      child: ListTile(
+        leading: Text(
+          '${statistic.money} KGS',
+          style: const TextStyle(fontWeight: FontWeight.w500),
+        ),
+        subtitle: Text(date),
+      ),
     );
   }
 }

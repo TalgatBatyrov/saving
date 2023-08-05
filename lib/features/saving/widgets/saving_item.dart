@@ -12,17 +12,28 @@ class SavingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title),
-        const SizedBox(height: 10),
         Text(
-          value.toString(),
+          title,
           style: const TextStyle(
-            color: Colors.green,
-            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
-        )
+        ),
+        SizedBox(
+          width: 70,
+          child: Card(
+            color: Colors.green[400],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '$value',
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

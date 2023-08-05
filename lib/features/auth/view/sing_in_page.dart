@@ -19,9 +19,6 @@ class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
 
   bool isEmailValid(String email) {
-    // Регулярное выражение для проверки email
-    // Этот паттерн может не покрыть все возможные варианты email, но подойдет для большинства случаев.
-    // При необходимости, вы можете использовать более сложный паттерн для более точной валидации.
     final RegExp emailRegExp =
         RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
@@ -57,13 +54,11 @@ class _SignInPageState extends State<SignInPage> {
                 controller: _emailController,
                 isValidate: (value) => isEmailValid(value),
                 title: 'Email',
-                validate: () => _formKey.currentState!.validate(),
               ),
               CustomInputField(
                 controller: _passwordController,
                 isValidate: (value) => isPasswordValid(value),
                 title: 'Passowrd',
-                validate: () => _formKey.currentState!.validate(),
               ),
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
@@ -116,14 +111,12 @@ class _SignInPageState extends State<SignInPage> {
 
 class CustomInputField extends StatelessWidget {
   final TextEditingController controller;
-  final bool Function() validate;
   final bool Function(String) isValidate;
 
   final String title;
   const CustomInputField({
     super.key,
     required this.controller,
-    required this.validate,
     required this.isValidate,
     required this.title,
   });
@@ -135,9 +128,6 @@ class CustomInputField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: title,
       ),
-      onChanged: (value) {
-        validate();
-      },
       validator: (value) {
         if (value != null) {
           final isValid = isValidate(value);

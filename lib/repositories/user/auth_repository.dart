@@ -22,10 +22,10 @@ class AuthRepository implements AbstractAuthRepository {
       );
       final user = _firebaseAuth.currentUser;
 
-      if (user != null) {
+      if (user != null && user.emailVerified) {
         return getUser(user.uid);
       } else {
-        throw Exception();
+        throw Exception('User not verified');
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -55,20 +55,22 @@ class AuthRepository implements AbstractAuthRepository {
         email: email,
         password: password,
       );
+      final userFromFirebase = response.user;
 
-      if (response.user != null) {
-        firestore.collection('users').doc(response.user!.uid).set(
+      if (userFromFirebase != null) {
+        final uid = userFromFirebase.uid;
+
+        await userFromFirebase.sendEmailVerification();
+
+        await firestore.collection('users').doc(uid).set(
               AuthUser(
                 id: response.user!.uid,
                 name: name,
                 email: email,
               ).toJson(),
             );
-      }
-      final user = _firebaseAuth.currentUser;
 
-      if (user != null) {
-        final authUser = await getUser(user.uid);
+        final authUser = await getUser(uid);
         return authUser;
       } else {
         throw Exception();
@@ -76,17 +78,13 @@ class AuthRepository implements AbstractAuthRepository {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw Exception('The password provided is too weak.');
-        // throw WeakPasswordAuthException();
       } else if (e.code == 'email-already-in-use') {
         throw Exception('The account already exists for that email.');
-        // throw EmailAlreadyInUseAuthException();
       } else {
         throw Exception(e.code);
-        // throw GenericAuthException();
       }
     } on Exception catch (_) {
       throw Exception('Error');
-      // throw GenericAuthException();
     }
   }
 

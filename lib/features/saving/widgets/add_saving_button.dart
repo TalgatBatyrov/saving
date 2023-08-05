@@ -9,7 +9,7 @@ class AddSavingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return IconButton(
       onPressed: () {
         showDialog(
           context: context,
@@ -61,7 +61,7 @@ class AddSavingButton extends StatelessWidget {
           },
         );
       },
-      child: const Icon(Icons.add),
+      icon: const Icon(Icons.add),
     );
   }
 }
