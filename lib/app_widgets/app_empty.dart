@@ -7,7 +7,7 @@ class AppEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        'No savings yet',
+        'Empty',
         style: TextStyle(
           fontSize: 20,
           color: Colors.red,
