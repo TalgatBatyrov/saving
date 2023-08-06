@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saving/repositories/fcm/fcm_repository.dart';
 
 import '../../../repositories/savings/models/saving.dart';
 import '../blocs/saving_cubit.dart';
@@ -34,6 +35,11 @@ class DeleteSavingButton extends StatelessWidget {
     if (isConfirmed == true) {
       context.router.pop();
       context.read<SavingCubit>().deleteSaving(saving);
+      final fcmRepository = context.read<FcmRepository>();
+      fcmRepository.sendNotification(
+        title: saving.goal,
+        body: 'Цель удалена',
+      );
     }
   }
 }

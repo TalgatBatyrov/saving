@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_my_app/features/auth/view/verify_email_screen.dart';
 import '../features/auth/view/splash_screen.dart';
 import '../features/auth/view/sign_up_page.dart';
 import '../features/auth/view/sing_in_page.dart';
+import '../features/auth/view/verify_email_screen.dart';
 import '../features/saving/view/savings_page.dart';
 import '../features/statistic/view/statistic_page.dart';
 import '../repositories/savings/models/saving.dart';

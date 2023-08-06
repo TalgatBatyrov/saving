@@ -1,5 +1,5 @@
+import 'package:saving/features/saving/widgets/saving_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_my_app/features/saving/widgets/saving_tile.dart';
 
 import '../../../repositories/savings/models/saving.dart';
 

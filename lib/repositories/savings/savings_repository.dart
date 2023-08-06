@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_my_app/repositories/savings/abstract_savings_repository.dart';
-import 'package:flutter_my_app/repositories/savings/models/saving.dart';
 import 'package:hive_flutter/adapters.dart';
+
+import 'abstract_savings_repository.dart';
+import 'models/saving.dart';
 
 class SavingsRepository implements AbstractSavingsRepository {
   final FirebaseFirestore firestore;

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/repositories/user/auth_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../repositories/user/auth_repository.dart';
 import '../../../repositories/user/models/auth_user.dart';
 
 part 'auth_cubit.freezed.dart';
@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> _onAuthStateChanged(User? firebaseUser) async {
-    print("firebaseUser: $firebaseUser");
+    // print("firebaseUser: $firebaseUser");
     try {
       if (firebaseUser == null) {
         emit(const AuthState.loggedOut());
@@ -25,7 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
       }
 
       if (!firebaseUser.emailVerified) {
-        print('User is not verified');
+        // print('User is not verified');
         emit(const AuthState.needVerification());
         return;
       }

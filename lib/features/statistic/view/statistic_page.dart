@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/app_widgets/app_empty.dart';
-import 'package:flutter_my_app/repositories/savings/models/saving.dart';
 
+import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
 import '../../../app_widgets/app_loading.dart';
+import '../../../repositories/savings/models/saving.dart';
 import '../blocs/statistic_cubit.dart';
 import '../widgets/statistic_app_bar_action.dart';
 import '../widgets/statistics_list.dart';

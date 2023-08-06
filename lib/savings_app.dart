@@ -1,14 +1,16 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:saving/repositories/fcm/fcm_repository.dart';
+import 'package:saving/repositories/savings/abstract_savings_repository.dart';
+import 'package:saving/repositories/statistics/abstract_statistics_repository.dart';
+import 'package:saving/repositories/user/auth_repository.dart';
+import 'package:saving/router/router.dart';
+import 'package:saving/theme/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/features/auth/blocs/auth_cubit.dart';
-import 'package:flutter_my_app/repositories/savings/abstract_savings_repository.dart';
-import 'package:flutter_my_app/repositories/statistics/abstract_statistics_repository.dart';
-import 'package:flutter_my_app/repositories/user/auth_repository.dart';
-import 'package:flutter_my_app/router/router.dart';
-import 'package:flutter_my_app/theme/theme.dart';
 import 'package:get_it/get_it.dart';
 
+import 'features/auth/blocs/auth_cubit.dart';
 import 'features/saving/blocs/saving_cubit.dart';
 import 'features/statistic/blocs/statistic_cubit.dart';
 
@@ -42,16 +44,19 @@ class _SavingsAppState extends State<SavingsApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: _savingCubit),
-        BlocProvider.value(value: _statisticCubit),
-        BlocProvider.value(value: _authCubit),
-      ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: darkTheme,
-        routerConfig: _appRouter.config(),
+    return RepositoryProvider(
+      create: (_) => FcmRepository(FirebaseMessaging.instance),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: _savingCubit),
+          BlocProvider.value(value: _statisticCubit),
+          BlocProvider.value(value: _authCubit),
+        ],
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: darkTheme,
+          routerConfig: _appRouter.config(),
+        ),
       ),
     );
   }

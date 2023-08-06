@@ -1,5 +1,4 @@
-import 'package:flutter_my_app/repositories/savings/models/saving.dart';
-
+import '../savings/models/saving.dart';
 import 'models/statistic.dart';
 
 abstract class AbstractStatisticsRepository {

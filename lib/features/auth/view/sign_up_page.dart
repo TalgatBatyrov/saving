@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/app_widgets/app_loading.dart';
-import 'package:flutter_my_app/features/auth/blocs/auth_cubit.dart';
-import 'package:flutter_my_app/router/router.dart';
+
+import '../../../app_widgets/app_loading.dart';
+import '../../../router/router.dart';
+import '../blocs/auth_cubit.dart';
 
 @RoutePage()
 class SignUpPage extends StatefulWidget {

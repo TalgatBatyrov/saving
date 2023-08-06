@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:saving/features/saving/widgets/saving_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/features/saving/widgets/saving_item.dart';
+import 'package:saving/repositories/fcm/fcm_repository.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../repositories/savings/models/saving.dart';
 import '../../../router/router.dart';
@@ -45,6 +46,7 @@ class _SavingTileState extends State<SavingTile> {
     final saving = widget.saving;
     final addValue = _addController.text;
     final valueExists = addValue.isNotEmpty;
+
     if (valueExists) {
       final addValueInt = int.parse(addValue);
 
@@ -53,9 +55,12 @@ class _SavingTileState extends State<SavingTile> {
             ? (saving.current + addValueInt)
             : (saving.current - addValueInt);
 
-        // savingCubit.updateSaving(
-        //   saving.copyWith(current: current <= 0 ? 0 : current),
-        // );
+        if (saving.isCompleted) {
+          context.read<FcmRepository>().sendNotification(
+                title: widget.saving.goal,
+                body: 'Цель достигнута!',
+              );
+        }
 
         savingCubit.updateSaving2(savingId: saving.id, money: money);
 

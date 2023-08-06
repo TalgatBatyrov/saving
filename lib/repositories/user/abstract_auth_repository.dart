@@ -1,4 +1,4 @@
-import 'package:flutter_my_app/repositories/user/models/auth_user.dart';
+import 'models/auth_user.dart';
 
 abstract class AbstractAuthRepository {
   Future<void> signIn({

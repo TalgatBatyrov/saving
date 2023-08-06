@@ -2,12 +2,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/features/auth/blocs/auth_cubit.dart';
-import 'package:flutter_my_app/repositories/user/models/auth_user.dart';
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
 import '../../../app_widgets/app_loading.dart';
+import '../../../repositories/user/models/auth_user.dart';
 import '../../../router/router.dart';
+import '../../auth/blocs/auth_cubit.dart';
 import '../blocs/saving_cubit.dart';
 import '../widgets/add_saving_button.dart';
 import '../widgets/savings_list.dart';

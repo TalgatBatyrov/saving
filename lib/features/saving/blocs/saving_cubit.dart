@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_app/features/auth/blocs/auth_cubit.dart';
-import 'package:flutter_my_app/repositories/savings/abstract_savings_repository.dart';
+import '../../../repositories/savings/abstract_savings_repository.dart';
 import '../../../repositories/savings/models/saving.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../auth/blocs/auth_cubit.dart';
 import '../../statistic/blocs/statistic_cubit.dart';
 
 part 'saving_cubit.freezed.dart';
