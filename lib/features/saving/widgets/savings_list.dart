@@ -15,7 +15,7 @@ class SavingsList extends StatelessWidget {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
       itemCount: savings.length,
-      separatorBuilder: (context, i) => const Divider(thickness: 2),
+      separatorBuilder: (context, i) => const Divider(),
       itemBuilder: (context, i) => SavingTile(saving: savings[i]),
     );
   }

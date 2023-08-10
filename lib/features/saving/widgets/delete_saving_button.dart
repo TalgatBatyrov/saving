@@ -9,12 +9,12 @@ import '../../../repositories/savings/models/saving.dart';
 import '../blocs/saving_cubit.dart';
 
 class DeleteSavingButton extends StatelessWidget {
+  final Saving saving;
+
   const DeleteSavingButton({
     super.key,
     required this.saving,
   });
-
-  final Saving saving;
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:share_plus/share_plus.dart';
 
-import '../../../repositories/statistics/models/statistic.dart';
+import '../../../services/share_services.dart';
 import '../blocs/statistic_cubit.dart';
 
 class StatisticAppBarAction extends StatelessWidget {
@@ -27,14 +26,5 @@ class StatisticAppBarAction extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-/// TODO: extract to separate file in services folder
-abstract class ShareService {
-  static Future<void> shareStatistics(List<Statistic> statistic) async {
-    final statisticString =
-        statistic.map((e) => '${e.date} - ${e.money} com').toList();
-    await Share.share(statisticString.join('\n'));
   }
 }

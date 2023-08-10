@@ -43,7 +43,7 @@ class FcmRepository {
         data: jsonEncode(data),
       );
     } catch (error) {
-      print('Ошибка при отправке уведомления: $error');
+      // print('Ошибка при отправке уведомления: $error');
     }
   }
 }
