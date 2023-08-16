@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
+import 'package:saving/utilities/dialogs/delete_dialog.dart';
 
 import '../../../repositories/savings/models/saving.dart';
 import '../blocs/saving_cubit.dart';
@@ -11,10 +11,7 @@ import '../blocs/saving_cubit.dart';
 class DeleteSavingButton extends StatelessWidget {
   final Saving saving;
 
-  const DeleteSavingButton({
-    super.key,
-    required this.saving,
-  });
+  const DeleteSavingButton({super.key, required this.saving});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +27,9 @@ class DeleteSavingButton extends StatelessWidget {
   }
 
   Future<void> _onDeleteSaving(BuildContext context) async {
-    final isConfirmed = await _showDeleteDialog(context);
+    final isConfirmed = await showDeleteDialog(context);
 
-    if (isConfirmed == true) {
+    if (isConfirmed) {
       context.router.pop();
       context.read<SavingCubit>().deleteSaving(saving);
       final fcmRepository = context.read<FcmRepository>();
@@ -42,31 +39,4 @@ class DeleteSavingButton extends StatelessWidget {
       );
     }
   }
-}
-
-Future<bool?> _showDeleteDialog(BuildContext context) {
-  return showDialog<bool>(
-    barrierDismissible: false,
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Удалить?'),
-        content: const Text('Вы уверены, что хотите удалить?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.router.pop(false);
-            },
-            child: const Text('Нет'),
-          ),
-          TextButton(
-            onPressed: () {
-              context.router.pop(true);
-            },
-            child: const Text('Да'),
-          ),
-        ],
-      );
-    },
-  );
 }

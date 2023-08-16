@@ -4,15 +4,16 @@ import 'package:saving/repositories/savings/abstract_savings_repository.dart';
 import 'package:saving/repositories/statistics/abstract_statistics_repository.dart';
 import 'package:saving/repositories/user/auth_repository.dart';
 import 'package:saving/router/router.dart';
-import 'package:saving/theme/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:saving/theming/app_themes.dart';
 
 import 'features/auth/blocs/auth_cubit.dart';
 import 'features/saving/blocs/saving_cubit.dart';
 import 'features/statistic/blocs/statistic_cubit.dart';
+import 'features/theme/theme_cubit.dart';
 
 class SavingsApp extends StatefulWidget {
   const SavingsApp({super.key});
@@ -51,11 +52,18 @@ class _SavingsAppState extends State<SavingsApp> {
           BlocProvider.value(value: _savingCubit),
           BlocProvider.value(value: _statisticCubit),
           BlocProvider.value(value: _authCubit),
+          BlocProvider(create: (_) => ThemeCubit()),
         ],
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: darkTheme,
-          routerConfig: _appRouter.config(),
+        child: BlocBuilder<ThemeCubit, ThemeMode>(
+          builder: (context, themeMode) {
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              themeMode: themeMode,
+              theme: AppThemes.light,
+              darkTheme: AppThemes.dark,
+              routerConfig: _appRouter.config(),
+            );
+          },
         ),
       ),
     );

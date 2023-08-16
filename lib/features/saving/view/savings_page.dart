@@ -2,9 +2,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saving/utilities/dialogs/logout_dialog.dart';
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
 import '../../../app_widgets/app_loading.dart';
+import '../../../app_widgets/theme_toggle_button.dart';
 import '../../../repositories/user/models/auth_user.dart';
 import '../../../router/router.dart';
 import '../../auth/blocs/auth_cubit.dart';
@@ -23,6 +25,7 @@ class SavingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(user.name),
         actions: [
+          const ThemeToggleButton(),
           const AddSavingButton(),
           IconButton(
             onPressed: () => _onSignOut(context),
@@ -44,38 +47,11 @@ class SavingsPage extends StatelessWidget {
   }
 
   Future<void> _onSignOut(BuildContext context) async {
-    final isConfirmed = await _showSignOutDialog(context);
+    final isConfirmed = await showLogOutDialog(context);
 
     if (isConfirmed == true) {
       context.router.replace(const SignInRoute());
       context.read<AuthCubit>().logout();
     }
-  }
-
-  Future<bool?> _showSignOutDialog(BuildContext context) {
-    return showDialog<bool>(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Выход'),
-          content: const Text('Вы уверены, что хотите выйти?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                context.router.pop(false);
-              },
-              child: const Text('Нет'),
-            ),
-            TextButton(
-              onPressed: () {
-                context.router.pop(true);
-              },
-              child: const Text('Да'),
-            ),
-          ],
-        );
-      },
-    );
   }
 }

@@ -45,17 +45,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCFLfdJla8lw9WOBnt1QSh87Lc0Ng_1mYE',
-    appId: '1:610396238684:web:8d7dc2dbfe1e3a29218799',
+    appId: '1:610396238684:web:d7fec9a6e02fa9de218799',
     messagingSenderId: '610396238684',
     projectId: 'crypto-coins-fcce1',
     authDomain: 'crypto-coins-fcce1.firebaseapp.com',
     storageBucket: 'crypto-coins-fcce1.appspot.com',
-    measurementId: 'G-GTZ2VFSH9R',
+    measurementId: 'G-B86RM7NTDF',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBozEe5LRcafYZN0_9kizymYRo4wrlpEOM',
-    appId: '1:610396238684:android:22bcbb4caed4edcc218799',
+    appId: '1:610396238684:android:ebaf7da074b40351218799',
     messagingSenderId: '610396238684',
     projectId: 'crypto-coins-fcce1',
     storageBucket: 'crypto-coins-fcce1.appspot.com',
@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBzNqfPYctbp9zU-U6K1gCTfrlA8_EylJA',
-    appId: '1:610396238684:ios:96a20687ace766db218799',
+    appId: '1:610396238684:ios:c50be3d552ecb04e218799',
     messagingSenderId: '610396238684',
     projectId: 'crypto-coins-fcce1',
     storageBucket: 'crypto-coins-fcce1.appspot.com',
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBzNqfPYctbp9zU-U6K1gCTfrlA8_EylJA',
-    appId: '1:610396238684:ios:4fc6825f471a0f76218799',
+    appId: '1:610396238684:ios:6ae2f388d4f30fd6218799',
     messagingSenderId: '610396238684',
     projectId: 'crypto-coins-fcce1',
     storageBucket: 'crypto-coins-fcce1.appspot.com',

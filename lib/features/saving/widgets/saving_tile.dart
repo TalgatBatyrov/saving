@@ -76,7 +76,6 @@ class _SavingTileState extends State<SavingTile> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
-          shadowColor: Colors.grey,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -94,7 +93,7 @@ class _SavingTileState extends State<SavingTile> {
                   visible: saving.isCompleted,
                   child: const Text('Цель достигнута!'),
                 ),
-                const SizedBox(height: 10),
+                // const SizedBox(height: 10),
                 LinerProgresScreen(saving: saving),
                 SavingItem(title: 'Цель', value: saving.total),
                 SavingItem(title: 'Накоплено', value: saving.current),
@@ -118,8 +117,9 @@ class _SavingTileState extends State<SavingTile> {
                     ),
                     ActionIconButton(
                       icon: Icons.history,
-                      onPressed: () =>
-                          context.router.push(StatisticRoute(saving: saving)),
+                      onPressed: () => context.router.push(
+                        StatisticRoute(saving: saving),
+                      ),
                     ),
                   ],
                 ),
