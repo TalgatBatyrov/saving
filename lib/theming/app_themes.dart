@@ -5,7 +5,7 @@ abstract class AppThemes {
         textTheme: ThemeData.light(useMaterial3: true).textTheme.copyWith(
               bodyMedium: const TextStyle(color: Colors.black),
             ),
-        cardTheme: CardTheme(color: Colors.grey[200]),
+        cardTheme: const CardTheme(color: Colors.white),
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
             TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
