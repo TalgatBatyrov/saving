@@ -6,9 +6,10 @@
 
 <div>
   <div style="display: flex;">
-    <img  width="15%" src="https://github.com/TalgatBatyrov/Pokemon/assets/90198155/2a0b5b90-e3cd-478a-b1dd-1792a27bea13"/>
-    <img  width="15%" src="https://github.com/TalgatBatyrov/Pokemon/assets/90198155/1a4c50d6-7fc6-4b8b-b768-51a1e6f73bb8"/>
-    <img  width="15%" src="https://github.com/TalgatBatyrov/Pokemon/assets/90198155/9b1f8373-8010-4b7a-a375-7ab8626e6f98"/>
+    <img  width="15%" src="https://github.com/TalgatBatyrov/saving/assets/90198155/cc69327f-80ba-4257-a4f3-166bdfa2c871"/>
+    <img  width="15%" src="https://github.com/TalgatBatyrov/saving/assets/90198155/c676696b-9b0d-4454-8117-0d05ef6fbbd8"/>
+    <img  width="15%" src="https://github.com/TalgatBatyrov/saving/assets/90198155/7efc0c51-38ff-440d-a668-21036d12c6c9"/>
+    <img  width="15%" src="https://github.com/TalgatBatyrov/saving/assets/90198155/277da8cb-8cd2-4991-8486-5c4b2c2cbfcc"/>
   </div>
 </div>
 
