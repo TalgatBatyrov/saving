@@ -93,7 +93,6 @@ class _SavingTileState extends State<SavingTile> {
                   visible: saving.isCompleted,
                   child: const Text('Цель достигнута!'),
                 ),
-                // const SizedBox(height: 10),
                 LinerProgresScreen(saving: saving),
                 SavingItem(title: 'Цель', value: saving.total),
                 SavingItem(title: 'Накоплено', value: saving.current),
