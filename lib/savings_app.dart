@@ -1,15 +1,15 @@
+import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
-import 'package:saving/repositories/savings/abstract_savings_repository.dart';
-import 'package:saving/repositories/statistics/abstract_statistics_repository.dart';
+import 'package:saving/repositories/savings/savings_repository.dart';
+import 'package:saving/repositories/statistics/statistics_repository.dart';
 import 'package:saving/repositories/user/auth_repository.dart';
 import 'package:saving/router/router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:saving/theming/app_themes.dart';
-
 import 'features/auth/blocs/auth_cubit.dart';
 import 'features/saving/blocs/saving_cubit.dart';
 import 'features/statistic/blocs/statistic_cubit.dart';
@@ -24,13 +24,27 @@ class SavingsApp extends StatefulWidget {
 
 class _SavingsAppState extends State<SavingsApp> {
   final _appRouter = AppRouter();
-  final _authCubit = AuthCubit(GetIt.I<AuthRepository>());
-  final _statisticCubit = StatisticCubit(
-    GetIt.I<AbstractStatisticsRepository>(),
+  final _dio = Dio();
+  final _firestore = FirebaseFirestore.instance;
+  final _firebaseAuth = FirebaseAuth.instance;
+  final _firebaserMessaging = FirebaseMessaging.instance;
+
+  late final _statisticRepository = StatisticsRepository(_firestore);
+
+  late final _savingRepository = SavingsRepository(
+    dio: _dio,
+    firestore: _firestore,
   );
+
+  late final _authRepository = AuthRepository(_firebaseAuth, _firestore);
+
+  late final _authCubit = AuthCubit(_authRepository);
+
+  late final _statisticCubit = StatisticCubit(_statisticRepository);
+
   late final _savingCubit = SavingCubit(
-    GetIt.I<AbstractSavingsRepository>(),
-    FirebaseFirestore.instance,
+    _savingRepository,
+    _firestore,
     _statisticCubit,
     _authCubit,
   );
@@ -45,8 +59,13 @@ class _SavingsAppState extends State<SavingsApp> {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (_) => FcmRepository(FirebaseMessaging.instance),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (_) => FcmRepository(_firebaserMessaging)),
+        RepositoryProvider.value(value: _savingRepository),
+        RepositoryProvider.value(value: _authRepository),
+        RepositoryProvider.value(value: _statisticRepository)
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider.value(value: _savingCubit),

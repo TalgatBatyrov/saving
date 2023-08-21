@@ -12,7 +12,7 @@ class MoneyInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: 3,
       child: TextField(
         keyboardType: TextInputType.number,
         inputFormatters: [

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hive_flutter/adapters.dart';
 
 import 'abstract_savings_repository.dart';
 import 'models/saving.dart';
@@ -10,11 +9,11 @@ class SavingsRepository implements AbstractSavingsRepository {
   final FirebaseFirestore firestore;
 
   final Dio dio;
-  final Box<Saving> savingsBox;
+  // final Box<Saving> savingsBox;
 
   SavingsRepository({
     required this.dio,
-    required this.savingsBox,
+    // required this.savingsBox,
     required this.firestore,
   });
 
@@ -31,9 +30,9 @@ class SavingsRepository implements AbstractSavingsRepository {
 
       final savingListMap = {for (var e in savingList) e.id: e};
 
-      await savingsBox.putAll(savingListMap);
+      // await savingsBox.putAll(savingListMap);
     } catch (e) {
-      savingList = savingsBox.values.toList();
+      // savingList = savingsBox.values.toList();
     }
 
     return savingList;
