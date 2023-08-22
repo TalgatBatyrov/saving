@@ -9,7 +9,6 @@ import 'package:saving/router/router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saving/services/push_notifications.dart';
 import 'package:saving/theming/app_themes.dart';
 import 'features/auth/blocs/auth_cubit.dart';
 import 'features/saving/blocs/saving_cubit.dart';
@@ -30,23 +29,14 @@ class _SavingsAppState extends State<SavingsApp> {
   final _firebaseAuth = FirebaseAuth.instance;
   final _firebaserMessaging = FirebaseMessaging.instance;
 
-  late final _statisticRepository = StatisticsRepository(
-    _firestore,
-  );
+  late final _statisticRepository = StatisticsRepository(_firestore);
   late final _savingRepository = SavingsRepository(
     dio: _dio,
     firestore: _firestore,
   );
-  late final _authRepository = AuthRepository(
-    _firebaseAuth,
-    _firestore,
-  );
-  late final _authCubit = AuthCubit(
-    _authRepository,
-  );
-  late final _statisticCubit = StatisticCubit(
-    _statisticRepository,
-  );
+  late final _authRepository = AuthRepository(_firebaseAuth, _firestore);
+  late final _authCubit = AuthCubit(_authRepository);
+  late final _statisticCubit = StatisticCubit(_statisticRepository);
   late final _savingCubit = SavingCubit(
     _savingRepository,
     _firestore,

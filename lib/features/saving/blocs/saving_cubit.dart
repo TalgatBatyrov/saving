@@ -72,7 +72,9 @@ class SavingCubit extends Cubit<SavingState> {
       if (state is! _Loaded) {
         emit(const SavingState.loading());
       }
-
+      if (goal.isEmpty || total == 0) {
+        return;
+      }
       await _savingsRepository.createSaving(
         goal: goal,
         total: total,

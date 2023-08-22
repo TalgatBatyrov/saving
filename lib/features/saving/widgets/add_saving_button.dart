@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/saving_cubit.dart';
@@ -32,6 +33,10 @@ class AddSavingButton extends StatelessWidget {
                     ),
                     TextField(
                       controller: totalController,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        FilteringTextInputFormatter.deny(RegExp(r'^0+'))
+                      ],
                       decoration: const InputDecoration(
                         labelText: 'Total',
                         hintText: 'Enter total',
