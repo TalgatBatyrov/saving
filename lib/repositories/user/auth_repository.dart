@@ -57,14 +57,14 @@ class AuthRepository implements AbstractAuthRepository {
       );
       final userFromFirebase = response.user;
 
+      sendEmailVerification();
+
       if (userFromFirebase != null) {
         final uid = userFromFirebase.uid;
 
-        await userFromFirebase.sendEmailVerification();
-
         await firestore.collection('users').doc(uid).set(
               AuthUser(
-                id: response.user!.uid,
+                id: uid,
                 name: name,
                 email: email,
               ).toJson(),
@@ -102,5 +102,13 @@ class AuthRepository implements AbstractAuthRepository {
   @override
   Future<void> signOut() async {
     await _firebaseAuth.signOut().whenComplete(() => print('Signed out'));
+  }
+
+  @override
+  Future<void> sendEmailVerification() async {
+    final user = _firebaseAuth.currentUser;
+    if (user != null) {
+      await user.sendEmailVerification();
+    }
   }
 }

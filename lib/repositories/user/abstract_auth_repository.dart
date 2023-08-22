@@ -12,5 +12,8 @@ abstract class AbstractAuthRepository {
   });
   Future<void> signOut();
 
+  // send email verification
+  Future<void> sendEmailVerification();
+
   Future<AuthUser> getUser(String id);
 }

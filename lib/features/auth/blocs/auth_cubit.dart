@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> _onAuthStateChanged(User? firebaseUser) async {
-    // print("firebaseUser: $firebaseUser");
+    // print('firebaseUserVerified: ${firebaseUser?.emailVerified}');
     try {
       if (firebaseUser == null) {
         emit(const AuthState.loggedOut());
@@ -25,12 +25,11 @@ class AuthCubit extends Cubit<AuthState> {
       }
 
       if (!firebaseUser.emailVerified) {
-        // print('User is not verified');
         emit(const AuthState.needVerification());
         return;
       }
-      final user = await _userRepository.getUser(firebaseUser.uid);
 
+      final user = await _userRepository.getUser(firebaseUser.uid);
       emit(AuthState.loggedIn(user: user));
     } catch (e) {
       emit(const AuthState.loggedOut());
@@ -44,12 +43,10 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(const AuthState.loading());
 
-      final user = await _userRepository.signIn(
+      await _userRepository.signIn(
         email: email,
         password: password,
       );
-
-      emit(AuthState.loggedIn(user: user));
     } on Exception catch (e) {
       emit(AuthState.error(e));
     }
@@ -62,12 +59,23 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     try {
       emit(const AuthState.loading());
-
-      await _userRepository.signUp(
+      final user = await _userRepository.signUp(
         name: name,
         email: email,
         password: password,
       );
+
+      final firebaseUser = FirebaseAuth.instance.currentUser;
+
+      if (firebaseUser == null) {
+        return emit(const AuthState.loggedOut());
+      }
+
+      if (firebaseUser.emailVerified == false) {
+        return emit(const AuthState.needVerification());
+      }
+
+      emit(AuthState.loggedIn(user: user));
     } on Exception catch (e) {
       emit(AuthState.error(e));
     }
@@ -86,8 +94,26 @@ class AuthCubit extends Cubit<AuthState> {
         return emit(const AuthState.loggedOut());
       }
 
+      if (!firebaseUser.emailVerified) {
+        return emit(const AuthState.needVerification());
+      }
+
       final user = await _userRepository.getUser(firebaseUser.uid);
       emit(AuthState.loggedIn(user: user));
+    } catch (e) {
+      emit(const AuthState.loggedOut());
+    }
+  }
+
+  Future<void> sendEmailVerification() async {
+    try {
+      final firebaseUser = FirebaseAuth.instance.currentUser;
+
+      if (firebaseUser == null) {
+        return emit(const AuthState.loggedOut());
+      }
+
+      await firebaseUser.sendEmailVerification();
     } catch (e) {
       emit(const AuthState.loggedOut());
     }

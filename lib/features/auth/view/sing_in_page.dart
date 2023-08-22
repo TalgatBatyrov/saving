@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../router/router.dart';
 import '../blocs/auth_cubit.dart';
+import '../widgets/custom_input_field.dart';
 
 @RoutePage()
 class SignInPage extends StatefulWidget {
@@ -58,9 +59,11 @@ class _SignInPageState extends State<SignInPage> {
               ),
               CustomInputField(
                 controller: _passwordController,
+                obscureText: true,
                 isValidate: (value) => isPasswordValid(value),
                 title: 'Passowrd',
               ),
+              const SizedBox(height: 16),
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   return state.maybeWhen(
@@ -84,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               TextButton(
                 onPressed: () => context.router.replace(const SignUpRoute()),
-                child: const Text('SignUp'),
+                child: const Text('You don\'t have an account? Sign up'),
               ),
             ],
           ),
@@ -106,38 +109,6 @@ class _SignInPageState extends State<SignInPage> {
           )
         ],
       ),
-    );
-  }
-}
-
-class CustomInputField extends StatelessWidget {
-  final TextEditingController controller;
-  final bool Function(String) isValidate;
-
-  final String title;
-  const CustomInputField({
-    super.key,
-    required this.controller,
-    required this.isValidate,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: title,
-      ),
-      validator: (value) {
-        if (value != null) {
-          final isValid = isValidate(value);
-          if (isValid) {
-            return null;
-          }
-        }
-        return 'Введите валидный $title';
-      },
     );
   }
 }

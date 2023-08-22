@@ -17,6 +17,7 @@ class MoneyInputField extends StatelessWidget {
         keyboardType: TextInputType.number,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
+          FilteringTextInputFormatter.deny(RegExp(r'^0+'))
         ],
         controller: _addController,
         decoration: const InputDecoration(

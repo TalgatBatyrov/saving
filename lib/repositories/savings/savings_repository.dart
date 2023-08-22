@@ -9,11 +9,9 @@ class SavingsRepository implements AbstractSavingsRepository {
   final FirebaseFirestore firestore;
 
   final Dio dio;
-  // final Box<Saving> savingsBox;
 
   SavingsRepository({
     required this.dio,
-    // required this.savingsBox,
     required this.firestore,
   });
 
@@ -27,12 +25,8 @@ class SavingsRepository implements AbstractSavingsRepository {
       savingList = response.docs.map((e) {
         return Saving.fromJson(e.data());
       }).toList();
-
-      final savingListMap = {for (var e in savingList) e.id: e};
-
-      // await savingsBox.putAll(savingListMap);
     } catch (e) {
-      // savingList = savingsBox.values.toList();
+      rethrow;
     }
 
     return savingList;
