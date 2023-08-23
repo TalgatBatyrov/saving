@@ -4,10 +4,7 @@ import '../../../repositories/savings/models/saving.dart';
 
 class SavingsList extends StatelessWidget {
   final List<Saving> savings;
-  const SavingsList({
-    super.key,
-    required this.savings,
-  });
+  const SavingsList({super.key, required this.savings});
 
   @override
   Widget build(BuildContext context) {

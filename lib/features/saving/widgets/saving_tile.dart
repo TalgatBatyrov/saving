@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:saving/features/saving/widgets/saving_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
+import 'package:saving/utilities/dialogs/delete_dialog.dart';
 import '../../../repositories/savings/models/saving.dart';
 import '../../../router/router.dart';
 import '../../../services/share_services.dart';
@@ -50,7 +52,7 @@ class _SavingTileState extends State<SavingTile> {
               );
         }
 
-        savingCubit.updateSaving2(savingId: saving.id, money: money);
+        savingCubit.updateSaving(savingId: saving.id, money: money);
 
         context
             .read<StatisticCubit>()
@@ -69,60 +71,121 @@ class _SavingTileState extends State<SavingTile> {
   @override
   Widget build(BuildContext context) {
     final savingCubit = context.read<SavingCubit>();
+    final fcmRepos = context.read<FcmRepository>();
     final saving = widget.saving;
 
     return BlocProvider(
       create: (context) => ToggleVisibilityChangeGoalCubit(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+      child: GestureDetector(
+        onTap: () => context.router.push(
+          StatisticRoute(saving: saving),
+        ),
+        child: Slidable(
+          key: Key(saving.id),
+          startActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: (context) {
+                  context.read<ToggleVisibilityChangeGoalCubit>().toggle();
+                },
+                // borderRadius: const BorderRadius.only(
+                //   topRight: Radius.circular(15),
+                //   bottomRight: Radius.circular(15),
+                // ),
+                backgroundColor: Colors.grey,
+                foregroundColor: Colors.white,
+                icon: Icons.edit,
+                label: 'Edit',
+              ),
+              SlidableAction(
+                onPressed: (context) {
+                  ShareService.shareSaving(saving);
+                },
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+                backgroundColor: const Color(0xFF21B7CA),
+                foregroundColor: Colors.white,
+                icon: Icons.share,
+                label: 'Share',
+              ),
+            ],
           ),
-          elevation: 8,
+          endActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            dismissible: DismissiblePane(
+              closeOnCancel: true,
+              confirmDismiss: () {
+                return showDeleteDialog(context);
+              },
+              onDismissed: () {
+                savingCubit.deleteSaving(widget.saving);
+                fcmRepos.sendNotification(
+                  title: widget.saving.goal,
+                  body: 'Цель удалена',
+                );
+              },
+            ),
+            children: const [
+              SlidableAction(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                ),
+                onPressed: null,
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+                label: 'Свайп влево для удаления',
+              ),
+            ],
+          ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                ChangeGoalNameScreen(saving: saving),
-                GoalTitle(saving: saving),
-                const SizedBox(height: 10),
-                Visibility(
-                  visible: saving.isCompleted,
-                  child: const Text('Цель достигнута!'),
-                ),
-                LinerProgresScreen(saving: saving),
-                SavingItem(title: 'Цель', value: saving.total),
-                SavingItem(title: 'Накоплено', value: saving.current),
-                SavingItem(title: 'Осталось', value: saving.remainder),
-                SavingItem(title: '%', value: saving.percent.toInt()),
-                Row(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              elevation: 8,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MoneyInputField(addController: _addController),
-                    ActionIconButton(
-                      icon: Icons.add,
-                      onPressed: () => addSaving(savingCubit),
+                    const SizedBox(height: 10),
+                    ChangeGoalNameScreen(saving: saving),
+                    GoalTitle(saving: saving),
+                    const SizedBox(height: 10),
+                    Visibility(
+                      visible: saving.isCompleted,
+                      child: const Text('Цель достигнута!'),
                     ),
-                    ActionIconButton(
-                      icon: Icons.remove,
-                      onPressed: () => addSaving(savingCubit, false),
+                    Row(
+                      children: [
+                        Expanded(child: LinerProgresScreen(saving: saving)),
+                        Text('${saving.percent.toInt()}%'),
+                      ],
                     ),
-                    DeleteSavingButton(saving: saving),
-                    ActionIconButton(
-                      icon: Icons.share,
-                      onPressed: () => ShareService.shareSaving(saving),
-                    ),
-                    ActionIconButton(
-                      icon: Icons.history,
-                      onPressed: () => context.router.push(
-                        StatisticRoute(saving: saving),
-                      ),
+                    SavingItem(title: 'Цель', value: saving.total),
+                    SavingItem(title: 'Накоплено', value: saving.current),
+                    SavingItem(title: 'Осталось', value: saving.remainder),
+                    Row(
+                      children: [
+                        MoneyInputField(addController: _addController),
+                        ActionIconButton(
+                          icon: Icons.add,
+                          onPressed: () => addSaving(savingCubit),
+                        ),
+                        ActionIconButton(
+                          icon: Icons.remove,
+                          onPressed: () => addSaving(savingCubit, false),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

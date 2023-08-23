@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    VerifyEmailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const VerifyEmailScreen(),
+      );
+    },
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -53,13 +59,21 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    VerifyEmailRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const VerifyEmailScreen(),
-      );
-    },
   };
+}
+
+/// generated route for
+/// [VerifyEmailScreen]
+class VerifyEmailRoute extends PageRouteInfo<void> {
+  const VerifyEmailRoute({List<PageRouteInfo>? children})
+      : super(
+          VerifyEmailRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'VerifyEmailRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -178,18 +192,4 @@ class StatisticRouteArgs {
   String toString() {
     return 'StatisticRouteArgs{key: $key, saving: $saving}';
   }
-}
-
-/// generated route for
-/// [VerifyEmailScreen]
-class VerifyEmailRoute extends PageRouteInfo<void> {
-  const VerifyEmailRoute({List<PageRouteInfo>? children})
-      : super(
-          VerifyEmailRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'VerifyEmailRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -74,29 +74,15 @@ class SavingsRepository implements AbstractSavingsRepository {
   }
 
   @override
-  Future<void> updateSaving(Saving saving) async {
-    final savingsPath = 'users/${saving.userId}/savings';
-    final savingCollection = firestore.collection(savingsPath);
-    savingCollection
-        .doc(saving.id)
-        .update(saving.toJson())
-        .then((value) => print("Saving Updated"))
-        .catchError((er) => print("Failed to update Saving: $er"));
-  }
-
-  @override
-  Future<void> updateSaving2({
+  Future<void> updateSaving({
     required String savingId,
     required int money,
   }) async {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     final savingsPath = 'users/$userId/savings';
     final savingCollection = firestore.collection(savingsPath);
-    savingCollection
-        .doc(savingId)
-        .update({'current': money <= 0 ? 0 : money})
-        .then((value) => print("Saving Updated"))
-        .catchError((er) => print("Failed to update Saving: $er"));
+
+    savingCollection.doc(savingId).update({'current': money <= 0 ? 0 : money});
   }
 
   @override

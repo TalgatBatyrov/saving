@@ -53,6 +53,8 @@ dependencies:
   firebase_messaging: ^14.6.5
   flutter_local_notifications: ^15.1.0+1
   firebase_remote_config: ^4.2.4
+  flutter_sliding_up_panel: ^2.0.1
+  flutter_slidable: ^3.0.0
 
 dev_dependencies:
   flutter_test:

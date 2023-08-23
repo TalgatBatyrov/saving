@@ -98,7 +98,7 @@ class SavingCubit extends Cubit<SavingState> {
     }
   }
 
-  Future<void> updateSaving2({
+  Future<void> updateSaving({
     required String savingId,
     required int money,
   }) async {
@@ -107,27 +107,10 @@ class SavingCubit extends Cubit<SavingState> {
         emit(const SavingState.loading());
       }
 
-      await _savingsRepository.updateSaving2(
+      await _savingsRepository.updateSaving(
         savingId: savingId,
         money: money,
       );
-    } catch (e) {
-      emit(SavingState.error(e.toString()));
-    }
-  }
-
-  Future<void> updateSaving(Saving saving) async {
-    try {
-      if (state is! _Loaded) {
-        emit(const SavingState.loading());
-      }
-
-      await _savingsRepository.updateSaving(saving);
-
-      // _statisticCubit.addStatistic(
-      //   money: money ?? 0,
-      //   savingId: saving.id,
-      // );
     } catch (e) {
       emit(SavingState.error(e.toString()));
     }

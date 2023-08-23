@@ -39,7 +39,7 @@ class SavingsPage extends StatelessWidget {
             loading: () => const AppLoading(),
             loaded: (savings) => SavingsList(savings: savings),
             error: (errorMessage) => AppError(message: errorMessage),
-            empty: () => const AppEmpty(),
+            empty: () => const AppEmpty(message: 'Нет целей'),
           );
         },
       ),

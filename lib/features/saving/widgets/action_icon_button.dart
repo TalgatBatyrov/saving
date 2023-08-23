@@ -13,6 +13,7 @@ class ActionIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: 3,
       child: IconButton(
         onPressed: onPressed,
         icon: Icon(icon, color: Colors.green),

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppEmpty extends StatelessWidget {
-  const AppEmpty({super.key});
+  final String message;
+  const AppEmpty({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text(
-        'Empty',
-        style: TextStyle(
+        message,
+        style: const TextStyle(
           fontSize: 20,
           color: Colors.red,
         ),

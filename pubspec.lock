@@ -499,6 +499,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0+1"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      sha256: cc4231579e3eae41ae166660df717f4bad1359c87f4a4322ad8ba1befeb3d2be
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  flutter_sliding_up_panel:
+    dependency: "direct main"
+    description:
+      name: flutter_sliding_up_panel
+      sha256: "60fdb281d2a81047dadecb931f9b53b6f7189680cd71f898441073207ff90e6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -1190,4 +1206,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.1.0-185.0.dev <4.0.0"
-  flutter: ">=3.7.0-0"
+  flutter: ">=3.7.0"

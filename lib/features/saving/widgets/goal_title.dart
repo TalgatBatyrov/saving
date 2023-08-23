@@ -14,14 +14,11 @@ class GoalTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: context.read<ToggleVisibilityChangeGoalCubit>().toggle,
-      child: Text(
-        saving.goal,
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-        ),
+    return Text(
+      saving.goal,
+      style: const TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
