@@ -16,7 +16,7 @@ class Saving with _$Saving {
     @HiveField(4) required String userId,
   }) = _Saving;
 
-  get percent => (current / total) * 100;
+  int get percent => ((current / total) * 100).clamp(0, 100).ceil();
 
   bool get isCompleted => current >= total;
 

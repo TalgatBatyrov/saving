@@ -18,20 +18,22 @@ class SavingItem extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(
-          width: 70,
-          child: Card(
-            color: Colors.green[400],
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                '$value',
-                style: const TextStyle(color: Colors.white),
+        Text(
+          '$value',
+          style: const TextStyle(
+            fontSize: 18,
+            shadows: [
+              Shadow(
+                color: Colors.black54,
+                offset: Offset(1, 1),
+                blurRadius: 2,
               ),
-            ),
+            ],
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],

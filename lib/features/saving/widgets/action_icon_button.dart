@@ -16,7 +16,11 @@ class ActionIconButton extends StatelessWidget {
       flex: 3,
       child: IconButton(
         onPressed: onPressed,
-        icon: Icon(icon, color: Colors.green),
+        icon: Icon(
+          icon,
+          color: Colors.green,
+          size: 40,
+        ),
       ),
     );
   }

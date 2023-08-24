@@ -89,10 +89,6 @@ class _SavingTileState extends State<SavingTile> {
                 onPressed: (context) {
                   context.read<ToggleVisibilityChangeGoalCubit>().toggle();
                 },
-                // borderRadius: const BorderRadius.only(
-                //   topRight: Radius.circular(15),
-                //   bottomRight: Radius.circular(15),
-                // ),
                 backgroundColor: Colors.grey,
                 foregroundColor: Colors.white,
                 icon: Icons.edit,
@@ -153,23 +149,40 @@ class _SavingTileState extends State<SavingTile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 10),
                     ChangeGoalNameScreen(saving: saving),
                     GoalTitle(saving: saving),
-                    const SizedBox(height: 10),
-                    Visibility(
-                      visible: saving.isCompleted,
-                      child: const Text('Цель достигнута!'),
-                    ),
+                    const SizedBox(height: 5),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(child: LinerProgresScreen(saving: saving)),
-                        Text('${saving.percent.toInt()}%'),
+                        Visibility(
+                          visible: saving.isCompleted,
+                          child: const Text('Цель достигнута!'),
+                        ),
+                        Text(
+                          '${saving.percent.ceil()}%',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black54,
+                                offset: Offset(1, 1),
+                                blurRadius: 2,
+                              ),
+                            ],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
+                    LinerProgresScreen(saving: saving),
+                    const SizedBox(height: 5),
                     SavingItem(title: 'Цель', value: saving.total),
+                    const SizedBox(height: 5),
                     SavingItem(title: 'Накоплено', value: saving.current),
+                    const SizedBox(height: 5),
                     SavingItem(title: 'Осталось', value: saving.remainder),
+                    const SizedBox(height: 5),
                     Row(
                       children: [
                         MoneyInputField(addController: _addController),
