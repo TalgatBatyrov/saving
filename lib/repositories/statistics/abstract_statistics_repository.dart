@@ -5,7 +5,7 @@ abstract class AbstractStatisticsRepository {
   Future<List<Statistic>> getStatisticsList(Saving saving);
   Future<void> deleteStatistic(Saving saving);
   Future<void> addStatistic({
-    required Saving saving,
+    required String savingId,
     required int money,
   });
 }

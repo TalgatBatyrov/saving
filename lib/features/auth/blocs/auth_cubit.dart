@@ -17,6 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> _onAuthStateChanged(User? firebaseUser) async {
+    print('firebaseUser: ${firebaseUser?.emailVerified}');
     try {
       if (firebaseUser == null) {
         emit(const AuthState.loggedOut());

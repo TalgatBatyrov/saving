@@ -15,3 +15,11 @@ void main() async {
 
   runApp(const SavingsApp());
 }
+
+class Counter {
+  int value;
+
+  Counter({required this.value});
+
+  void increment() => value++;
+}

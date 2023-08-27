@@ -82,7 +82,7 @@ class SavingsRepository implements AbstractSavingsRepository {
     final savingsPath = 'users/$userId/savings';
     final savingCollection = firestore.collection(savingsPath);
 
-    savingCollection.doc(savingId).update({'current': money <= 0 ? 0 : money});
+    savingCollection.doc(savingId).update({'current': money});
   }
 
   @override

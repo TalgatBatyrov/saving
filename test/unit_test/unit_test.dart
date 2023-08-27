@@ -1,29 +1,47 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:saving/features/statistic/blocs/statistic_cubit.dart';
+import 'package:saving/repositories/statistics/abstract_statistics_repository.dart';
+import 'package:saving/repositories/statistics/statistics_repository.dart';
 
 void main() {
-  group('ds', () {
-    test(
-      'Check',
-      () {
-        const result = 1 + 1;
+  group('StatisticCubit', () {
+    AbstractStatisticsRepository statisticsRepository;
+    late StatisticCubit statisticCubit;
 
-        expect(result, 2);
-      },
-    );
-    test('Hello', () {
-      expect('Hello', 'Hello');
+    setUp(() {
+      statisticsRepository = StatisticsRepository(FirebaseFirestore.instance);
+      statisticCubit = StatisticCubit(statisticsRepository);
     });
-    test('Very goog', () {
-      const result = 1 + 2;
-      expect(result, 3);
+
+    test('initial state is loading', () {
+      expect(statisticCubit.state, const StatisticState.loading());
     });
-    test('Get bla', () {
-      const result = 1 + 3;
-      expect(result, 4);
-    });
-    test('Impact', () {
-      const result = 1 + 4;
-      expect(result, 5);
+
+    // test('getStatistics emits loaded state when successful', () async {
+    //   final saving = Saving(); // Создайте тестовые данные
+    //   final fakeStatistics = [Statistic(money: 100), Statistic(money: 200)];
+    //   when(statisticsRepository.getStatisticsList(saving))
+    //       .thenAnswer((_) async => fakeStatistics);
+
+    //   await statisticCubit.getStatistics(saving);
+
+    //   expect(statisticCubit.state, StatisticState.loaded(statistics: fakeStatistics));
+    // });
+
+    // test('getStatistics emits empty state when statistics are empty', () async {
+    //   final saving = Saving();
+    //   when(statisticsRepository.getStatisticsList(saving)).thenAnswer((_) async => []);
+
+    //   await statisticCubit.getStatistics(saving);
+
+    //   expect(statisticCubit.state, const StatisticState.empty());
+    // });
+
+    // // Тесты для addStatistic и deleteStatistic могут быть похожими
+
+    tearDown(() {
+      statisticCubit.close();
     });
   });
 }

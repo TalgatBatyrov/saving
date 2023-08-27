@@ -11,9 +11,7 @@ class VerifyEmailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Verify'),
-      ),
+      appBar: AppBar(title: const Text('Verify')),
       body: Column(
         children: [
           const Text(
@@ -23,7 +21,6 @@ class VerifyEmailScreen extends StatelessWidget {
           TextButton(
             onPressed: () async {
               context.read<AuthCubit>().sendEmailVerification();
-              // AuthService.firebase().sendEmailVerification();
             },
             child: const Text('Send email verification'),
           ),
