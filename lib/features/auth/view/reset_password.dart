@@ -49,7 +49,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Сброс пароля'),
+        title: const Text('Reset password'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -60,10 +60,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Введите Email';
+                    return 'Please enter some text';
                   }
                   if (!value.contains('@')) {
-                    return 'Введите корректный Email';
+                    return 'Please enter a valid email address.';
                   }
                   return null;
                 },
@@ -72,13 +72,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 controller: emailTextInputController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Введите Email',
+                  hintText: 'Email',
                 ),
               ),
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: resetPassword,
-                child: const Center(child: Text('Сбросить пароль')),
+                child: const Center(child: Text('Reset password')),
               ),
             ],
           ),

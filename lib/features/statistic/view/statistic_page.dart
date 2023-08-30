@@ -36,7 +36,7 @@ class _StatisticPageState extends State<StatisticPage> {
       body: BlocBuilder<StatisticCubit, StatisticState>(
         builder: (context, state) {
           return state.map(
-            empty: (_) => const AppEmpty(message: 'Нет статистики'),
+            empty: (_) => const AppEmpty(message: 'Not transactions'),
             loading: (_) => const AppLoading(),
             loaded: (v) =>
                 StatisticsList(statistics: v.statistics, saving: widget.saving),
