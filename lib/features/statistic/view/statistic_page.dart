@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/features/saving/widgets/button_translate.dart';
 
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
@@ -32,12 +33,20 @@ class _StatisticPageState extends State<StatisticPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.saving.goal),
-        actions: const [StatisticAppBarAction()],
+        actions: [
+          const StatisticAppBarAction(),
+          IconButton(
+            onPressed: () {
+              ButtonTranslate().onActionSheetPress(context);
+            },
+            icon: const Icon(Icons.translate),
+          ),
+        ],
       ),
       body: BlocBuilder<StatisticCubit, StatisticState>(
         builder: (context, state) {
           return state.map(
-            empty: (_) =>  AppEmpty(message: translate('no_statistics')),
+            empty: (_) => AppEmpty(message: translate('no_statistics')),
             loading: (_) => const AppLoading(),
             loaded: (v) =>
                 StatisticsList(statistics: v.statistics, saving: widget.saving),

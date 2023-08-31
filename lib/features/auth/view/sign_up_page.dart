@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/utilities/dialogs/error_dialog.dart';
 import '../../../app_widgets/app_loading.dart';
 import '../../../router/router.dart';
 import '../blocs/auth_cubit.dart';
@@ -33,22 +34,6 @@ class _SignUpPageState extends State<SignUpPage> {
     return password.length >= 6;
   }
 
-  Future<dynamic> _showAuthErrorDialog(BuildContext context, String message) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(translate('error')),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => context.router.pop(),
-            child:  Text(translate('ok')),
-          )
-        ],
-      ),
-    );
-  }
-
   Future<void> _signUp() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -72,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
             context.router.replace(SavingsRoute(user: user));
           },
           error: (message) {
-            _showAuthErrorDialog(context, message.toString());
+            showErrorDialog(context, message.toString());
           },
         );
       },
@@ -87,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    labelText:  translate('name'),
+                    labelText: translate('name'),
                   ),
                 ),
                 CustomInputField(
@@ -109,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       orElse: () {
                         return ElevatedButton(
                           onPressed: _signUp,
-                          child:  Text(translate('sign_up')),
+                          child: Text(translate('sign_up')),
                         );
                       },
                     );

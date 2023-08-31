@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/features/saving/widgets/button_translate.dart';
 import 'package:saving/utilities/dialogs/logout_dialog.dart';
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
@@ -32,6 +33,12 @@ class SavingsPage extends StatelessWidget {
             onPressed: () => _onSignOut(context),
             icon: const Icon(Icons.logout),
           ),
+          IconButton(
+            onPressed: () {
+              ButtonTranslate().onActionSheetPress(context);
+            },
+            icon: const Icon(Icons.translate),
+          ),
         ],
       ),
       body: BlocBuilder<SavingCubit, SavingState>(
@@ -40,10 +47,37 @@ class SavingsPage extends StatelessWidget {
             loading: () => const AppLoading(),
             loaded: (savings) => SavingsList(savings: savings),
             error: (errorMessage) => AppError(message: errorMessage),
-            empty: () =>  AppEmpty(message: translate('no_targets')),
+            empty: () => AppEmpty(message: translate('no_targets')),
           );
         },
       ),
+      // body: CustomScrollView(
+      //   anchor: 0.0,
+      //   slivers: [
+      //     SliverAppBar(
+      //       title: Text(user.name),
+      //       actions: [
+      //         const ThemeToggleButton(),
+      //         const AddSavingButton(),
+      //         IconButton(
+      //           onPressed: () => _onSignOut(context),
+      //           icon: const Icon(Icons.logout),
+      //         ),
+      //         // reset password
+      //       ],
+      //     ),
+      //     // BlocBuilder<SavingCubit, SavingState>(
+      //     //   builder: (context, state) {
+      //     //     return state.when(
+      //     //       loading: () => const AppLoading(),
+      //     //       loaded: (savings) => SavingsList(savings: savings),
+      //     //       error: (errorMessage) => AppError(message: errorMessage),
+      //     //       empty: () => const AppEmpty(message: 'Нет целей'),
+      //     //     );
+      //     //   },
+      //     // ),
+      //   ],
+      // ),
     );
   }
 

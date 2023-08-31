@@ -15,8 +15,15 @@ void main() async {
   PushNotifications.initialize();
 
   var delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'en', supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp']);
-  runApp(LocalizedApp(delegate, const SavingsApp()));
+    fallbackLocale: 'en',
+    supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp'],
+  );
+  runApp(
+    LocalizedApp(
+      delegate,
+      const SavingsApp(),
+    ),
+  );
 }
 
 class Counter {
