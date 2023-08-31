@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/features/auth/blocs/auth_cubit.dart';
 import 'package:saving/router/router.dart';
 
@@ -12,27 +13,27 @@ class VerifyEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Verify'),
+        title: Text(translate('verify')),
       ),
       body: Column(
         children: [
-          const Text(
-              'We\'ve sent you an email verification. Please open it to verify your account.'),
-          const Text(
-              'If you haven\'t received a verification email yet, press the button below'),
+           Text(
+              translate('email_verification')),
+           Text(
+              translate('email_yet')),
           TextButton(
             onPressed: () async {
               context.read<AuthCubit>().sendEmailVerification();
               // AuthService.firebase().sendEmailVerification();
             },
-            child: const Text('Send email verification'),
+            child:  Text(translate('send')),
           ),
           TextButton(
             onPressed: () async {
               context.read<AuthCubit>().logout();
               context.router.replace(const SignInRoute());
             },
-            child: const Text('Restart'),
+            child: Text(translate('restart')),
           ),
         ],
       ),

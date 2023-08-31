@@ -1,3 +1,4 @@
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/features/statistic/widgets/statistic_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -30,12 +31,12 @@ class StatisticsList extends StatelessWidget {
             children: [
               ListTile(
                 leading: const Text('KGS'),
-                title: const Text('Среднее значение'),
+                title: Text(translate('average_value')),
                 trailing: Text('${average.round()}'),
               ),
               ListTile(
-                leading: const Text('Дней'),
-                title: const Text('Такими темпами еще'),
+                leading: Text(translate('days')),
+                title: Text(translate('pace_yet')),
                 trailing: Text('${dayForOver > 0 ? dayForOver : 0}'),
               ),
             ],

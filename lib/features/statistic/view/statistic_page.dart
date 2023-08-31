@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
@@ -36,7 +37,7 @@ class _StatisticPageState extends State<StatisticPage> {
       body: BlocBuilder<StatisticCubit, StatisticState>(
         builder: (context, state) {
           return state.map(
-            empty: (_) => const AppEmpty(message: 'Нет статистики'),
+            empty: (_) =>  AppEmpty(message: translate('no_statistics')),
             loading: (_) => const AppLoading(),
             loaded: (v) =>
                 StatisticsList(statistics: v.statistics, saving: widget.saving),

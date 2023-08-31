@@ -1,3 +1,4 @@
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/repositories/savings/models/saving.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -12,7 +13,7 @@ abstract class ShareService {
 
   static Future<void> shareSaving(Saving saving) async {
     final message =
-        'Цель: ${saving.goal}\nНакоплено: ${saving.current}\nОсталось: ${saving.remainder}\nВ %: ${saving.percent}';
+        '${translate('target')}: ${saving.goal}\n${translate('accumulated')}: ${saving.current}\n${translate('left')}: ${saving.remainder}\n %: ${saving.percent}';
 
     await Share.share(message);
   }

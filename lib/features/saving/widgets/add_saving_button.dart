@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import '../blocs/saving_cubit.dart';
 
 class AddSavingButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class AddSavingButton extends StatelessWidget {
             final goalController = TextEditingController();
             final totalController = TextEditingController();
             return AlertDialog(
-              title: const Text('Add Saving'),
+              title:  Text(translate('add-Saving')),
               content: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -25,9 +26,9 @@ class AddSavingButton extends StatelessWidget {
                   children: [
                     TextField(
                       controller: goalController,
-                      decoration: const InputDecoration(
-                        labelText: 'Saving',
-                        hintText: 'Enter saving',
+                      decoration: InputDecoration(
+                        labelText: translate('saving'),
+                        hintText: translate('enter_saving'),
                       ),
                     ),
                     TextField(
@@ -36,9 +37,9 @@ class AddSavingButton extends StatelessWidget {
                         FilteringTextInputFormatter.digitsOnly,
                         FilteringTextInputFormatter.deny(RegExp(r'^0+'))
                       ],
-                      decoration: const InputDecoration(
-                        labelText: 'Total',
-                        hintText: 'Enter total',
+                      decoration:  InputDecoration(
+                        labelText: translate('total'),
+                        hintText: translate('enter_total'),
                       ),
                     ),
                   ],
@@ -55,10 +56,10 @@ class AddSavingButton extends StatelessWidget {
                           );
                       context.router.pop();
                     },
-                    child: const Text('Add Saving')),
+                    child:  Text(translate('add_saving'))),
                 TextButton(
                   onPressed: context.router.pop,
-                  child: const Text('Cancel'),
+                  child: Text(translate('cancel')),
                 ),
               ],
             );

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/features/saving/widgets/saving_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,7 @@ class _SavingTileState extends State<SavingTile> {
         if (saving.isCompleted) {
           context.read<FcmRepository>().sendNotification(
                 title: widget.saving.goal,
-                body: 'Цель достигнута!',
+                body: translate('goal_achieved'),
               );
         }
 
@@ -92,7 +93,7 @@ class _SavingTileState extends State<SavingTile> {
                 backgroundColor: Colors.grey,
                 foregroundColor: Colors.white,
                 icon: Icons.edit,
-                label: 'Edit',
+                label: translate('edit'),
               ),
               SlidableAction(
                 onPressed: (context) {
@@ -120,20 +121,20 @@ class _SavingTileState extends State<SavingTile> {
                 savingCubit.deleteSaving(widget.saving);
                 fcmRepos.sendNotification(
                   title: widget.saving.goal,
-                  body: 'Цель удалена',
+                  body: translate('target_deleted'),
                 );
               },
             ),
-            children: const [
+            children:  [
               SlidableAction(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
                   bottomLeft: Radius.circular(15),
                 ),
                 onPressed: null,
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
-                label: 'Свайп влево для удаления',
+                label: translate('swipe_left'),
               ),
             ],
           ),
@@ -157,7 +158,7 @@ class _SavingTileState extends State<SavingTile> {
                       children: [
                         Visibility(
                           visible: saving.isCompleted,
-                          child: const Text('Цель достигнута!'),
+                          child:  Text(translate('goal_achieved')),
                         ),
                         Text(
                           '${saving.percent.ceil()}%',
@@ -177,11 +178,11 @@ class _SavingTileState extends State<SavingTile> {
                     ),
                     LinerProgresScreen(saving: saving),
                     const SizedBox(height: 5),
-                    SavingItem(title: 'Цель', value: saving.total),
+                    SavingItem(title: translate('target'), value: saving.total),
                     const SizedBox(height: 5),
-                    SavingItem(title: 'Накоплено', value: saving.current),
+                    SavingItem(title: translate('accumulated'), value: saving.current),
                     const SizedBox(height: 5),
-                    SavingItem(title: 'Осталось', value: saving.remainder),
+                    SavingItem(title: translate('left'), value: saving.remainder),
                     const SizedBox(height: 5),
                     Row(
                       children: [

@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/features/saving/widgets/button_translate.dart';
 
 import '../../../router/router.dart';
 import '../blocs/auth_cubit.dart';
@@ -55,13 +58,13 @@ class _SignInPageState extends State<SignInPage> {
               CustomInputField(
                 controller: _emailController,
                 isValidate: (value) => isEmailValid(value),
-                title: 'Email',
+                title: translate('email'),
               ),
               CustomInputField(
                 controller: _passwordController,
                 obscureText: true,
                 isValidate: (value) => isPasswordValid(value),
-                title: 'Passowrd',
+                title: translate('password'),
               ),
               const SizedBox(height: 16),
               BlocBuilder<AuthCubit, AuthState>(
@@ -79,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
                                 );
                           }
                         },
-                        child: const Text('Login'),
+                        child: Text(translate('login')),
                       );
                     },
                   );
@@ -87,8 +90,13 @@ class _SignInPageState extends State<SignInPage> {
               ),
               TextButton(
                 onPressed: () => context.router.replace(const SignUpRoute()),
-                child: const Text('You don\'t have an account? Sign up'),
+                child: Text(translate('snake_bar.login')),
               ),
+              TextButton(
+                  onPressed: () {
+                    ButtonTranslate().onActionSheetPress(context);
+                  },
+                  child: const Text('Translate'))
             ],
           ),
         )),
@@ -100,12 +108,12 @@ class _SignInPageState extends State<SignInPage> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Error'),
+        title: Text(translate('error')),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => context.router.pop(),
-            child: const Text('Ok'),
+            child: Text(translate('ok')),
           )
         ],
       ),

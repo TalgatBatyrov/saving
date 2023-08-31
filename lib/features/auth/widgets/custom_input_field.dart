@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class CustomInputField extends StatelessWidget {
   final TextEditingController controller;
@@ -27,7 +28,7 @@ class CustomInputField extends StatelessWidget {
             return null;
           }
         }
-        return 'Введите валидный $title';
+        return '${translate('input_field')} $title';
       },
     );
   }

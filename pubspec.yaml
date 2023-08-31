@@ -55,6 +55,7 @@ dependencies:
   firebase_remote_config: ^4.2.4
   flutter_sliding_up_panel: ^2.0.1
   flutter_slidable: ^3.0.0
+  flutter_translate: ^4.0.4
 
 dev_dependencies:
   flutter_test:
@@ -91,9 +92,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+  # To add assets to your applicat  ion, add an assets section, like this:
   assets:
     - assets/svg/
+    - assets/i18n/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
