@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 class ButtonTranslate {
-  void showDemoActionSheet(
-      {required BuildContext context, required Widget child}) {
+  void showDemoActionSheet({
+    required BuildContext context,
+    required Widget child,
+  }) {
     showCupertinoModalPopup<String>(
         context: context,
         builder: (BuildContext context) => child).then((String? value) {
@@ -17,7 +18,7 @@ class ButtonTranslate {
       context: context,
       child: CupertinoActionSheet(
         title: Text(translate('language')),
-        actions: <Widget>[
+        actions: [
           CupertinoActionSheetAction(
             child: const Text('English'),
             onPressed: () => Navigator.pop(context, 'en'),

@@ -59,13 +59,13 @@ class _SignInPageState extends State<SignInPage> {
                 CustomInputField(
                   controller: _emailController,
                   isValidate: (value) => isEmailValid(value),
-                  title: translate('Email'),
+                  title: translate('email'),
                 ),
                 CustomInputField(
                   controller: _passwordController,
                   obscureText: true,
                   isValidate: (value) => isPasswordValid(value),
-                  title: translate('Passowrd'),
+                  title: translate('passowrd'),
                 ),
                 const SizedBox(height: 16),
                 BlocBuilder<AuthCubit, AuthState>(
@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                                   );
                             }
                           },
-                          child: Text(translate('Login')),
+                          child: Text(translate('login')),
                         );
                       },
                       error: (message) {
@@ -96,15 +96,20 @@ class _SignInPageState extends State<SignInPage> {
                                   );
                             }
                           },
-                          child: Text(translate('Login')),
+                          child: Text(translate('login')),
                         );
                       },
                     );
                   },
                 ),
                 TextButton(
+                    onPressed: () {
+                      ButtonTranslate().onActionSheetPress(context);
+                    },
+                    child: const Text('Translate')),
+                TextButton(
                   onPressed: () => context.router.replace(const SignUpRoute()),
-                  child: Text(translate('You don\'t have an account? Sign up')),
+                  child: Text(translate('snake_bar.login')),
                 ),
                 TextButton(
                   onPressed: () {

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/utilities/dialogs/error_dialog.dart';
 import '../../../app_widgets/app_loading.dart';
 import '../../../router/router.dart';
 import '../blocs/auth_cubit.dart';
@@ -30,22 +32,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool isPasswordValid(String password) {
     return password.length >= 6;
-  }
-
-  Future<dynamic> _showAuthErrorDialog(BuildContext context, String message) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Error'),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => context.router.pop(),
-            child: const Text('Ok'),
-          )
-        ],
-      ),
-    );
   }
 
   Future<void> _signUp() async {

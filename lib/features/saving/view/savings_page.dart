@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/features/saving/widgets/button_translate.dart';
 import 'package:saving/utilities/dialogs/logout_dialog.dart';
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
@@ -32,7 +33,12 @@ class SavingsPage extends StatelessWidget {
             onPressed: () => _onSignOut(context),
             icon: const Icon(Icons.logout),
           ),
-          // reset password
+          IconButton(
+            onPressed: () {
+              ButtonTranslate().onActionSheetPress(context);
+            },
+            icon: const Icon(Icons.translate),
+          ),
         ],
       ),
       body: BlocBuilder<SavingCubit, SavingState>(
