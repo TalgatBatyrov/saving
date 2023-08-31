@@ -18,3 +18,11 @@ void main() async {
       fallbackLocale: 'en', supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp']);
   runApp(LocalizedApp(delegate, const SavingsApp()));
 }
+
+class Counter {
+  int value;
+
+  Counter({required this.value});
+
+  void increment() => value++;
+}

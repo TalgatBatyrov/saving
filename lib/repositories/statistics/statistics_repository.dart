@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../savings/models/saving.dart';
 import 'abstract_statistics_repository.dart';
@@ -29,18 +30,19 @@ class StatisticsRepository implements AbstractStatisticsRepository {
 
   @override
   Future<void> addStatistic({
-    required Saving saving,
+    required String savingId,
     required int money,
   }) async {
-    final statisticPath =
-        'users/${saving.userId}/savings/${saving.id}/transactions';
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    final statisticPath = 'users/$userId/savings/$savingId/transactions';
     final statisticsCollection = _firestore.collection(statisticPath);
 
     final docId = statisticsCollection.doc().id;
 
     Statistic statistic = Statistic(
       money: money,
-      savingId: saving.id,
+      savingId: savingId,
       id: docId,
       date: DateTime.now(),
     );

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
+import 'package:saving/features/auth/view/reset_password.dart';
 import '../features/auth/view/splash_screen.dart';
 import '../features/auth/view/sign_up_page.dart';
 import '../features/auth/view/sing_in_page.dart';
@@ -21,5 +22,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SavingsRoute.page),
         AutoRoute(page: StatisticRoute.page),
         AutoRoute(page: VerifyEmailRoute.page),
+        AutoRoute(page: ResetPasswordRoute.page),
       ];
 }

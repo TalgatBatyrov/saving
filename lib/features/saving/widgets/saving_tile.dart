@@ -9,22 +9,17 @@ import 'package:saving/utilities/dialogs/delete_dialog.dart';
 import '../../../repositories/savings/models/saving.dart';
 import '../../../router/router.dart';
 import '../../../services/share_services.dart';
-import '../../statistic/blocs/statistic_cubit.dart';
 import '../../toggle/toggle_cubit.dart';
 import '../blocs/saving_cubit.dart';
 import 'action_icon_button.dart';
 import 'change_goal_name_screen.dart';
-import 'delete_saving_button.dart';
 import 'goal_title.dart';
 import 'liner_progres_screen.dart';
 import 'money_input_field.dart';
 
 class SavingTile extends StatefulWidget {
   final Saving saving;
-  const SavingTile({
-    super.key,
-    required this.saving,
-  });
+  const SavingTile({super.key, required this.saving});
 
   @override
   State<SavingTile> createState() => _SavingTileState();
@@ -53,17 +48,11 @@ class _SavingTileState extends State<SavingTile> {
               );
         }
 
-        savingCubit.updateSaving(savingId: saving.id, money: money);
-
-        context
-            .read<StatisticCubit>()
-            .addStatistic(
-                money: isAdd ? addValueInt : -addValueInt, saving: saving)
-            .onError((error, stackTrace) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(error.toString())),
-          );
-        });
+        savingCubit.updateSaving(
+          savingId: saving.id,
+          money: money <= 0 ? 0 : money,
+          moneyForStatistic: isAdd ? addValueInt : -addValueInt,
+        );
       }
     }
     _addController.clear();

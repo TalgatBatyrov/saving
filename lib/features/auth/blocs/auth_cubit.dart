@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../../repositories/user/auth_repository.dart';
 import '../../../repositories/user/models/auth_user.dart';
 
@@ -13,7 +12,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._userRepository) : super(const AuthState.loading()) {
     FirebaseAuth.instance.authStateChanges().listen(_onAuthStateChanged);
-    // _onAuthStateChanged(FirebaseAuth.instance.currentUser);
   }
 
   Future<void> _onAuthStateChanged(User? firebaseUser) async {

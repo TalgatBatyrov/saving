@@ -3,6 +3,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:convert';
 
 class FcmRepository {
+  final FirebaseMessaging _firebaseMessaging;
+
   final Dio _dio = Dio()
     ..options = BaseOptions(
       baseUrl: "https://fcm.googleapis.com/",
@@ -12,8 +14,6 @@ class FcmRepository {
             'key=AAAAjh5zc1w:APA91bFjdSscPvwqKCZrisa8xSKOQMwrw2tOL5W0_aVB79zbWSF4u-eoTMdkZd4BE3oaeMvO4SXnpx6_ioSJXUGhLqtv5Me3Kjtx4r7lhPAGVm4HuBuN29TKFGbimVho53jcyRBc9Y88',
       },
     );
-
-  final FirebaseMessaging _firebaseMessaging;
 
   FcmRepository(this._firebaseMessaging);
 

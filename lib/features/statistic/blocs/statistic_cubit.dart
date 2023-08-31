@@ -26,11 +26,11 @@ class StatisticCubit extends Cubit<StatisticState> {
   }
 
   Future<void> addStatistic({
-    required Saving saving,
+    required String savingId,
     required int money,
   }) async {
     await _statisticsRepository.addStatistic(
-      saving: saving,
+      savingId: savingId,
       money: money,
     );
   }
