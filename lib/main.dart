@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/cache.dart';
 import 'package:saving/services/push_notifications.dart';
 import 'savings_app.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,17 +14,15 @@ void main() async {
   );
 
   PushNotifications.initialize();
-
+  final String selectedLanguageCode =
+      await const LocalCache().getTranslate() ?? 'en';
+  print(selectedLanguageCode);
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en',
     supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp'],
   );
-  runApp(
-    LocalizedApp(
-      delegate,
-      const SavingsApp(),
-    ),
-  );
+  delegate.changeLocale(Locale(selectedLanguageCode));
+  runApp(LocalizedApp(delegate, const SavingsApp()));
 }
 
 class Counter {

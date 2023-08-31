@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/cache.dart';
 
 class ButtonTranslate {
   void showDemoActionSheet({
@@ -21,31 +22,52 @@ class ButtonTranslate {
         actions: [
           CupertinoActionSheetAction(
             child: const Text('English'),
-            onPressed: () => Navigator.pop(context, 'en'),
+            onPressed: () {
+              Navigator.pop(context, 'en');
+              const LocalCache().saveTranslate('en');
+            },
           ),
           CupertinoActionSheetAction(
             child: const Text('Українська'),
-            onPressed: () => Navigator.pop(context, 'uk'),
+            onPressed: () {
+              Navigator.pop(context, 'uk');
+              const LocalCache().saveTranslate('uk');
+            },
           ),
           CupertinoActionSheetAction(
             child: const Text('Руский'),
-            onPressed: () => Navigator.pop(context, 'ru'),
+            onPressed: () {
+              Navigator.pop(context, 'ru');
+              const LocalCache().saveTranslate('ru');
+            },
           ),
           CupertinoActionSheetAction(
             child: const Text('Polski'),
-            onPressed: () => Navigator.pop(context, 'pl'),
+            onPressed: () {
+              Navigator.pop(context, 'pl');
+              const LocalCache().saveTranslate('pl');
+            },
           ),
           CupertinoActionSheetAction(
             child: const Text('español'),
-            onPressed: () => Navigator.pop(context, 'sp'),
+            onPressed: () {
+              Navigator.pop(context, 'sp');
+              const LocalCache().saveTranslate('sp');
+            },
           ),
           CupertinoActionSheetAction(
             child: const Text('português'),
-            onPressed: () => Navigator.pop(context, 'pr'),
+            onPressed: () {
+              Navigator.pop(context, 'pr');
+              const LocalCache().saveTranslate('kr');
+            },
           ),
           CupertinoActionSheetAction(
             child: const Text('Кыргызча'),
-            onPressed: () => Navigator.pop(context, 'kr'),
+            onPressed: () {
+              Navigator.pop(context, 'kr');
+              const LocalCache().saveTranslate('kr');
+            },
           ),
         ],
         cancelButton: CupertinoActionSheetAction(
