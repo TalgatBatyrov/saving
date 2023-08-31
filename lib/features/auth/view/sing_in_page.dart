@@ -65,7 +65,7 @@ class _SignInPageState extends State<SignInPage> {
                   controller: _passwordController,
                   obscureText: true,
                   isValidate: (value) => isPasswordValid(value),
-                  title: translate('passowrd'),
+                  title: translate('password'),
                 ),
                 const SizedBox(height: 16),
                 BlocBuilder<AuthCubit, AuthState>(
@@ -115,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
                   onPressed: () {
                     context.router.push(const ResetPasswordRoute());
                   },
-                  child: Text(translate('Forgot password?')),
+                  child: Text(translate('forgot_password')),
                 )
               ],
             ),
