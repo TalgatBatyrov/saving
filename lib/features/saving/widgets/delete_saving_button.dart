@@ -2,6 +2,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
 import 'package:saving/utilities/dialogs/delete_dialog.dart';
 import '../../../repositories/savings/models/saving.dart';
@@ -34,7 +35,7 @@ class DeleteSavingButton extends StatelessWidget {
       final fcmRepository = context.read<FcmRepository>();
       fcmRepository.sendNotification(
         title: saving.goal,
-        body: 'Цель удалена',
+        body: translate('target_deleted'),
       );
     }
   }

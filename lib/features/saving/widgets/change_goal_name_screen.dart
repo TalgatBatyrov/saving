@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/features/toggle/toggle_cubit.dart';
 
 import '../../../repositories/savings/models/saving.dart';
@@ -50,9 +51,9 @@ class _ChangeGoalNameScreenState extends State<ChangeGoalNameScreen> {
                 flex: 2,
                 child: TextField(
                   controller: _goalController,
-                  decoration: const InputDecoration(
-                    labelText: 'Название цели',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: translate('target_name'),
+                    border: const OutlineInputBorder(),
                   ),
                 ),
               ),

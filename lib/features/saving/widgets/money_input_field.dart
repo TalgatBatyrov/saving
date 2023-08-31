@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class MoneyInputField extends StatelessWidget {
   const MoneyInputField({
@@ -20,9 +21,9 @@ class MoneyInputField extends StatelessWidget {
           FilteringTextInputFormatter.deny(RegExp(r'^0+'))
         ],
         controller: _addController,
-        decoration: const InputDecoration(
-          labelText: 'Добавить',
-          border: OutlineInputBorder(),
+        decoration: InputDecoration(
+          labelText: translate('add'),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
