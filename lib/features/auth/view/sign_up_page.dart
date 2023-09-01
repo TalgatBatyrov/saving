@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/utilities/dialogs/error_dialog.dart';
+import 'package:saving/utilities/extensions/validation.dart';
 import '../../../app_widgets/app_loading.dart';
 import '../../../router/router.dart';
 import '../blocs/auth_cubit.dart';
@@ -22,17 +23,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  bool isEmailValid(String email) {
-    final RegExp emailRegExp =
-        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-
-    return emailRegExp.hasMatch(email);
-  }
-
-  bool isPasswordValid(String password) {
-    return password.length >= 6;
-  }
 
   Future<void> _signUp() async {
     if (!_formKey.currentState!.validate()) {
@@ -77,13 +67,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 CustomInputField(
                   controller: _emailController,
-                  isValidate: (value) => isEmailValid(value),
+                  isValidate: (value) => value.isValidEmail,
                   title: translate('email'),
                 ),
                 CustomInputField(
                   controller: _passwordController,
                   obscureText: true,
-                  isValidate: (value) => isPasswordValid(value),
+                  isValidate: (value) => value.isValidPassword,
                   title: translate('password'),
                 ),
                 const SizedBox(height: 16),

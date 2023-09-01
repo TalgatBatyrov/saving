@@ -28,7 +28,7 @@ class CustomInputField extends StatelessWidget {
             return null;
           }
         }
-        return '${translate('input_field')} $title';
+        return '${translate('snake_bar.input_field')} $title';
       },
     );
   }

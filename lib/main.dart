@@ -14,22 +14,15 @@ void main() async {
 
   PushNotifications.initialize();
 
-  var delegate = await LocalizationDelegate.create(
+  final delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en',
     supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp'],
   );
+
   runApp(
     LocalizedApp(
       delegate,
       const SavingsApp(),
     ),
   );
-}
-
-class Counter {
-  int value;
-
-  Counter({required this.value});
-
-  void increment() => value++;
 }

@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/utilities/dialogs/error_dialog.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/features/saving/widgets/button_translate.dart';
-
+import 'package:saving/utilities/extensions/validation.dart';
 import '../../../router/router.dart';
 import '../blocs/auth_cubit.dart';
 import '../widgets/custom_input_field.dart';
@@ -21,19 +20,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
-  bool isEmailValid(String email) {
-    final RegExp emailRegExp =
-        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-
-    return emailRegExp.hasMatch(email);
-  }
-
-  bool isPasswordValid(String password) {
-    return password.length >= 6;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +45,14 @@ class _SignInPageState extends State<SignInPage> {
               children: [
                 CustomInputField(
                   controller: _emailController,
-                  isValidate: (value) => isEmailValid(value),
+                  isValidate: (value) => value.isValidEmail,
                   title: translate('email'),
                 ),
                 CustomInputField(
                   controller: _passwordController,
                   obscureText: true,
-                  isValidate: (value) => isPasswordValid(value),
-                  title: translate('passowrd'),
+                  isValidate: (value) => value.isValidPassword,
+                  title: translate('password'),
                 ),
                 const SizedBox(height: 16),
                 BlocBuilder<AuthCubit, AuthState>(

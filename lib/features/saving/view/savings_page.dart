@@ -30,14 +30,14 @@ class SavingsPage extends StatelessWidget {
           const ThemeToggleButton(),
           const AddSavingButton(),
           IconButton(
-            onPressed: () => _onSignOut(context),
-            icon: const Icon(Icons.logout),
-          ),
-          IconButton(
             onPressed: () {
               ButtonTranslate().onActionSheetPress(context);
             },
             icon: const Icon(Icons.translate),
+          ),
+          IconButton(
+            onPressed: () => _onSignOut(context),
+            icon: const Icon(Icons.logout),
           ),
         ],
       ),

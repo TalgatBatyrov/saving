@@ -114,7 +114,7 @@ class _SavingTileState extends State<SavingTile> {
                 );
               },
             ),
-            children:  [
+            children: [
               SlidableAction(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
@@ -147,7 +147,7 @@ class _SavingTileState extends State<SavingTile> {
                       children: [
                         Visibility(
                           visible: saving.isCompleted,
-                          child:  Text(translate('goal_achieved')),
+                          child: Text(translate('goal_achieved')),
                         ),
                         Text(
                           '${saving.percent.ceil()}%',
@@ -169,9 +169,11 @@ class _SavingTileState extends State<SavingTile> {
                     const SizedBox(height: 5),
                     SavingItem(title: translate('target'), value: saving.total),
                     const SizedBox(height: 5),
-                    SavingItem(title: translate('accumulated'), value: saving.current),
+                    SavingItem(
+                        title: translate('accumulated'), value: saving.current),
                     const SizedBox(height: 5),
-                    SavingItem(title: translate('left'), value: saving.remainder),
+                    SavingItem(
+                        title: translate('left'), value: saving.remainder),
                     const SizedBox(height: 5),
                     Row(
                       children: [
