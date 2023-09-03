@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import 'generic_dialog.dart';
 
@@ -7,11 +8,11 @@ Future<bool> showDeleteDialog(
 ) async {
   return showGenericDialog<bool>(
     context: context,
-    content: 'Are you sure you want to delete this item?',
-    title: 'Delete',
+    content: translate('delete_dialog'),
+    title: translate('delete'),
     optionsBuilder: () => {
-      'Cancel': false,
-      'Yes': true,
+      translate('cancel'): false,
+      translate('yes'): true,
     },
   ).then((value) => value ?? false);
 }

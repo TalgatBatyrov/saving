@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import 'generic_dialog.dart';
 
@@ -8,8 +9,8 @@ Future<void> showErrorDialog(
 ) async {
   return showGenericDialog(
     context: context,
-    title: 'An error occurred',
+    title: translate('sharing_error'),
     content: text,
-    optionsBuilder: () => {'OK': null},
+    optionsBuilder: () => {translate('ok'): null},
   );
 }
