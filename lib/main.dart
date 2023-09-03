@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/services/push_notifications.dart';
+import 'local_cache.dart';
 import 'savings_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -13,11 +14,12 @@ void main() async {
   );
 
   PushNotifications.initialize();
-
-  final delegate = await LocalizationDelegate.create(
+  final String selectedLanguageCode = await const LocalCache().getLanguage();
+  var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en',
     supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp'],
   );
+  delegate.changeLocale(Locale(selectedLanguageCode));
 
   runApp(
     LocalizedApp(

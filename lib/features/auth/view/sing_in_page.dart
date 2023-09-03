@@ -102,7 +102,7 @@ class _SignInPageState extends State<SignInPage> {
                   onPressed: () {
                     context.router.push(const ResetPasswordRoute());
                   },
-                  child: Text(translate('Forgot password?')),
+                  child: Text(translate('forgot_password')),
                 )
               ],
             ),
