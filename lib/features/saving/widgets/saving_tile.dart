@@ -123,7 +123,7 @@ class _SavingTileState extends State<SavingTile> {
                 onPressed: null,
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
-                label: translate('swipe_left'),
+                label: translate('snake_bar.swipe_left'),
               ),
             ],
           ),

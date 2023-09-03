@@ -51,33 +51,6 @@ class SavingsPage extends StatelessWidget {
           );
         },
       ),
-      // body: CustomScrollView(
-      //   anchor: 0.0,
-      //   slivers: [
-      //     SliverAppBar(
-      //       title: Text(user.name),
-      //       actions: [
-      //         const ThemeToggleButton(),
-      //         const AddSavingButton(),
-      //         IconButton(
-      //           onPressed: () => _onSignOut(context),
-      //           icon: const Icon(Icons.logout),
-      //         ),
-      //         // reset password
-      //       ],
-      //     ),
-      //     // BlocBuilder<SavingCubit, SavingState>(
-      //     //   builder: (context, state) {
-      //     //     return state.when(
-      //     //       loading: () => const AppLoading(),
-      //     //       loaded: (savings) => SavingsList(savings: savings),
-      //     //       error: (errorMessage) => AppError(message: errorMessage),
-      //     //       empty: () => const AppEmpty(message: 'Нет целей'),
-      //     //     );
-      //     //   },
-      //     // ),
-      //   ],
-      // ),
     );
   }
 
