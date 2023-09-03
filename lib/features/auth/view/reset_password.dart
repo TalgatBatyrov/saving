@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:saving/utilities/extensions/validation.dart';
 
 @RoutePage()
 class ResetPasswordScreen extends StatefulWidget {
@@ -28,8 +29,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     if (!isValid) return;
 
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailTextInputController.text.trim());
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailTextInputController.text.trim(),
+      );
     } on FirebaseAuthException catch (e) {
       print(e.code);
     }
@@ -59,11 +61,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             children: [
               TextFormField(
                 validator: (value) {
-                  if (value!.isEmpty) {
+                  if (!value!.isValidEmail) {
                     return 'Please enter some text';
-                  }
-                  if (!value.contains('@')) {
-                    return 'Please enter a valid email address.';
                   }
                   return null;
                 },

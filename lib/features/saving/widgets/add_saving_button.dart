@@ -18,7 +18,7 @@ class AddSavingButton extends StatelessWidget {
             final goalController = TextEditingController();
             final totalController = TextEditingController();
             return AlertDialog(
-              title:  Text(translate('add-Saving')),
+              title: Text(translate('add_saving')),
               content: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -27,7 +27,7 @@ class AddSavingButton extends StatelessWidget {
                     TextField(
                       controller: goalController,
                       decoration: InputDecoration(
-                        labelText: translate('saving'),
+                        labelText: translate('Saving'),
                         hintText: translate('enter_saving'),
                       ),
                     ),
@@ -37,7 +37,7 @@ class AddSavingButton extends StatelessWidget {
                         FilteringTextInputFormatter.digitsOnly,
                         FilteringTextInputFormatter.deny(RegExp(r'^0+'))
                       ],
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         labelText: translate('total'),
                         hintText: translate('enter_total'),
                       ),
@@ -56,7 +56,7 @@ class AddSavingButton extends StatelessWidget {
                           );
                       context.router.pop();
                     },
-                    child:  Text(translate('add_saving'))),
+                    child: Text(translate('add_saving'))),
                 TextButton(
                   onPressed: context.router.pop,
                   child: Text(translate('cancel')),
