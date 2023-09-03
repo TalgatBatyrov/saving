@@ -14,7 +14,7 @@ void main() async {
   );
 
   PushNotifications.initialize();
-  final String selectedLanguageCode = await const LocalCache().getLanguage();
+  final selectedLanguageCode = await const LocalCache().getLanguage();
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en',
     supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp'],
