@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import 'generic_dialog.dart';
 
@@ -7,11 +8,11 @@ Future<bool> showLogOutDialog(
 ) async {
   return showGenericDialog<bool>(
     context: context,
-    title: 'Log out',
-    content: 'Are you sure you want to sign out?',
+    title: translate('logout'),
+    content: translate('sharing_success'),
     optionsBuilder: () => {
-      'Cancel': false,
-      'Log out': true,
+      translate('cancel'): false,
+      translate('logout'): true,
     },
   ).then((value) => value ?? false);
 }
