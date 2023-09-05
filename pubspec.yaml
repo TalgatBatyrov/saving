@@ -49,6 +49,7 @@ dependencies:
   flutter_slidable: ^3.0.0
   flutter_translate: ^4.0.4
   shared_preferences: ^2.2.1
+  firebase_database: ^10.2.5
 
 dev_dependencies:
   flutter_test:
