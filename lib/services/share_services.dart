@@ -1,8 +1,8 @@
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/repositories/savings/models/saving.dart';
+import 'package:saving/models/saving/saving.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../repositories/statistics/models/statistic.dart';
+import '../models/statistic/statistic.dart';
 
 abstract class ShareService {
   static Future<void> shareStatistics(List<Statistic> statistics) async {

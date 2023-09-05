@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/repositories/savings/models/saving.dart';
+import 'package:saving/models/saving/saving.dart';
 
 class ProgressInPercent extends StatelessWidget {
   final Saving saving;

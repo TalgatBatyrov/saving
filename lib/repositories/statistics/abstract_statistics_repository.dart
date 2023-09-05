@@ -1,5 +1,5 @@
-import '../savings/models/saving.dart';
-import 'models/statistic.dart';
+import '../../models/saving/saving.dart';
+import '../../models/statistic/statistic.dart';
 
 abstract class AbstractStatisticsRepository {
   Future<List<Statistic>> getStatisticsList(Saving saving);

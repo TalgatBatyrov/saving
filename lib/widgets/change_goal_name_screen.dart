@@ -4,7 +4,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/blocs/toggle/toggle_cubit.dart';
 import 'package:saving/widgets/goal_title.dart';
-import '../repositories/savings/models/saving.dart';
+import '../models/saving/saving.dart';
 
 class ChangeGoalNameScreen extends StatefulWidget {
   final Saving saving;

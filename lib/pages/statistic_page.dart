@@ -7,7 +7,7 @@ import 'package:saving/widgets/button_translate.dart';
 import '../app_widgets/app_empty.dart';
 import '../app_widgets/app_error.dart';
 import '../app_widgets/app_loading.dart';
-import '../repositories/savings/models/saving.dart';
+import '../models/saving/saving.dart';
 import '../widgets/statistic_app_bar_action.dart';
 import '../widgets/statistics_list.dart';
 

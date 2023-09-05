@@ -1,4 +1,4 @@
-import 'models/auth_user.dart';
+import '../../models/auth_user/auth_user.dart';
 
 abstract class AbstractAuthRepository {
   Future<void> signIn({
@@ -12,7 +12,6 @@ abstract class AbstractAuthRepository {
   });
   Future<void> signOut();
 
-  // send email verification
   Future<void> sendEmailVerification();
 
   Future<AuthUser> getUser(String id);

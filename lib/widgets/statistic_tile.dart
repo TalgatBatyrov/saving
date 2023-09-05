@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../repositories/statistics/models/statistic.dart';
+import '../models/statistic/statistic.dart';
 
 class StatisticTile extends StatelessWidget {
   const StatisticTile({

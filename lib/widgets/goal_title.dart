@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../repositories/savings/models/saving.dart';
+import '../models/saving/saving.dart';
 
 class GoalTitle extends StatelessWidget {
   const GoalTitle({

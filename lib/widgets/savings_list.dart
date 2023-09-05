@@ -1,6 +1,6 @@
 import 'package:saving/widgets/saving_tile.dart';
 import 'package:flutter/material.dart';
-import '../repositories/savings/models/saving.dart';
+import '../models/saving/saving.dart';
 
 class SavingsList extends StatelessWidget {
   final List<Saving> savings;

@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
+import 'package:saving/models/auth_user/auth_user.dart';
+import 'package:saving/models/saving/saving.dart';
 import 'package:saving/pages/reset_password_page.dart';
 import 'package:saving/pages/savings_page.dart';
 import '../pages/splash_screen.dart';
@@ -7,8 +9,6 @@ import '../pages/sign_up_page.dart';
 import '../pages/sing_in_page.dart';
 import '../pages/verify_email_page.dart';
 import '../pages/statistic_page.dart';
-import '../repositories/savings/models/saving.dart';
-import '../repositories/user/models/auth_user.dart';
 
 part 'router.gr.dart';
 

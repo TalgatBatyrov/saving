@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../savings/models/saving.dart';
+import '../../models/saving/saving.dart';
 import 'abstract_statistics_repository.dart';
-import 'models/statistic.dart';
+import '../../models/statistic/statistic.dart';
 
 class StatisticsRepository implements AbstractStatisticsRepository {
   final FirebaseFirestore _firestore;

@@ -13,7 +13,7 @@ import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
 import '../../../app_widgets/app_loading.dart';
 import '../../../app_widgets/theme_toggle_button.dart';
-import '../../../repositories/user/models/auth_user.dart';
+import '../models/auth_user/auth_user.dart';
 import '../../../router/router.dart';
 
 @RoutePage()

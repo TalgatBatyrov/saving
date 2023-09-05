@@ -8,7 +8,7 @@ import 'package:saving/widgets/saving_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/widgets/start_action_pane.dart';
-import '../repositories/savings/models/saving.dart';
+import '../models/saving/saving.dart';
 import '../router/router.dart';
 import '../blocs/toggle/toggle_cubit.dart';
 import 'change_goal_name_screen.dart';

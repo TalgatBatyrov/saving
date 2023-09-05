@@ -6,7 +6,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
 import 'package:saving/utilities/dialogs/delete_dialog.dart';
-import '../repositories/savings/models/saving.dart';
+import '../models/saving/saving.dart';
 
 class DeleteSavingButton extends StatelessWidget {
   final Saving saving;

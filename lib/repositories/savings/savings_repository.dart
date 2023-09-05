@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'abstract_savings_repository.dart';
-import 'models/saving.dart';
+import '../../models/saving/saving.dart';
 
 class SavingsRepository implements AbstractSavingsRepository {
   final FirebaseFirestore firestore;

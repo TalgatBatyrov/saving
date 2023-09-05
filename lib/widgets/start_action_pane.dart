@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/toggle/toggle_cubit.dart';
-import 'package:saving/repositories/savings/models/saving.dart';
+import 'package:saving/models/saving/saving.dart';
 import 'package:saving/services/share_services.dart';
 
 class StartActionPane extends StatelessWidget {

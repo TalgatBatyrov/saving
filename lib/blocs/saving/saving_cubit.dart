@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
 import 'package:saving/blocs/statistic/statistic_cubit.dart';
 import '../../repositories/savings/abstract_savings_repository.dart';
-import '../../repositories/savings/models/saving.dart';
+import '../../models/saving/saving.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'saving_cubit.freezed.dart';

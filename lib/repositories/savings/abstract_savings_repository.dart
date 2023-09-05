@@ -1,4 +1,4 @@
-import 'models/saving.dart';
+import '../../models/saving/saving.dart';
 
 abstract class AbstractSavingsRepository {
   Future<List<Saving>> getSavingsList({required String userId});
