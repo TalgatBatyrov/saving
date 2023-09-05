@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/blocs/toggle/toggle_cubit.dart';
+import 'package:saving/widgets/goal_title.dart';
 import '../repositories/savings/models/saving.dart';
 
 class ChangeGoalNameScreen extends StatefulWidget {
@@ -42,35 +43,39 @@ class _ChangeGoalNameScreenState extends State<ChangeGoalNameScreen> {
     final savingCubit = context.read<SavingCubit>();
     return BlocBuilder<ToggleVisibilityChangeGoalCubit, bool>(
       builder: (context, state) {
-        return Visibility(
-          visible: state,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: TextField(
-                  controller: _goalController,
-                  decoration: InputDecoration(
-                    labelText: translate('target_name'),
-                    border: const OutlineInputBorder(),
-                  ),
+        return state
+            ? Visibility(
+                visible: state,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: TextField(
+                        controller: _goalController,
+                        decoration: InputDecoration(
+                          labelText: translate('target_name'),
+                          border: const OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: IconButton(
+                        onPressed: () {
+                          _changeGoalName(
+                            savingCubit: savingCubit,
+                            saving: widget.saving,
+                          );
+                          context
+                              .read<ToggleVisibilityChangeGoalCubit>()
+                              .toggle();
+                        },
+                        icon: const Icon(Icons.edit),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Expanded(
-                child: IconButton(
-                  onPressed: () {
-                    _changeGoalName(
-                      savingCubit: savingCubit,
-                      saving: widget.saving,
-                    );
-                    context.read<ToggleVisibilityChangeGoalCubit>().toggle();
-                  },
-                  icon: const Icon(Icons.edit),
-                ),
-              ),
-            ],
-          ),
-        );
+              )
+            : GoalTitle(saving: widget.saving);
       },
     );
   }

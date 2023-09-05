@@ -9,6 +9,7 @@ class SavingsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: const EdgeInsets.all(8),
       physics: const BouncingScrollPhysics(),
       itemCount: savings.length,
       itemBuilder: (context, i) => SavingTile(saving: savings[i]),

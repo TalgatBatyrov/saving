@@ -11,11 +11,13 @@ class GoalTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      saving.goal,
-      style: const TextStyle(
-        fontSize: 25,
-        fontWeight: FontWeight.bold,
+    return Center(
+      child: Text(
+        saving.goal,
+        style: const TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
