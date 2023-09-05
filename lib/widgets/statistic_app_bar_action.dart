@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saving/blocs/statistic/statistic_cubit.dart';
 
-import '../../../services/share_services.dart';
-import '../blocs/statistic_cubit.dart';
+import '../services/share_services.dart';
 
 class StatisticAppBarAction extends StatelessWidget {
   const StatisticAppBarAction({

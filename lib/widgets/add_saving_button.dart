@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import '../blocs/saving_cubit.dart';
+import 'package:saving/blocs/saving/saving_cubit.dart';
 
 class AddSavingButton extends StatelessWidget {
   const AddSavingButton({super.key});

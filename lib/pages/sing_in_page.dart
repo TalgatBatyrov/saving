@@ -1,12 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/features/saving/widgets/button_translate.dart';
+import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/widgets/button_translate.dart';
 
-import '../../../router/router.dart';
-import '../blocs/auth_cubit.dart';
+import '../router/router.dart';
 import '../widgets/custom_input_field.dart';
 
 @RoutePage()

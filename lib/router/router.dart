@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
-import 'package:saving/features/auth/view/reset_password.dart';
-import '../features/auth/view/splash_screen.dart';
-import '../features/auth/view/sign_up_page.dart';
-import '../features/auth/view/sing_in_page.dart';
-import '../features/auth/view/verify_email_screen.dart';
-import '../features/saving/view/savings_page.dart';
-import '../features/statistic/view/statistic_page.dart';
+import 'package:saving/pages/reset_password_page.dart';
+import 'package:saving/pages/savings_page.dart';
+import '../pages/splash_screen.dart';
+import '../pages/sign_up_page.dart';
+import '../pages/sing_in_page.dart';
+import '../pages/verify_email_page.dart';
+import '../pages/statistic_page.dart';
 import '../repositories/savings/models/saving.dart';
 import '../repositories/user/models/auth_user.dart';
 

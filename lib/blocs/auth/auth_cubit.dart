@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../repositories/user/auth_repository.dart';
-import '../../../repositories/user/models/auth_user.dart';
+import '../../repositories/user/auth_repository.dart';
+import '../../repositories/user/models/auth_user.dart';
 
 part 'auth_cubit.freezed.dart';
 part 'auth_state.dart';

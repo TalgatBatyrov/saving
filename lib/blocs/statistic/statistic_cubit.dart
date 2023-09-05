@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../repositories/savings/models/saving.dart';
-import '../../../repositories/statistics/abstract_statistics_repository.dart';
-import '../../../repositories/statistics/models/statistic.dart';
+import '../../repositories/savings/models/saving.dart';
+import '../../repositories/statistics/abstract_statistics_repository.dart';
+import '../../repositories/statistics/models/statistic.dart';
 
 part 'statistic_cubit.freezed.dart';
 part 'statistic_state.dart';

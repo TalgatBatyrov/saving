@@ -2,13 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/features/saving/widgets/button_translate.dart';
-
-import '../../../app_widgets/app_empty.dart';
-import '../../../app_widgets/app_error.dart';
-import '../../../app_widgets/app_loading.dart';
-import '../../../repositories/savings/models/saving.dart';
-import '../blocs/statistic_cubit.dart';
+import 'package:saving/blocs/statistic/statistic_cubit.dart';
+import 'package:saving/widgets/button_translate.dart';
+import '../app_widgets/app_empty.dart';
+import '../app_widgets/app_error.dart';
+import '../app_widgets/app_loading.dart';
+import '../repositories/savings/models/saving.dart';
 import '../widgets/statistic_app_bar_action.dart';
 import '../widgets/statistics_list.dart';
 

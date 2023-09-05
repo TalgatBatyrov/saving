@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:saving/utilities/extensions/validation.dart';
 
 @RoutePage()
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({super.key});
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
   TextEditingController emailTextInputController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 

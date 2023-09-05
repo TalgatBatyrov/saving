@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/features/toggle/toggle_cubit.dart';
-
-import '../../../repositories/savings/models/saving.dart';
-import '../blocs/saving_cubit.dart';
+import 'package:saving/blocs/saving/saving_cubit.dart';
+import 'package:saving/blocs/toggle/toggle_cubit.dart';
+import '../repositories/savings/models/saving.dart';
 
 class ChangeGoalNameScreen extends StatefulWidget {
   final Saving saving;

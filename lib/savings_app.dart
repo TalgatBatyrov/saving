@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/saving/saving_cubit.dart';
+import 'package:saving/blocs/statistic/statistic_cubit.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
 import 'package:saving/repositories/savings/savings_repository.dart';
 import 'package:saving/repositories/statistics/statistics_repository.dart';
@@ -10,10 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/theming/app_themes.dart';
-import 'features/auth/blocs/auth_cubit.dart';
-import 'features/saving/blocs/saving_cubit.dart';
-import 'features/statistic/blocs/statistic_cubit.dart';
-import 'features/theme/theme_cubit.dart';
+import 'blocs/theme/theme_cubit.dart';
 
 class SavingsApp extends StatefulWidget {
   const SavingsApp({super.key});

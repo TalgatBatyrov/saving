@@ -1,9 +1,9 @@
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/features/statistic/widgets/statistic_tile.dart';
+import 'package:saving/widgets/statistic_tile.dart';
 import 'package:flutter/material.dart';
 
-import '../../../repositories/savings/models/saving.dart';
-import '../../../repositories/statistics/models/statistic.dart';
+import '../repositories/savings/models/saving.dart';
+import '../repositories/statistics/models/statistic.dart';
 
 class StatisticsList extends StatelessWidget {
   final List<Statistic> statistics;

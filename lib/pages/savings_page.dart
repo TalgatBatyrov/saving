@@ -3,7 +3,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/features/saving/widgets/button_translate.dart';
+import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/saving/saving_cubit.dart';
+import 'package:saving/widgets/add_saving_button.dart';
+import 'package:saving/widgets/button_translate.dart';
+import 'package:saving/widgets/savings_list.dart';
 import 'package:saving/utilities/dialogs/logout_dialog.dart';
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
@@ -11,10 +15,6 @@ import '../../../app_widgets/app_loading.dart';
 import '../../../app_widgets/theme_toggle_button.dart';
 import '../../../repositories/user/models/auth_user.dart';
 import '../../../router/router.dart';
-import '../../auth/blocs/auth_cubit.dart';
-import '../blocs/saving_cubit.dart';
-import '../widgets/add_saving_button.dart';
-import '../widgets/savings_list.dart';
 
 @RoutePage()
 class SavingsPage extends StatelessWidget {

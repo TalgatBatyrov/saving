@@ -3,10 +3,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
 import 'package:saving/utilities/dialogs/delete_dialog.dart';
-import '../../../repositories/savings/models/saving.dart';
-import '../blocs/saving_cubit.dart';
+import '../repositories/savings/models/saving.dart';
 
 class DeleteSavingButton extends StatelessWidget {
   final Saving saving;
