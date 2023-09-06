@@ -55,10 +55,12 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomInputField(
+                keyboardType: TextInputType.emailAddress,
                 controller: _emailController,
                 isValidate: (value) => isEmailValid(value),
                 title: translate('email'),
               ),
+              const SizedBox(height: 16),
               CustomInputField(
                 controller: _passwordController,
                 obscureText: true,

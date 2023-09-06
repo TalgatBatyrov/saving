@@ -10,43 +10,65 @@ class AddSavingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final goalController = TextEditingController();
+    final totalController = TextEditingController();
     return IconButton(
       onPressed: () {
-        showDialog(
+        showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
-            final goalController = TextEditingController();
-            final totalController = TextEditingController();
-            return AlertDialog(
-              title: Text(translate('add_saving')),
-              content: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3,
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: goalController,
-                      decoration: InputDecoration(
-                        labelText: translate('Saving'),
-                        hintText: translate('enter_saving'),
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    translate('add_saving'),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  TextField(
+                    controller: goalController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.savings),
+                      labelText: translate('saving'),
+                      hintText: translate('enter_saving'),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    TextField(
-                      controller: totalController,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        FilteringTextInputFormatter.deny(RegExp(r'^0+'))
-                      ],
-                      decoration: InputDecoration(
-                        labelText: translate('total'),
-                        hintText: translate('enter_total'),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: totalController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.deny(RegExp(r'^0+'))
+                    ],
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.money),
+                      labelText: translate('total'),
+                      hintText: translate('enter_total'),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              actions: [
-                TextButton(
+                  ),
+                  const Spacer(),
+                  TextButton(
                     onPressed: () {
                       context.read<SavingCubit>().createSaving(
                             goal: goalController.text,
@@ -56,12 +78,15 @@ class AddSavingButton extends StatelessWidget {
                           );
                       context.router.pop();
                     },
-                    child: Text(translate('add_saving'))),
-                TextButton(
-                  onPressed: context.router.pop,
-                  child: Text(translate('cancel')),
-                ),
-              ],
+                    child: Text(translate('add_saving')),
+                  ),
+                  TextButton(
+                    onPressed: context.router.pop,
+                    child: Text(translate('cancel')),
+                  ),
+                  const Spacer(),
+                ],
+              ),
             );
           },
         );

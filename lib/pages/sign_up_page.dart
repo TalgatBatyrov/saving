@@ -59,17 +59,19 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: translate('name'),
-                  ),
-                ),
                 CustomInputField(
+                  controller: _nameController,
+                  isValidate: (value) => value.isNotEmpty,
+                  title: translate('name'),
+                ),
+                const SizedBox(height: 16),
+                CustomInputField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   isValidate: (value) => value.isValidEmail,
                   title: translate('email'),
                 ),
+                const SizedBox(height: 16),
                 CustomInputField(
                   controller: _passwordController,
                   obscureText: true,
