@@ -15,6 +15,7 @@ abstract class PushNotifications {
     enableVibration: true,
     showBadge: true,
     playSound: true,
+    sound: RawResourceAndroidNotificationSound('sound'),
     ledColor: Colors.red,
   );
 
@@ -56,9 +57,21 @@ abstract class PushNotifications {
       title,
       body,
       NotificationDetails(
+        iOS: const DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+          subtitle: 'subtitle',
+        ),
         android: AndroidNotificationDetails(
           channel.id,
           channel.name,
+          playSound: true,
+          sound: const RawResourceAndroidNotificationSound('sound'),
+          color: Colors.transparent,
+          enableLights: true,
+          enableVibration: true,
+          channelAction: AndroidNotificationChannelAction.createIfNotExists,
           priority: Priority.high,
           importance: Importance.max,
           setAsGroupSummary: true,

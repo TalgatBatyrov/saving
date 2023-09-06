@@ -15,7 +15,7 @@ class AddSavingButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         showModalBottomSheet(
-          isScrollControlled: true,
+          // isScrollControlled: true,
           context: context,
           builder: (context) {
             return Padding(
@@ -71,11 +71,15 @@ class AddSavingButton extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       context.read<SavingCubit>().createSaving(
-                            goal: goalController.text,
+                            goal: goalController.text.trim(),
                             total: totalController.text.isNotEmpty
                                 ? int.parse(totalController.text)
                                 : 0,
                           );
+
+                      goalController.clear();
+                      totalController.clear();
+
                       context.router.pop();
                     },
                     child: Text(translate('add_saving')),
