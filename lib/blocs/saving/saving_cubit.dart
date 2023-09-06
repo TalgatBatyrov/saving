@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
@@ -70,9 +71,7 @@ class SavingCubit extends Cubit<SavingState> {
       if (state is! _Loaded) {
         emit(const SavingState.loading());
       }
-      if (goal.isEmpty || total == 0) {
-        return;
-      }
+
       await _savingsRepository.createSaving(
         goal: goal,
         total: total,
