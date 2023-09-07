@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/statistic/statistic_cubit.dart';
 import '../../repositories/savings/abstract_savings_repository.dart';
 import '../../models/saving/saving.dart';
@@ -16,7 +15,7 @@ class SavingCubit extends Cubit<SavingState> {
   final AbstractSavingsRepository _savingsRepository;
 
   final StatisticCubit _statisticCubit;
-  final AuthCubit _authCubit;
+  final ProfileCubit _profileCubit;
 
   StreamSubscription? _savingSub;
   late final StreamSubscription _authSub;
@@ -25,10 +24,10 @@ class SavingCubit extends Cubit<SavingState> {
     this._savingsRepository,
     this._firestore,
     this._statisticCubit,
-    this._authCubit,
+    this._profileCubit,
   ) : super(const SavingState.loading()) {
-    _authSub = _authCubit.stream.listen(_onAuthChanged);
-    _onAuthChanged(_authCubit.state);
+    _authSub = _profileCubit.stream.listen(_onProfileChanged);
+    _onProfileChanged(_profileCubit.state);
   }
 
   void _onSavingsChanged(QuerySnapshot<Map<String, dynamic>> event) {
@@ -137,9 +136,9 @@ class SavingCubit extends Cubit<SavingState> {
     }
   }
 
-  void _onAuthChanged(AuthState event) async {
+  void _onProfileChanged(ProfileState event) async {
     event.maybeWhen(
-      loggedIn: (user) {
+      loaded: (user) {
         final savingsCollection = _firestore.collection(
           'users/${user.id}/savings',
         );

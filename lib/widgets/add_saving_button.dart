@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
@@ -21,7 +20,8 @@ class AddSavingButton extends StatelessWidget {
             return Form(
               key: formKey,
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -65,10 +65,7 @@ class AddSavingButton extends StatelessWidget {
                     const SizedBox(height: 10),
                     TextFormField(
                       controller: totalController,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        FilteringTextInputFormatter.deny(RegExp(r'^0+'))
-                      ],
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.money),
                         labelText: translate('total'),
@@ -100,7 +97,6 @@ class AddSavingButton extends StatelessWidget {
 
                           goalController.clear();
                           totalController.clear();
-
                           context.router.pop();
                         }
                       },

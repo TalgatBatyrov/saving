@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
 import 'package:saving/widgets/button_translate.dart';
 
 import '../router/router.dart';
@@ -35,14 +36,14 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
+    return BlocListener<VerificationCubit, VerificationState>(
       listener: (context, state) async {
         state.whenOrNull(
-          loggedIn: (user) {
-            context.router.replace(SavingsRoute(user: user));
+          verified: () {
+            context.router.replace(const SavingsRoute());
           },
-          error: (message) {
-            _showAuthErrorDialog(context, message.toString());
+          unverified: () {
+            context.router.replace(const VerifyEmailRoute());
           },
         );
       },
@@ -77,10 +78,15 @@ class _SignInPageState extends State<SignInPage> {
                       return ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await context.read<AuthCubit>().signIn(
+                            await context
+                                .read<AuthCubit>()
+                                .signIn(
                                   email: _emailController.text,
                                   password: _passwordController.text,
-                                );
+                                )
+                                .onError((error, stackTrace) {
+                              _showAuthErrorDialog(context, error.toString());
+                            });
                           }
                         },
                         child: Text(translate('login')),

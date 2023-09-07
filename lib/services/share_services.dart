@@ -1,7 +1,6 @@
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/models/saving/saving.dart';
 import 'package:share_plus/share_plus.dart';
-
 import '../models/statistic/statistic.dart';
 
 abstract class ShareService {

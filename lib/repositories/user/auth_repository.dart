@@ -56,8 +56,6 @@ class AuthRepository implements AbstractAuthRepository {
       );
       final userFromFirebase = response.user;
 
-      sendEmailVerification();
-
       if (userFromFirebase != null) {
         final uid = userFromFirebase.uid;
 

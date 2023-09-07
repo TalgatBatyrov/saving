@@ -50,6 +50,7 @@ dependencies:
   flutter_translate: ^4.0.4
   shared_preferences: ^2.2.1
   firebase_database: ^10.2.5
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

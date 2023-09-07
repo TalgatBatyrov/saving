@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
 import 'package:saving/utilities/dialogs/error_dialog.dart';
 import 'package:saving/utilities/extensions/validation.dart';
 import '../app_widgets/app_loading.dart';
@@ -29,25 +30,28 @@ class _SignUpPageState extends State<SignUpPage> {
       return;
     }
 
-    await context.read<AuthCubit>().signUp(
+    await context
+        .read<AuthCubit>()
+        .signUp(
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text,
-        );
+        )
+        .onError((error, stackTrace) {
+      showErrorDialog(context, error.toString());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
+    return BlocListener<VerificationCubit, VerificationState>(
       listener: (context, state) async {
         state.whenOrNull(
-          needVerification: () =>
-              context.router.replace(const VerifyEmailRoute()),
-          loggedIn: (user) {
-            context.router.replace(SavingsRoute(user: user));
+          verified: () {
+            context.router.replace(const SavingsRoute());
           },
-          error: (message) {
-            showErrorDialog(context, message.toString());
+          unverified: () {
+            context.router.replace(const VerifyEmailRoute());
           },
         );
       },

@@ -2,8 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/internet_connection/internet_connection_cubit.dart';
+import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/blocs/statistic/statistic_cubit.dart';
+import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
 import 'package:saving/repositories/savings/savings_repository.dart';
 import 'package:saving/repositories/statistics/statistics_repository.dart';
@@ -35,13 +38,18 @@ class _SavingsAppState extends State<SavingsApp> {
     firestore: _firestore,
   );
   late final _authRepository = AuthRepository(_firebaseAuth, _firestore);
-  late final _authCubit = AuthCubit(_authRepository);
+  late final _authCubit = AuthCubit(_authRepository, _firebaseAuth);
+  late final _profileCubit = ProfileCubit(_authRepository, _firebaseAuth);
+
   late final _statisticCubit = StatisticCubit(_statisticRepository);
   late final _savingCubit = SavingCubit(
     _savingRepository,
     _firestore,
     _statisticCubit,
-    _authCubit,
+    _profileCubit,
+  );
+  late final _verificationCubit = VerificationCubit(
+    _firebaseAuth,
   );
 
   @override
@@ -50,6 +58,8 @@ class _SavingsAppState extends State<SavingsApp> {
     _savingCubit.close();
     _statisticCubit.close();
     _authCubit.close();
+    _profileCubit.close();
+    _verificationCubit.close();
   }
 
   @override
@@ -66,7 +76,10 @@ class _SavingsAppState extends State<SavingsApp> {
           BlocProvider.value(value: _savingCubit),
           BlocProvider.value(value: _statisticCubit),
           BlocProvider.value(value: _authCubit),
+          BlocProvider.value(value: _profileCubit),
           BlocProvider(create: (_) => ThemeCubit()),
+          BlocProvider(create: (_) => InternetConnectionCubit()),
+          BlocProvider.value(value: _verificationCubit),
         ],
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (context, themeMode) {

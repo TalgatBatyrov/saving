@@ -19,28 +19,22 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(AuthUser user) loggedIn,
+    required TResult Function() loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(Exception message) error,
-    required TResult Function() needVerification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(AuthUser user)? loggedIn,
+    TResult? Function()? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(Exception message)? error,
-    TResult? Function()? needVerification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(AuthUser user)? loggedIn,
+    TResult Function()? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(Exception message)? error,
-    TResult Function()? needVerification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,8 +43,6 @@ mixin _$AuthState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_LoggedIn value) loggedIn,
     required TResult Function(_LoggedOut value) loggedOut,
-    required TResult Function(_Error value) error,
-    required TResult Function(_NeedVerification value) needVerification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,8 +50,6 @@ mixin _$AuthState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_LoggedIn value)? loggedIn,
     TResult? Function(_LoggedOut value)? loggedOut,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_NeedVerification value)? needVerification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,8 +57,6 @@ mixin _$AuthState {
     TResult Function(_Loading value)? loading,
     TResult Function(_LoggedIn value)? loggedIn,
     TResult Function(_LoggedOut value)? loggedOut,
-    TResult Function(_Error value)? error,
-    TResult Function(_NeedVerification value)? needVerification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,10 +117,8 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(AuthUser user) loggedIn,
+    required TResult Function() loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(Exception message) error,
-    required TResult Function() needVerification,
   }) {
     return loading();
   }
@@ -141,10 +127,8 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(AuthUser user)? loggedIn,
+    TResult? Function()? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(Exception message)? error,
-    TResult? Function()? needVerification,
   }) {
     return loading?.call();
   }
@@ -153,10 +137,8 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(AuthUser user)? loggedIn,
+    TResult Function()? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(Exception message)? error,
-    TResult Function()? needVerification,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -171,8 +153,6 @@ class _$_Loading extends _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_LoggedIn value) loggedIn,
     required TResult Function(_LoggedOut value) loggedOut,
-    required TResult Function(_Error value) error,
-    required TResult Function(_NeedVerification value) needVerification,
   }) {
     return loading(this);
   }
@@ -183,8 +163,6 @@ class _$_Loading extends _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_LoggedIn value)? loggedIn,
     TResult? Function(_LoggedOut value)? loggedOut,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_NeedVerification value)? needVerification,
   }) {
     return loading?.call(this);
   }
@@ -195,8 +173,6 @@ class _$_Loading extends _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_LoggedIn value)? loggedIn,
     TResult Function(_LoggedOut value)? loggedOut,
-    TResult Function(_Error value)? error,
-    TResult Function(_NeedVerification value)? needVerification,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -216,8 +192,6 @@ abstract class _$$_LoggedInCopyWith<$Res> {
   factory _$$_LoggedInCopyWith(
           _$_LoggedIn value, $Res Function(_$_LoggedIn) then) =
       __$$_LoggedInCopyWithImpl<$Res>;
-  @useResult
-  $Res call({AuthUser user});
 }
 
 /// @nodoc
@@ -227,88 +201,57 @@ class __$$_LoggedInCopyWithImpl<$Res>
   __$$_LoggedInCopyWithImpl(
       _$_LoggedIn _value, $Res Function(_$_LoggedIn) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-  }) {
-    return _then(_$_LoggedIn(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as AuthUser,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_LoggedIn extends _LoggedIn {
-  const _$_LoggedIn({required this.user}) : super._();
-
-  @override
-  final AuthUser user;
+  const _$_LoggedIn() : super._();
 
   @override
   String toString() {
-    return 'AuthState.loggedIn(user: $user)';
+    return 'AuthState.loggedIn()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_LoggedIn &&
-            const DeepCollectionEquality().equals(other.user, user));
+        (other.runtimeType == runtimeType && other is _$_LoggedIn);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoggedInCopyWith<_$_LoggedIn> get copyWith =>
-      __$$_LoggedInCopyWithImpl<_$_LoggedIn>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(AuthUser user) loggedIn,
+    required TResult Function() loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(Exception message) error,
-    required TResult Function() needVerification,
   }) {
-    return loggedIn(user);
+    return loggedIn();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(AuthUser user)? loggedIn,
+    TResult? Function()? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(Exception message)? error,
-    TResult? Function()? needVerification,
   }) {
-    return loggedIn?.call(user);
+    return loggedIn?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(AuthUser user)? loggedIn,
+    TResult Function()? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(Exception message)? error,
-    TResult Function()? needVerification,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
-      return loggedIn(user);
+      return loggedIn();
     }
     return orElse();
   }
@@ -319,8 +262,6 @@ class _$_LoggedIn extends _LoggedIn {
     required TResult Function(_Loading value) loading,
     required TResult Function(_LoggedIn value) loggedIn,
     required TResult Function(_LoggedOut value) loggedOut,
-    required TResult Function(_Error value) error,
-    required TResult Function(_NeedVerification value) needVerification,
   }) {
     return loggedIn(this);
   }
@@ -331,8 +272,6 @@ class _$_LoggedIn extends _LoggedIn {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_LoggedIn value)? loggedIn,
     TResult? Function(_LoggedOut value)? loggedOut,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_NeedVerification value)? needVerification,
   }) {
     return loggedIn?.call(this);
   }
@@ -343,8 +282,6 @@ class _$_LoggedIn extends _LoggedIn {
     TResult Function(_Loading value)? loading,
     TResult Function(_LoggedIn value)? loggedIn,
     TResult Function(_LoggedOut value)? loggedOut,
-    TResult Function(_Error value)? error,
-    TResult Function(_NeedVerification value)? needVerification,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
@@ -355,13 +292,8 @@ class _$_LoggedIn extends _LoggedIn {
 }
 
 abstract class _LoggedIn extends AuthState {
-  const factory _LoggedIn({required final AuthUser user}) = _$_LoggedIn;
+  const factory _LoggedIn() = _$_LoggedIn;
   const _LoggedIn._() : super._();
-
-  AuthUser get user;
-  @JsonKey(ignore: true)
-  _$$_LoggedInCopyWith<_$_LoggedIn> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -403,10 +335,8 @@ class _$_LoggedOut extends _LoggedOut {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(AuthUser user) loggedIn,
+    required TResult Function() loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(Exception message) error,
-    required TResult Function() needVerification,
   }) {
     return loggedOut();
   }
@@ -415,10 +345,8 @@ class _$_LoggedOut extends _LoggedOut {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(AuthUser user)? loggedIn,
+    TResult? Function()? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(Exception message)? error,
-    TResult? Function()? needVerification,
   }) {
     return loggedOut?.call();
   }
@@ -427,10 +355,8 @@ class _$_LoggedOut extends _LoggedOut {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(AuthUser user)? loggedIn,
+    TResult Function()? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(Exception message)? error,
-    TResult Function()? needVerification,
     required TResult orElse(),
   }) {
     if (loggedOut != null) {
@@ -445,8 +371,6 @@ class _$_LoggedOut extends _LoggedOut {
     required TResult Function(_Loading value) loading,
     required TResult Function(_LoggedIn value) loggedIn,
     required TResult Function(_LoggedOut value) loggedOut,
-    required TResult Function(_Error value) error,
-    required TResult Function(_NeedVerification value) needVerification,
   }) {
     return loggedOut(this);
   }
@@ -457,8 +381,6 @@ class _$_LoggedOut extends _LoggedOut {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_LoggedIn value)? loggedIn,
     TResult? Function(_LoggedOut value)? loggedOut,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_NeedVerification value)? needVerification,
   }) {
     return loggedOut?.call(this);
   }
@@ -469,8 +391,6 @@ class _$_LoggedOut extends _LoggedOut {
     TResult Function(_Loading value)? loading,
     TResult Function(_LoggedIn value)? loggedIn,
     TResult Function(_LoggedOut value)? loggedOut,
-    TResult Function(_Error value)? error,
-    TResult Function(_NeedVerification value)? needVerification,
     required TResult orElse(),
   }) {
     if (loggedOut != null) {
@@ -483,275 +403,4 @@ class _$_LoggedOut extends _LoggedOut {
 abstract class _LoggedOut extends AuthState {
   const factory _LoggedOut() = _$_LoggedOut;
   const _LoggedOut._() : super._();
-}
-
-/// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Exception message});
-}
-
-/// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_Error(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as Exception,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Error extends _Error {
-  const _$_Error(this.message) : super._();
-
-  @override
-  final Exception message;
-
-  @override
-  String toString() {
-    return 'AuthState.error(message: $message)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Error &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(AuthUser user) loggedIn,
-    required TResult Function() loggedOut,
-    required TResult Function(Exception message) error,
-    required TResult Function() needVerification,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(AuthUser user)? loggedIn,
-    TResult? Function()? loggedOut,
-    TResult? Function(Exception message)? error,
-    TResult? Function()? needVerification,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(AuthUser user)? loggedIn,
-    TResult Function()? loggedOut,
-    TResult Function(Exception message)? error,
-    TResult Function()? needVerification,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_LoggedIn value) loggedIn,
-    required TResult Function(_LoggedOut value) loggedOut,
-    required TResult Function(_Error value) error,
-    required TResult Function(_NeedVerification value) needVerification,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_LoggedIn value)? loggedIn,
-    TResult? Function(_LoggedOut value)? loggedOut,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_NeedVerification value)? needVerification,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_LoggedIn value)? loggedIn,
-    TResult Function(_LoggedOut value)? loggedOut,
-    TResult Function(_Error value)? error,
-    TResult Function(_NeedVerification value)? needVerification,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Error extends AuthState {
-  const factory _Error(final Exception message) = _$_Error;
-  const _Error._() : super._();
-
-  Exception get message;
-  @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_NeedVerificationCopyWith<$Res> {
-  factory _$$_NeedVerificationCopyWith(
-          _$_NeedVerification value, $Res Function(_$_NeedVerification) then) =
-      __$$_NeedVerificationCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_NeedVerificationCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_NeedVerification>
-    implements _$$_NeedVerificationCopyWith<$Res> {
-  __$$_NeedVerificationCopyWithImpl(
-      _$_NeedVerification _value, $Res Function(_$_NeedVerification) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_NeedVerification extends _NeedVerification {
-  const _$_NeedVerification() : super._();
-
-  @override
-  String toString() {
-    return 'AuthState.needVerification()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_NeedVerification);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(AuthUser user) loggedIn,
-    required TResult Function() loggedOut,
-    required TResult Function(Exception message) error,
-    required TResult Function() needVerification,
-  }) {
-    return needVerification();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(AuthUser user)? loggedIn,
-    TResult? Function()? loggedOut,
-    TResult? Function(Exception message)? error,
-    TResult? Function()? needVerification,
-  }) {
-    return needVerification?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(AuthUser user)? loggedIn,
-    TResult Function()? loggedOut,
-    TResult Function(Exception message)? error,
-    TResult Function()? needVerification,
-    required TResult orElse(),
-  }) {
-    if (needVerification != null) {
-      return needVerification();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_LoggedIn value) loggedIn,
-    required TResult Function(_LoggedOut value) loggedOut,
-    required TResult Function(_Error value) error,
-    required TResult Function(_NeedVerification value) needVerification,
-  }) {
-    return needVerification(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_LoggedIn value)? loggedIn,
-    TResult? Function(_LoggedOut value)? loggedOut,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_NeedVerification value)? needVerification,
-  }) {
-    return needVerification?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_LoggedIn value)? loggedIn,
-    TResult Function(_LoggedOut value)? loggedOut,
-    TResult Function(_Error value)? error,
-    TResult Function(_NeedVerification value)? needVerification,
-    required TResult orElse(),
-  }) {
-    if (needVerification != null) {
-      return needVerification(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _NeedVerification extends AuthState {
-  const factory _NeedVerification() = _$_NeedVerification;
-  const _NeedVerification._() : super._();
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../models/saving/saving.dart';
 
-class LinerProgressScreen extends StatelessWidget {
-  const LinerProgressScreen({
+class LinearProgressScreen extends StatelessWidget {
+  const LinearProgressScreen({
     super.key,
     required this.saving,
   });

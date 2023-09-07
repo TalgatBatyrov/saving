@@ -12,7 +12,7 @@ import '../models/saving/saving.dart';
 import '../router/router.dart';
 import '../blocs/toggle/toggle_cubit.dart';
 import 'change_goal_name_screen.dart';
-import 'liner_progress_screen.dart';
+import 'linear_progress_screen.dart';
 
 class SavingTile extends StatelessWidget {
   final Saving saving;
@@ -58,7 +58,7 @@ class SavingTile extends StatelessWidget {
                   ChangeGoalNameScreen(saving: saving),
                   const SizedBox(height: 5),
                   ProgressInPercent(saving: saving),
-                  LinerProgressScreen(saving: saving),
+                  LinearProgressScreen(saving: saving),
                   const SizedBox(height: 5),
                   SavingItem(title: translate('target'), value: saving.total),
                   const SizedBox(height: 5),

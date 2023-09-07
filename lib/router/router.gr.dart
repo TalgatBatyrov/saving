@@ -34,13 +34,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SavingsRoute.name: (routeData) {
-      final args = routeData.argsAs<SavingsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: SavingsPage(
-          key: args.key,
-          user: args.user,
-        ),
+        child: const SavingsPage(),
       );
     },
     StatisticRoute.name: (routeData) {
@@ -112,40 +108,16 @@ class SignUpRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SavingsPage]
-class SavingsRoute extends PageRouteInfo<SavingsRouteArgs> {
-  SavingsRoute({
-    Key? key,
-    required AuthUser user,
-    List<PageRouteInfo>? children,
-  }) : super(
+class SavingsRoute extends PageRouteInfo<void> {
+  const SavingsRoute({List<PageRouteInfo>? children})
+      : super(
           SavingsRoute.name,
-          args: SavingsRouteArgs(
-            key: key,
-            user: user,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'SavingsRoute';
 
-  static const PageInfo<SavingsRouteArgs> page =
-      PageInfo<SavingsRouteArgs>(name);
-}
-
-class SavingsRouteArgs {
-  const SavingsRouteArgs({
-    this.key,
-    required this.user,
-  });
-
-  final Key? key;
-
-  final AuthUser user;
-
-  @override
-  String toString() {
-    return 'SavingsRouteArgs{key: $key, user: $user}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
