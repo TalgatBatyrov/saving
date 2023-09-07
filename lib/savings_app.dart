@@ -6,6 +6,7 @@ import 'package:saving/blocs/internet_connection/internet_connection_cubit.dart'
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/blocs/statistic/statistic_cubit.dart';
+import 'package:saving/blocs/statistic_changes/statistic_changes_cubit.dart';
 import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
 import 'package:saving/repositories/savings/savings_repository.dart';
@@ -40,6 +41,7 @@ class _SavingsAppState extends State<SavingsApp> {
   late final _authRepository = AuthRepository(_firebaseAuth, _firestore);
   late final _authCubit = AuthCubit(_authRepository, _firebaseAuth);
   late final _profileCubit = ProfileCubit(_authRepository, _firebaseAuth);
+  late final _statisticChandedCubit = StatisticChangesCubit();
 
   late final _statisticCubit = StatisticCubit(_statisticRepository);
   late final _savingCubit = SavingCubit(
@@ -47,6 +49,7 @@ class _SavingsAppState extends State<SavingsApp> {
     _firestore,
     _statisticCubit,
     _profileCubit,
+    _statisticChandedCubit,
   );
   late final _verificationCubit = VerificationCubit(
     _firebaseAuth,
@@ -60,6 +63,7 @@ class _SavingsAppState extends State<SavingsApp> {
     _authCubit.close();
     _profileCubit.close();
     _verificationCubit.close();
+    _statisticChandedCubit.close();
   }
 
   @override
@@ -80,6 +84,7 @@ class _SavingsAppState extends State<SavingsApp> {
           BlocProvider(create: (_) => ThemeCubit()),
           BlocProvider(create: (_) => InternetConnectionCubit()),
           BlocProvider.value(value: _verificationCubit),
+          BlocProvider.value(value: _statisticChandedCubit),
         ],
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (context, themeMode) {

@@ -1,4 +1,5 @@
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/app_widgets/app_empty.dart';
 import 'package:saving/widgets/statistic_tile.dart';
 import 'package:flutter/material.dart';
 import '../models/saving/saving.dart';
@@ -15,6 +16,9 @@ class StatisticsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // if (statistics.isEmpty) {
+    //   return AppEmpty(message: translate('no_statistics'));
+    // }
     final average = statistics.map((e) => e.money).reduce(
               (a, b) => a + b,
             ) /
@@ -41,13 +45,12 @@ class StatisticsList extends StatelessWidget {
             ],
           ),
         ),
-        // const SizedBox(height: 16),
         Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 2,
-            ),
+          child: ListView.builder(
+            // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            //   crossAxisCount: 1,
+            //   childAspectRatio: 6,
+            // ),
             // separatorBuilder: (context, index) => const Divider(thickness: 2),
             itemCount: statistics.length,
             itemBuilder: (context, index) =>

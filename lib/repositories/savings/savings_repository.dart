@@ -82,6 +82,8 @@ class SavingsRepository implements AbstractSavingsRepository {
     final savingsPath = 'users/$userId/savings';
     final savingCollection = firestore.collection(savingsPath);
 
+    // current = transaction sum + current
+
     savingCollection.doc(savingId).update({'current': money});
   }
 

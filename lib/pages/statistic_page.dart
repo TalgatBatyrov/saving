@@ -23,7 +23,7 @@ class StatisticPage extends StatefulWidget {
 class _StatisticPageState extends State<StatisticPage> {
   @override
   void initState() {
-    context.read<StatisticCubit>().getStatistics(widget.saving);
+    context.read<StatisticCubit>().getStatistics(widget.saving.id);
     super.initState();
   }
 

@@ -15,6 +15,7 @@ class AddSavingButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return Form(
@@ -25,14 +26,6 @@ class AddSavingButton extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
                     const Spacer(),
                     Text(
                       translate('add_saving'),

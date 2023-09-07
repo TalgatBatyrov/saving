@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/statistic/statistic_cubit.dart';
+import 'package:saving/blocs/statistic_changes/statistic_changes_cubit.dart';
 import '../../repositories/savings/abstract_savings_repository.dart';
 import '../../models/saving/saving.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,19 +16,25 @@ class SavingCubit extends Cubit<SavingState> {
   final AbstractSavingsRepository _savingsRepository;
 
   final StatisticCubit _statisticCubit;
+  final StatisticChangesCubit _statisticChangesCubit;
   final ProfileCubit _profileCubit;
 
   StreamSubscription? _savingSub;
   late final StreamSubscription _authSub;
+  late final StreamSubscription _statisticChangesSub;
 
   SavingCubit(
     this._savingsRepository,
     this._firestore,
     this._statisticCubit,
     this._profileCubit,
+    this._statisticChangesCubit,
   ) : super(const SavingState.loading()) {
     _authSub = _profileCubit.stream.listen(_onProfileChanged);
     _onProfileChanged(_profileCubit.state);
+
+    _statisticChangesSub =
+        _statisticChangesCubit.stream.listen(_onStatisticSignal);
   }
 
   void _onSavingsChanged(QuerySnapshot<Map<String, dynamic>> event) {
@@ -38,28 +45,41 @@ class SavingCubit extends Cubit<SavingState> {
     if (savingList.isEmpty) {
       return emit(const SavingState.empty());
     }
+
     emit(SavingState.loaded(savings: savingList));
+  }
+
+  void _onStatisticSignal(StatisticChangesState statisticChangesState) {
+    statisticChangesState.whenOrNull(
+      updated: (statistic) async {
+        await _statisticCubit.editStatistic(statistic);
+
+        final summ =
+            await _statisticCubit.getStatisticSummary(statistic.savingId);
+
+        await _savingsRepository.updateSaving(
+          savingId: statistic.savingId,
+          money: summ,
+        );
+      },
+      remowed: (statistic) async {
+        await _statisticCubit.deleteStatisticById(statistic);
+        final summ =
+            await _statisticCubit.getStatisticSummary(statistic.savingId);
+        await _savingsRepository.updateSaving(
+          savingId: statistic.savingId,
+          money: summ,
+        );
+      },
+    );
   }
 
   @override
   Future<void> close() {
     _savingSub?.cancel();
     _authSub.cancel();
+    _statisticChangesSub.cancel();
     return super.close();
-  }
-
-  Future<void> loadSavings(String userId) async {
-    try {
-      if (state is! _Loaded) {
-        emit(const SavingState.loading());
-      }
-
-      final savings = await _savingsRepository.getSavingsList(userId: userId);
-
-      emit(SavingState.loaded(savings: savings));
-    } catch (e) {
-      emit(SavingState.error(e.toString()));
-    }
   }
 
   Future<void> createSaving({
@@ -88,7 +108,7 @@ class SavingCubit extends Cubit<SavingState> {
 
       await _savingsRepository.deleteSaving(saving);
 
-      _statisticCubit.deleteStatistic(saving);
+      _statisticCubit.deleteStatistics(saving);
     } catch (e) {
       emit(SavingState.error(e.toString()));
     }
@@ -96,7 +116,7 @@ class SavingCubit extends Cubit<SavingState> {
 
   Future<void> updateSaving({
     required String savingId,
-    required int money,
+    // required int money,
     required int moneyForStatistic,
   }) async {
     try {
@@ -104,9 +124,11 @@ class SavingCubit extends Cubit<SavingState> {
         emit(const SavingState.loading());
       }
 
+      final summ = await _statisticCubit.getStatisticSummary(savingId);
+
       await _savingsRepository.updateSaving(
         savingId: savingId,
-        money: money,
+        money: moneyForStatistic + summ,
       );
 
       _statisticCubit.addStatistic(
