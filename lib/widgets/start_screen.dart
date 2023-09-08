@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:saving/router/router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
 @RoutePage()
@@ -13,6 +14,12 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   late VideoPlayerController _controller;
+
+  Future<bool> _isFirstTimeUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+    return isFirstTime;
+  }
 
   @override
   void initState() {
@@ -35,7 +42,12 @@ class _StartScreenState extends State<StartScreen> {
   void playVideo() async {
     _controller.play();
     await Future.delayed(const Duration(seconds: 4));
-    context.router.replace(const OnBoardingRoute());
+
+    final isFirstTime = await _isFirstTimeUser();
+
+    isFirstTime
+        ? context.router.replace(const OnBoardingRoute())
+        : context.router.replace(const SplashRoute());
   }
 
   @override
