@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
 import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
-import 'package:saving/utilities/dialogs/error_dialog.dart';
 import 'package:saving/utilities/extensions/validation.dart';
 import '../app_widgets/app_loading.dart';
 import '../router/router.dart';
@@ -29,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-
+    EasyLoading.show();
     await context
         .read<AuthCubit>()
         .signUp(
@@ -38,7 +38,9 @@ class _SignUpPageState extends State<SignUpPage> {
           password: _passwordController.text,
         )
         .onError((error, stackTrace) {
-      showErrorDialog(context, error.toString());
+      EasyLoading.showError(error.toString());
+    }).whenComplete(() {
+      EasyLoading.dismiss();
     });
   }
 

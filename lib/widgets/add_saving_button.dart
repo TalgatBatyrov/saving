@@ -21,8 +21,7 @@ class AddSavingButton extends StatelessWidget {
             return Form(
               key: formKey,
               child: Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

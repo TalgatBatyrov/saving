@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
 import 'package:saving/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
@@ -68,6 +69,8 @@ class _SavingsAppState extends State<SavingsApp> {
 
   @override
   Widget build(BuildContext context) {
+    EasyLoading.instance.userInteractions = false;
+
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => FcmRepository(_firebaserMessaging)),
@@ -94,6 +97,7 @@ class _SavingsAppState extends State<SavingsApp> {
               theme: AppThemes.light,
               darkTheme: AppThemes.dark,
               routerConfig: _appRouter.config(),
+              builder: EasyLoading.init(),
             );
           },
         ),

@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
 import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
 import 'package:saving/widgets/button_translate.dart';
-
 import '../router/router.dart';
 import '../widgets/custom_input_field.dart';
 
@@ -69,60 +69,38 @@ class _SignInPageState extends State<SignInPage> {
                 title: translate('password'),
               ),
               const SizedBox(height: 16),
-              BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    orElse: () {
-                      return ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            await context
-                                .read<AuthCubit>()
-                                .signIn(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                )
-                                .onError((error, stackTrace) {
-                              _showAuthErrorDialog(context, error.toString());
-                            });
-                          }
-                        },
-                        child: Text(translate('login')),
-                      );
-                    },
-                  );
+              ElevatedButton(
+                onPressed: () async {
+                  if (!_formKey.currentState!.validate()) return;
+
+                  EasyLoading.show();
+                  await context
+                      .read<AuthCubit>()
+                      .signIn(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      )
+                      .onError((error, _) {
+                    EasyLoading.showError(error.toString());
+                  }).whenComplete(() {
+                    EasyLoading.dismiss();
+                  });
                 },
+                child: Text(translate('login')),
               ),
               TextButton(
                 onPressed: () => context.router.replace(const SignUpRoute()),
                 child: Text(translate('snake_bar.login')),
               ),
-              TextButton(
-                  onPressed: () {
-                    ButtonTranslate().onActionSheetPress(context);
-                  },
-                  child: const Text('Translate'))
+              IconButton(
+                onPressed: () {
+                  ButtonTranslate().onActionSheetPress(context);
+                },
+                icon: const Icon(Icons.translate),
+              ),
             ],
           ),
         )),
-      ),
-    );
-  }
-
-  Future<dynamic> _showAuthErrorDialog(BuildContext context, String message) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(translate('error')),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => context.router.pop(),
-            child: Text(translate('ok')),
-          )
-        ],
       ),
     );
   }

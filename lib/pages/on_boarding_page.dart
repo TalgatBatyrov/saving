@@ -1,0 +1,95 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:introduction_screen/introduction_screen.dart';
+import 'package:saving/router/router.dart';
+
+@RoutePage()
+class OnBoardingPage extends StatefulWidget {
+  const OnBoardingPage({Key? key}) : super(key: key);
+
+  @override
+  OnBoardingPageState createState() => OnBoardingPageState();
+}
+
+class OnBoardingPageState extends State<OnBoardingPage> {
+  @override
+  Widget build(BuildContext context) {
+    return IntroductionScreen(
+      pages: [
+        PageViewModel(
+          title: 'Добавляйте цели',
+          body: 'Добавляйте цели и следите за их выполнением',
+          image: buildImage("assets/png/add_saving.png"),
+          //getPageDecoration, a method to customise the page style
+          // decoration: getPageDecoration(),
+          decoration: getPageDecoration().copyWith(
+            contentMargin: const EdgeInsets.symmetric(horizontal: 16),
+            // fullScreen: true,
+            bodyFlex: 2,
+            imageFlex: 3,
+
+            // safeArea: 100,
+          ),
+        ),
+        PageViewModel(
+          title: 'Пополняйте накопления',
+          body: 'Пополняйте накопления и отслеживайте прогресс',
+          image: buildImage("assets/png/saving.png"),
+          decoration: getPageDecoration(),
+        ),
+        PageViewModel(
+          title: 'Получайте статистику',
+          body: 'Получайте статистику по каждому накоплению',
+          image: buildImage("assets/png/statistic.png"),
+          decoration: getPageDecoration(),
+        ),
+      ],
+      onDone: () {
+        if (kDebugMode) {
+          print("Done clicked");
+
+          context.router.replace(const SplashRoute());
+        }
+      },
+      scrollPhysics: const ClampingScrollPhysics(),
+      showDoneButton: true,
+      showNextButton: true,
+      showSkipButton: true,
+      skip: const Text("Skip", style: TextStyle(fontWeight: FontWeight.w600)),
+      next: const Icon(Icons.forward),
+      done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
+      dotsDecorator: getDotsDecorator(),
+    );
+  }
+
+  Widget buildImage(String imagePath) {
+    return Expanded(
+      child: Image.asset(
+        imagePath,
+      ),
+    );
+  }
+
+  PageDecoration getPageDecoration() {
+    return const PageDecoration(
+      imagePadding: EdgeInsets.only(top: 120),
+      pageColor: Colors.white10,
+      bodyPadding: EdgeInsets.only(top: 8, left: 20, right: 20),
+      titlePadding: EdgeInsets.only(top: 50),
+      bodyTextStyle: TextStyle(color: Colors.black54, fontSize: 15),
+    );
+  }
+
+  DotsDecorator getDotsDecorator() {
+    return const DotsDecorator(
+      spacing: EdgeInsets.symmetric(horizontal: 2),
+      activeColor: Colors.indigo,
+      color: Colors.grey,
+      activeSize: Size(12, 5),
+      activeShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+      ),
+    );
+  }
+}
