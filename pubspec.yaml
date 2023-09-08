@@ -54,6 +54,7 @@ dependencies:
   replay_bloc: ^0.2.4
   flutter_easyloading: ^3.0.5
   introduction_screen: ^3.1.11
+  video_player: ^2.7.1
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +91,7 @@ flutter:
     - assets/svg/
     - assets/png/
     - assets/i18n/
+    - assets/mp4/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
