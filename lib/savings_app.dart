@@ -85,6 +85,7 @@ class _SavingsAppState extends State<SavingsApp> {
           BlocProvider(create: (_) => InternetConnectionCubit()),
           BlocProvider.value(value: _verificationCubit),
           BlocProvider.value(value: _statisticChandedCubit),
+          BlocProvider.value(value: _statisticChandedCubit),
         ],
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (context, themeMode) {

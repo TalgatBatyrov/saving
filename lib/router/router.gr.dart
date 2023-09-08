@@ -15,22 +15,10 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    VerifyEmailRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const VerifyEmailPage(),
-      );
-    },
     ResetPasswordRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ResetPasswordPage(),
-      );
-    },
-    SignUpRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SignUpPage(),
       );
     },
     SavingsRoute.name: (routeData) {
@@ -39,14 +27,10 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SavingsPage(),
       );
     },
-    StatisticRoute.name: (routeData) {
-      final args = routeData.argsAs<StatisticRouteArgs>();
+    SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: StatisticPage(
-          key: args.key,
-          saving: args.saving,
-        ),
+        child: const SignUpPage(),
       );
     },
     SignInRoute.name: (routeData) {
@@ -61,21 +45,29 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashScreen(),
       );
     },
+    StatisticRoute.name: (routeData) {
+      final args = routeData.argsAs<StatisticRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: StatisticPage(
+          key: args.key,
+          saving: args.saving,
+        ),
+      );
+    },
+    VerifyEmailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const VerifyEmailPage(),
+      );
+    },
+    StartRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const StartScreen(),
+      );
+    },
   };
-}
-
-/// generated route for
-/// [VerifyEmailPage]
-class VerifyEmailRoute extends PageRouteInfo<void> {
-  const VerifyEmailRoute({List<PageRouteInfo>? children})
-      : super(
-          VerifyEmailRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'VerifyEmailRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -88,6 +80,20 @@ class ResetPasswordRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ResetPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SavingsPage]
+class SavingsRoute extends PageRouteInfo<void> {
+  const SavingsRoute({List<PageRouteInfo>? children})
+      : super(
+          SavingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SavingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -107,15 +113,29 @@ class SignUpRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [SavingsPage]
-class SavingsRoute extends PageRouteInfo<void> {
-  const SavingsRoute({List<PageRouteInfo>? children})
+/// [SignInPage]
+class SignInRoute extends PageRouteInfo<void> {
+  const SignInRoute({List<PageRouteInfo>? children})
       : super(
-          SavingsRoute.name,
+          SignInRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SavingsRoute';
+  static const String name = 'SignInRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SplashScreen]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -159,29 +179,29 @@ class StatisticRouteArgs {
 }
 
 /// generated route for
-/// [SignInPage]
-class SignInRoute extends PageRouteInfo<void> {
-  const SignInRoute({List<PageRouteInfo>? children})
+/// [VerifyEmailPage]
+class VerifyEmailRoute extends PageRouteInfo<void> {
+  const VerifyEmailRoute({List<PageRouteInfo>? children})
       : super(
-          SignInRoute.name,
+          VerifyEmailRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SignInRoute';
+  static const String name = 'VerifyEmailRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [SplashScreen]
-class SplashRoute extends PageRouteInfo<void> {
-  const SplashRoute({List<PageRouteInfo>? children})
+/// [StartScreen]
+class StartRoute extends PageRouteInfo<void> {
+  const StartRoute({List<PageRouteInfo>? children})
       : super(
-          SplashRoute.name,
+          StartRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SplashRoute';
+  static const String name = 'StartRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -51,6 +51,8 @@ dependencies:
   shared_preferences: ^2.2.1
   firebase_database: ^10.2.5
   internet_connection_checker: ^1.0.0+1
+  video_player: ^2.7.1
+
 
 dev_dependencies:
   flutter_test:
@@ -65,7 +67,10 @@ dev_dependencies:
   freezed: ^2.4.1
   integration_test:
     sdk: flutter
+  flutter_native_splash: ^2.3.2
 
+flutter_native_splash:
+    color: "#000000"
 flutter_icons:
   android: true
   ios: true
@@ -86,6 +91,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/i18n/
+    - assets/mp4/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

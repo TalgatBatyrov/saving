@@ -8,6 +8,7 @@ import '../pages/sign_up_page.dart';
 import '../pages/sing_in_page.dart';
 import '../pages/verify_email_page.dart';
 import '../pages/statistic_page.dart';
+import '../widgets/start_screen.dart';
 
 part 'router.gr.dart';
 
@@ -15,12 +16,14 @@ part 'router.gr.dart';
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: SplashRoute.page, initial: true),
+        AutoRoute(page: StartRoute.page, initial: true),
+        AutoRoute(page: SplashRoute.page),
         AutoRoute(page: SignUpRoute.page),
         AutoRoute(page: SignInRoute.page),
         AutoRoute(page: SavingsRoute.page),
         AutoRoute(page: StatisticRoute.page),
         AutoRoute(page: VerifyEmailRoute.page),
+        AutoRoute(page: ResetPasswordRoute.page),
         AutoRoute(page: ResetPasswordRoute.page),
       ];
 }
