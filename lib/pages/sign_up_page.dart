@@ -6,7 +6,6 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
 import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
 import 'package:saving/utilities/extensions/validation.dart';
-import '../app_widgets/app_loading.dart';
 import '../router/router.dart';
 import '../widgets/custom_input_field.dart';
 
@@ -85,18 +84,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   title: translate('password'),
                 ),
                 const SizedBox(height: 16),
-                BlocBuilder<AuthCubit, AuthState>(
-                  builder: (context, state) {
-                    return state.maybeWhen(
-                      loading: () => const AppLoading(),
-                      orElse: () {
-                        return ElevatedButton(
-                          onPressed: _signUp,
-                          child: Text(translate('sign_up')),
-                        );
-                      },
-                    );
-                  },
+                ElevatedButton(
+                  onPressed: _signUp,
+                  child: Text(translate('sign_up')),
                 ),
                 TextButton(
                   onPressed: () => context.router.replace(const SignInRoute()),

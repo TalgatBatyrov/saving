@@ -13,6 +13,10 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class OnBoardingPageState extends State<OnBoardingPage> {
+  Widget buildImage(String imagePath) {
+    return Image.asset(imagePath);
+  }
+
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
@@ -21,36 +25,47 @@ class OnBoardingPageState extends State<OnBoardingPage> {
           title: 'Добавляйте цели',
           body: 'Добавляйте цели и следите за их выполнением',
           image: buildImage("assets/png/add_saving.png"),
-          //getPageDecoration, a method to customise the page style
-          // decoration: getPageDecoration(),
-          decoration: getPageDecoration().copyWith(
-            contentMargin: const EdgeInsets.symmetric(horizontal: 16),
-            // fullScreen: true,
+          decoration: const PageDecoration(
+            imagePadding: EdgeInsets.only(top: 120),
+            contentMargin: EdgeInsets.symmetric(horizontal: 16),
+            pageColor: Colors.white10,
             bodyFlex: 2,
             imageFlex: 3,
-
-            // safeArea: 100,
+            bodyPadding: EdgeInsets.only(top: 8, left: 20, right: 20),
+            titlePadding: EdgeInsets.only(top: 50),
+            bodyTextStyle: TextStyle(color: Colors.black54, fontSize: 15),
           ),
         ),
         PageViewModel(
           title: 'Пополняйте накопления',
           body: 'Пополняйте накопления и отслеживайте прогресс',
           image: buildImage("assets/png/saving.png"),
-          decoration: getPageDecoration(),
+          decoration: const PageDecoration(
+            imagePadding: EdgeInsets.only(top: 120),
+            pageColor: Colors.white10,
+            bodyPadding: EdgeInsets.only(top: 8, left: 20, right: 20),
+            titlePadding: EdgeInsets.only(top: 50),
+            bodyTextStyle: TextStyle(color: Colors.black54, fontSize: 15),
+          ),
         ),
         PageViewModel(
           title: 'Получайте статистику',
           body: 'Получайте статистику по каждому накоплению',
           image: buildImage("assets/png/statistic.png"),
-          decoration: getPageDecoration(),
+          decoration: const PageDecoration(
+            imagePadding: EdgeInsets.only(top: 120),
+            pageColor: Colors.white10,
+            bodyPadding: EdgeInsets.only(top: 8, left: 20, right: 20),
+            titlePadding: EdgeInsets.only(top: 50),
+            bodyTextStyle: TextStyle(color: Colors.black54, fontSize: 15),
+          ),
         ),
       ],
       onDone: () {
         if (kDebugMode) {
           print("Done clicked");
-
-          context.router.replace(const SplashRoute());
         }
+        context.router.replace(const SplashRoute());
       },
       scrollPhysics: const ClampingScrollPhysics(),
       showDoneButton: true,
@@ -59,36 +74,14 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       skip: const Text("Skip", style: TextStyle(fontWeight: FontWeight.w600)),
       next: const Icon(Icons.forward),
       done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
-      dotsDecorator: getDotsDecorator(),
-    );
-  }
-
-  Widget buildImage(String imagePath) {
-    return Expanded(
-      child: Image.asset(
-        imagePath,
-      ),
-    );
-  }
-
-  PageDecoration getPageDecoration() {
-    return const PageDecoration(
-      imagePadding: EdgeInsets.only(top: 120),
-      pageColor: Colors.white10,
-      bodyPadding: EdgeInsets.only(top: 8, left: 20, right: 20),
-      titlePadding: EdgeInsets.only(top: 50),
-      bodyTextStyle: TextStyle(color: Colors.black54, fontSize: 15),
-    );
-  }
-
-  DotsDecorator getDotsDecorator() {
-    return const DotsDecorator(
-      spacing: EdgeInsets.symmetric(horizontal: 2),
-      activeColor: Colors.indigo,
-      color: Colors.grey,
-      activeSize: Size(12, 5),
-      activeShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+      dotsDecorator: const DotsDecorator(
+        spacing: EdgeInsets.symmetric(horizontal: 2),
+        activeColor: Colors.indigo,
+        color: Colors.grey,
+        activeSize: Size(12, 5),
+        activeShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+        ),
       ),
     );
   }
