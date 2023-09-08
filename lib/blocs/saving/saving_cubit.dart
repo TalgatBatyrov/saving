@@ -126,15 +126,26 @@ class SavingCubit extends Cubit<SavingState> {
 
       final summ = await _statisticCubit.getStatisticSummary(savingId);
 
+      final addedMoney = moneyForStatistic + summ;
+
+      final noNegative = addedMoney <= 0 ? 0 : addedMoney;
+
       await _savingsRepository.updateSaving(
         savingId: savingId,
-        money: moneyForStatistic + summ,
+        money: noNegative,
       );
 
-      _statisticCubit.addStatistic(
-        money: moneyForStatistic,
-        savingId: savingId,
-      );
+      if (noNegative > 0) {
+        _statisticCubit.addStatistic(
+          money: moneyForStatistic,
+          savingId: savingId,
+        );
+      } else if (summ > 0) {
+        _statisticCubit.addStatistic(
+          money: -summ,
+          savingId: savingId,
+        );
+      }
     } catch (e) {
       emit(SavingState.error(e.toString()));
     }

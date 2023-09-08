@@ -16,14 +16,11 @@ class StatisticsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (statistics.isEmpty) {
-    //   return AppEmpty(message: translate('no_statistics'));
-    // }
     final average = statistics.map((e) => e.money).reduce(
               (a, b) => a + b,
             ) /
         statistics.length;
-    final dayForOver = ((saving.total - saving.current) / average).round();
+    // final dayForOver = ((saving.total - saving.current) / average).round();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,18 +37,13 @@ class StatisticsList extends StatelessWidget {
               ListTile(
                 leading: Text(translate('days')),
                 title: Text(translate('pace_yet')),
-                trailing: Text('${dayForOver > 0 ? dayForOver : 0}'),
+                // trailing: Text('${dayForOver > 0 ? dayForOver : 0}'),
               ),
             ],
           ),
         ),
         Expanded(
           child: ListView.builder(
-            // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //   crossAxisCount: 1,
-            //   childAspectRatio: 6,
-            // ),
-            // separatorBuilder: (context, index) => const Divider(thickness: 2),
             itemCount: statistics.length,
             itemBuilder: (context, index) =>
                 StatisticTile(statistic: statistics[index]),

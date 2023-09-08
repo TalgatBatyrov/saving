@@ -120,8 +120,10 @@ class _StatisticTileState extends State<StatisticTile> {
                     color: Colors.white,
                   ),
                 ),
-                trailing: Text(date,
-                    style: const TextStyle(color: Colors.white, fontSize: 20)),
+                trailing: Text(
+                  date,
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
       ),
     );
