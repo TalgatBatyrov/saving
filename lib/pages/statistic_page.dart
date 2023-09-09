@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/statistic/statistic_cubit.dart';
+import 'package:saving/repositories/cart/cart_repository.dart';
 import 'package:saving/widgets/button_translate.dart';
 import '../app_widgets/app_empty.dart';
 import '../app_widgets/app_error.dart';
@@ -27,6 +30,14 @@ class _StatisticPageState extends State<StatisticPage> {
     super.initState();
   }
 
+  final dio = Dio();
+  final firestore = FirebaseFirestore.instance;
+
+  late final cartRepository = CartRepository(
+    dio: dio,
+    firestore: firestore,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +50,13 @@ class _StatisticPageState extends State<StatisticPage> {
               ButtonTranslate().onActionSheetPress(context);
             },
             icon: const Icon(Icons.translate),
+          ),
+          IconButton(
+            onPressed: () async {
+              await cartRepository.createCart(
+                  goal: widget.saving.goal, total: widget.saving.total);
+            },
+            icon: const Icon(Icons.shopping_cart),
           ),
         ],
       ),

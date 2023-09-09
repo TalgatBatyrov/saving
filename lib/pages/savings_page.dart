@@ -1,5 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -7,6 +10,8 @@ import 'package:saving/blocs/auth/auth_cubit.dart';
 import 'package:saving/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
+import 'package:saving/pages/cart_page.dart';
+import 'package:saving/repositories/cart/cart_repository.dart';
 import 'package:saving/widgets/add_saving_button.dart';
 import 'package:saving/widgets/button_translate.dart';
 import 'package:saving/widgets/savings_list.dart';
@@ -23,6 +28,7 @@ class SavingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     return BlocListener<InternetConnectionCubit, InternetConnectionState>(
       listenWhen: (prev, _) => prev != const InternetConnectionState.initial(),
       listener: (context, state) {
@@ -69,6 +75,17 @@ class SavingsPage extends StatelessWidget {
             IconButton(
               onPressed: () => _onSignOut(context),
               icon: const Icon(Icons.logout),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartPage(userId: userId),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.shopping_cart),
             ),
           ],
         ),
