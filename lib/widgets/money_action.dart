@@ -23,17 +23,17 @@ class _MoneyActionState extends State<MoneyAction> {
     final addValue = _addController.text;
     final valueExists = addValue.isNotEmpty;
 
+    if (saving.isCompleted) {
+      context.read<FcmRepository>().sendNotification(
+            title: widget.saving.goal,
+            body: translate('goal_achieved'),
+          );
+    }
+
     if (valueExists) {
       final addValueInt = int.parse(addValue);
 
       if (addValueInt > 0) {
-        if (saving.isCompleted) {
-          context.read<FcmRepository>().sendNotification(
-                title: widget.saving.goal,
-                body: translate('goal_achieved'),
-              );
-        }
-
         savingCubit.updateSaving(
           savingId: saving.id,
           moneyForStatistic: isAdd ? addValueInt : -addValueInt,
