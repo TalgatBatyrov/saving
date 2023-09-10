@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ResetPasswordPage(),
       );
     },
+    OnBoardingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OnBoardingPage(),
+      );
+    },
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -61,6 +67,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashScreen(),
       );
     },
+    StartRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const StartScreen(),
+      );
+    },
   };
 }
 
@@ -88,6 +100,20 @@ class ResetPasswordRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ResetPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [OnBoardingPage]
+class OnBoardingRoute extends PageRouteInfo<void> {
+  const OnBoardingRoute({List<PageRouteInfo>? children})
+      : super(
+          OnBoardingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OnBoardingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -182,6 +208,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [StartScreen]
+class StartRoute extends PageRouteInfo<void> {
+  const StartRoute({List<PageRouteInfo>? children})
+      : super(
+          StartRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'StartRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

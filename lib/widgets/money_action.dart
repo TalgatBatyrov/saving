@@ -27,10 +27,6 @@ class _MoneyActionState extends State<MoneyAction> {
       final addValueInt = int.parse(addValue);
 
       if (addValueInt > 0) {
-        // final money = isAdd
-        //     ? (saving.current + addValueInt)
-        //     : (saving.current - addValueInt);
-
         if (saving.isCompleted) {
           context.read<FcmRepository>().sendNotification(
                 title: widget.saving.goal,
@@ -40,7 +36,6 @@ class _MoneyActionState extends State<MoneyAction> {
 
         savingCubit.updateSaving(
           savingId: saving.id,
-          // money: money <= 0 ? 0 : money,
           moneyForStatistic: isAdd ? addValueInt : -addValueInt,
         );
       }

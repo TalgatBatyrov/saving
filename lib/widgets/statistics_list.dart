@@ -1,5 +1,4 @@
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/app_widgets/app_empty.dart';
 import 'package:saving/widgets/statistic_tile.dart';
 import 'package:flutter/material.dart';
 import '../models/saving/saving.dart';
@@ -20,7 +19,11 @@ class StatisticsList extends StatelessWidget {
               (a, b) => a + b,
             ) /
         statistics.length;
-    // final dayForOver = ((saving.total - saving.current) / average).round();
+    int dayForOver = 0;
+    if (average != 0) {
+      dayForOver = ((saving.total - saving.current) / average).round();
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,11 +37,13 @@ class StatisticsList extends StatelessWidget {
                 title: Text(translate('average_value')),
                 trailing: Text('${average.round()}'),
               ),
-              ListTile(
-                leading: Text(translate('days')),
-                title: Text(translate('pace_yet')),
-                // trailing: Text('${dayForOver > 0 ? dayForOver : 0}'),
-              ),
+              average != 0
+                  ? ListTile(
+                      leading: Text(translate('days')),
+                      title: Text(translate('pace_yet')),
+                      trailing: Text('${dayForOver > 0 ? dayForOver : 0}'),
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),

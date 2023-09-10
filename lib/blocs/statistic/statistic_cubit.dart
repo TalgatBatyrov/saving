@@ -1,7 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:saving/blocs/saving/saving_cubit.dart';
-
 import '../../models/saving/saving.dart';
 import '../../repositories/statistics/abstract_statistics_repository.dart';
 import '../../models/statistic/statistic.dart';
@@ -11,7 +9,6 @@ part 'statistic_state.dart';
 
 class StatisticCubit extends Cubit<StatisticState> {
   final AbstractStatisticsRepository _statisticsRepository;
-  // final SavingCubit _savingCubit;
 
   StatisticCubit(this._statisticsRepository)
       : super(const StatisticState.loading());
@@ -27,7 +24,6 @@ class StatisticCubit extends Cubit<StatisticState> {
     emit(StatisticState.loaded(statistics: statistics));
   }
 
-  // get statistic summary
   Future<int> getStatisticSummary(String savingId) async {
     final statistics = await _statisticsRepository.getStatisticsList(savingId);
     if (statistics.isEmpty) {

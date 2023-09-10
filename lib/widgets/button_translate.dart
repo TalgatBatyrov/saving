@@ -37,7 +37,7 @@ class ButtonTranslate {
             },
           ),
           CupertinoActionSheetAction(
-            child: const Text('Руский'),
+            child: const Text('Русский'),
             onPressed: () {
               Navigator.pop(context, 'ru');
               cache.saveLanguage('ru');
