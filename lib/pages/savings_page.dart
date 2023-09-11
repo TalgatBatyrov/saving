@@ -49,7 +49,11 @@ class SavingsPage extends StatelessWidget {
           title: BlocBuilder<ProfileCubit, ProfileState>(
             builder: (context, state) {
               return state.when(
-                loaded: (profile) => Text(profile.name),
+                loaded: (profile) => InkWell(
+                    onTap: () {
+                      context.router.push(const ProfileRoute());
+                    },
+                    child: Text(profile.name)),
                 loading: () => const AppLoading(),
                 error: (errorMessage) => AppError(
                   message: errorMessage.toString(),

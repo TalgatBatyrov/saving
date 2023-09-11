@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:saving/models/saving/saving.dart';
 import 'package:saving/pages/on_boarding_page.dart';
+import 'package:saving/pages/profile_page.dart';
 import 'package:saving/pages/reset_password_page.dart';
 import 'package:saving/pages/savings_page.dart';
 import 'package:saving/widgets/start_screen.dart';
@@ -20,6 +21,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: StartRoute.page, initial: true),
         AutoRoute(page: OnBoardingRoute.page),
         AutoRoute(page: SplashRoute.page),
+        AutoRoute(page: ProfileRoute.page),
         AutoRoute(page: SignUpRoute.page),
         AutoRoute(page: SignInRoute.page),
         AutoRoute(page: SavingsRoute.page),
