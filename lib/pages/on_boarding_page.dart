@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:saving/router/router.dart';
@@ -63,10 +62,6 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         ),
       ],
       onDone: () async {
-        if (kDebugMode) {
-          print("Done clicked");
-        }
-        context.router.replace(const SplashRoute());
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isFirstTime', false);
 

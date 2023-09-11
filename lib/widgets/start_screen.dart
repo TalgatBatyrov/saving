@@ -41,7 +41,7 @@ class _StartScreenState extends State<StartScreen> {
 
   void playVideo() async {
     _controller.play();
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 3));
 
     final isFirstTime = await _isFirstTimeUser();
 
@@ -57,7 +57,8 @@ class _StartScreenState extends State<StartScreen> {
         child: _controller.value.isInitialized
             ? AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller))
+                child: VideoPlayer(_controller),
+              )
             : Container(),
       ),
     );
