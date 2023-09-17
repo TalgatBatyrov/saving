@@ -18,7 +18,7 @@ void main() async {
   final selectedLanguageCode = await const LocalCache().getLanguage();
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'ru',
-    supportedLocales: ['en', 'uk', 'kr', 'pl', 'pr', 'ru', 'sp'],
+    supportedLocales: ['uk', 'ru', 'en', 'kr', 'pl', 'pr', 'sp'],
   );
   delegate.changeLocale(Locale(selectedLanguageCode));
 
