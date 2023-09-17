@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'abstract_savings_repository.dart';
 import '../../models/saving/saving.dart';
+import 'abstract_savings_repository.dart';
 
 class SavingsRepository implements AbstractSavingsRepository {
   final FirebaseFirestore firestore;

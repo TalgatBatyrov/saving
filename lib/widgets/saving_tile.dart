@@ -1,16 +1,17 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/widgets/dismiss_widget.dart';
 import 'package:saving/widgets/money_action.dart';
 import 'package:saving/widgets/progress_in_percent.dart';
 import 'package:saving/widgets/saving_item.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/widgets/start_action_pane.dart';
+
+import '../blocs/toggle/toggle_cubit.dart';
 import '../models/saving/saving.dart';
 import '../router/router.dart';
-import '../blocs/toggle/toggle_cubit.dart';
 import 'change_goal_name_screen.dart';
 import 'linear_progress_screen.dart';
 

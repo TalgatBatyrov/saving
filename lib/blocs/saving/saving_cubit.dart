@@ -1,12 +1,14 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/statistic/statistic_cubit.dart';
 import 'package:saving/blocs/statistic_changes/statistic_changes_cubit.dart';
-import '../../repositories/savings/abstract_savings_repository.dart';
+
 import '../../models/saving/saving.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../repositories/savings/abstract_savings_repository.dart';
 
 part 'saving_cubit.freezed.dart';
 part 'saving_state.dart';
@@ -85,6 +87,7 @@ class SavingCubit extends Cubit<SavingState> {
   Future<void> createSaving({
     required String goal,
     required int total,
+    required String currencyState,
   }) async {
     try {
       if (state is! _Loaded) {

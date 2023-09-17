@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/currency/currency_cubit.dart';
 import 'package:saving/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
@@ -14,10 +18,8 @@ import 'package:saving/repositories/savings/savings_repository.dart';
 import 'package:saving/repositories/statistics/statistics_repository.dart';
 import 'package:saving/repositories/user/auth_repository.dart';
 import 'package:saving/router/router.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saving/theming/app_themes.dart';
+
 import 'blocs/theme/theme_cubit.dart';
 
 class SavingsApp extends StatefulWidget {
@@ -88,6 +90,7 @@ class _SavingsAppState extends State<SavingsApp> {
           BlocProvider(create: (_) => InternetConnectionCubit()),
           BlocProvider.value(value: _verificationCubit),
           BlocProvider.value(value: _statisticChandedCubit),
+          BlocProvider(create: (context) => CurrencyCubit()),
         ],
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (context, themeMode) {

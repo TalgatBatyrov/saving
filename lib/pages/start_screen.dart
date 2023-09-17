@@ -44,7 +44,6 @@ class _StartScreenState extends State<StartScreen> {
     await Future.delayed(const Duration(seconds: 3));
 
     final isFirstTime = await _isFirstTimeUser();
-
     isFirstTime
         ? context.router.replace(const OnBoardingRoute())
         : context.router.replace(const SplashRoute());

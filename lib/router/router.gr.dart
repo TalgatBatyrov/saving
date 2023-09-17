@@ -45,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SavingsPage(),
       );
     },
+    StartRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const StartScreen(),
+      );
+    },
     StatisticRoute.name: (routeData) {
       final args = routeData.argsAs<StatisticRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -65,12 +71,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashScreen(),
-      );
-    },
-    StartRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const StartScreen(),
       );
     },
   };
@@ -147,6 +147,20 @@ class SavingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [StartScreen]
+class StartRoute extends PageRouteInfo<void> {
+  const StartRoute({List<PageRouteInfo>? children})
+      : super(
+          StartRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'StartRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [StatisticPage]
 class StatisticRoute extends PageRouteInfo<StatisticRouteArgs> {
   StatisticRoute({
@@ -208,20 +222,6 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [StartScreen]
-class StartRoute extends PageRouteInfo<void> {
-  const StartRoute({List<PageRouteInfo>? children})
-      : super(
-          StartRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'StartRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

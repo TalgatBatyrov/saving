@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
+import 'package:saving/blocs/currency/currency_cubit.dart';
 import 'package:saving/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
+import 'package:saving/utilities/dialogs/logout_dialog.dart';
 import 'package:saving/widgets/add_saving_button.dart';
 import 'package:saving/widgets/button_translate.dart';
+import 'package:saving/widgets/currency_selection_modal.dart';
 import 'package:saving/widgets/savings_list.dart';
-import 'package:saving/utilities/dialogs/logout_dialog.dart';
+
 import '../../../app_widgets/app_empty.dart';
 import '../../../app_widgets/app_error.dart';
 import '../../../app_widgets/app_loading.dart';
@@ -58,6 +61,19 @@ class SavingsPage extends StatelessWidget {
             },
           ),
           actions: [
+            IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => const CurrencySelectionModal(),
+                );
+              },
+              icon: BlocBuilder<CurrencyCubit, Currency>(
+                builder: (context, state) {
+                  return Text(state.name);
+                },
+              ),
+            ),
             const ThemeToggleButton(),
             const AddSavingButton(),
             IconButton(

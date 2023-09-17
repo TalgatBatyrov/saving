@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:saving/blocs/currency/currency_cubit.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 
 class AddSavingButton extends StatelessWidget {
@@ -85,6 +86,8 @@ class AddSavingButton extends StatelessWidget {
                                 total: totalController.text.isNotEmpty
                                     ? int.parse(totalController.text)
                                     : 0,
+                                currencyState:
+                                    context.read<CurrencyCubit>().state.name,
                               );
 
                           goalController.clear();

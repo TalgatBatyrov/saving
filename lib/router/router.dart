@@ -4,12 +4,13 @@ import 'package:saving/models/saving/saving.dart';
 import 'package:saving/pages/on_boarding_page.dart';
 import 'package:saving/pages/reset_password_page.dart';
 import 'package:saving/pages/savings_page.dart';
-import 'package:saving/widgets/start_screen.dart';
-import '../pages/splash_screen.dart';
+import 'package:saving/pages/start_screen.dart';
+
 import '../pages/sign_up_page.dart';
 import '../pages/sing_in_page.dart';
-import '../pages/verify_email_page.dart';
+import '../pages/splash_screen.dart';
 import '../pages/statistic_page.dart';
+import '../pages/verify_email_page.dart';
 
 part 'router.gr.dart';
 

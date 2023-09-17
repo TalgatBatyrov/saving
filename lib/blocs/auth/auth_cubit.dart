@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:replay_bloc/replay_bloc.dart';
+
 import '../../repositories/user/auth_repository.dart';
 
 part 'auth_cubit.freezed.dart';
@@ -19,6 +20,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> _onAuthStateChanged(User? firebaseUser) async {
+    print('firebaseUser: $firebaseUser');
+
     if (firebaseUser == null) {
       emit(const AuthState.loggedOut());
     } else {
