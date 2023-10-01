@@ -138,6 +138,8 @@ class SavingCubit extends Cubit<SavingState> {
         money: noNegative,
       );
 
+      
+
       if (noNegative > 0) {
         _statisticCubit.addStatistic(
           money: moneyForStatistic,
