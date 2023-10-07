@@ -59,6 +59,7 @@ dependencies:
   story_view: ^0.15.0
   flutter_instagram_storyboard: ^0.0.8
   flutter_animation_progress_bar: ^2.3.1
+  flutter_native_splash: ^2.3.3
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,14 @@ flutter_icons:
   ios: true
   image_path: "assets/png/icon_app.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
+
+# for splash screen
+flutter_native_splash:
+  color: "#ffffff"
+  
+  image: assets/png/icon_app.png
+  
+  web: false 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

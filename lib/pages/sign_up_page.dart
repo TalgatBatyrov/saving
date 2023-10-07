@@ -6,6 +6,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/auth/auth_cubit.dart';
 import 'package:saving/blocs/verification_cubit/verification_cubit.dart';
 import 'package:saving/utilities/extensions/validation.dart';
+
 import '../router/router.dart';
 import '../widgets/custom_input_field.dart';
 
@@ -37,7 +38,9 @@ class _SignUpPageState extends State<SignUpPage> {
           password: _passwordController.text,
         )
         .onError((error, stackTrace) {
-      EasyLoading.showError(error.toString());
+      EasyLoading.showError(
+        error.toString(),
+      );
     }).whenComplete(() {
       EasyLoading.dismiss();
     });
