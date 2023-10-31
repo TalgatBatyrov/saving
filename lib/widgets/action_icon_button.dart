@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:saving/utilities/enums/app_enums.dart';
+import 'package:saving/utilities/extensions/app_extentions.dart';
 
 class ActionIconButton extends StatelessWidget {
   final Function() onPressed;
-  final IconData icon;
+  final ActionButton button;
 
   const ActionIconButton({
     super.key,
     required this.onPressed,
-    required this.icon,
+    required this.button,
   });
 
   @override
@@ -16,11 +19,7 @@ class ActionIconButton extends StatelessWidget {
       flex: 3,
       child: IconButton(
         onPressed: onPressed,
-        icon: Icon(
-          icon,
-          color: Colors.green,
-          size: 40,
-        ),
+        icon: Lottie.asset(button.asset, width: 50, height: 50),
       ),
     );
   }

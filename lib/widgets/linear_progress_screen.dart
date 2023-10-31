@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/saving/saving.dart';
 
 class LinearProgressScreen extends StatelessWidget {
@@ -12,6 +13,7 @@ class LinearProgressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LinearProgressIndicator(
+      borderRadius: BorderRadius.circular(5),
       valueColor: AlwaysStoppedAnimation<Color>(
         saving.isCompleted ? Colors.green : Colors.red,
       ),

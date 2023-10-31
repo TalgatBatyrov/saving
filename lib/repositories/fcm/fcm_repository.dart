@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'dart:convert';
 
 class FcmRepository {
   final FirebaseMessaging _firebaseMessaging;

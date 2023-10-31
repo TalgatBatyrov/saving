@@ -68,7 +68,7 @@ class SavingTile extends StatelessWidget {
                   const SizedBox(height: 5),
                   SavingItem(title: translate('left'), value: saving.remainder),
                   const SizedBox(height: 5),
-                  MoneyAction(saving: saving)
+                  MoneyAction(saving: saving),
                 ],
               ),
             ),

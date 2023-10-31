@@ -4,6 +4,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/models/saving/saving.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
+import 'package:saving/utilities/enums/app_enums.dart';
 import 'package:saving/widgets/action_icon_button.dart';
 import 'package:saving/widgets/money_input_field.dart';
 
@@ -51,11 +52,11 @@ class _MoneyActionState extends State<MoneyAction> {
       children: [
         MoneyInputField(addController: _addController),
         ActionIconButton(
-          icon: Icons.add,
+          button: ActionButton.add,
           onPressed: () => addSaving(savingCubit),
         ),
         ActionIconButton(
-          icon: Icons.remove,
+          button: ActionButton.remove,
           onPressed: () => addSaving(savingCubit, false),
         ),
       ],
