@@ -19,6 +19,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final router = context.router;
     return IntroductionScreen(
       pages: [
         PageViewModel(
@@ -65,7 +66,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isFirstTime', false);
 
-        context.router.replace(const SplashRoute());
+        router.replace(const SplashRoute());
       },
       scrollPhysics: const ClampingScrollPhysics(),
       showDoneButton: true,

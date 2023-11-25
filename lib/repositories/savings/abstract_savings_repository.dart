@@ -8,6 +8,10 @@ abstract class AbstractSavingsRepository {
     required String savingId,
     required int money,
   });
+  Future<void> updateSavingImage({
+    required String savingId,
+    required String? image,
+  });
   Future<void> changeSavingTitle({
     required String savingId,
     required String newTitle,

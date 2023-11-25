@@ -48,15 +48,10 @@ class SavingsRepository implements AbstractSavingsRepository {
       total: total,
       current: 0,
       userId: userId,
+      image: null,
     );
 
-    savingCollection
-        .doc(docId)
-        .set(saving.toJson())
-        .then((value) => print("Success add Saving"))
-        .catchError(
-          (error) => print("Failed to add Saving: $error"),
-        );
+    savingCollection.doc(docId).set(saving.toJson());
   }
 
   @override
@@ -64,13 +59,7 @@ class SavingsRepository implements AbstractSavingsRepository {
     final savingsPath = 'users/${saving.userId}/savings';
     final savingCollection = firestore.collection(savingsPath);
 
-    savingCollection
-        .doc(saving.id)
-        .delete()
-        .then((value) => print("Saving Deleted"))
-        .catchError(
-          (error) => print("Failed to delete user: $error"),
-        );
+    savingCollection.doc(saving.id).delete();
   }
 
   @override
@@ -88,6 +77,18 @@ class SavingsRepository implements AbstractSavingsRepository {
   }
 
   @override
+  Future<void> updateSavingImage({
+    required String savingId,
+    required String? image,
+  }) async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final savingsPath = 'users/$userId/savings';
+    final savingCollection = firestore.collection(savingsPath);
+
+    savingCollection.doc(savingId).update({'image': image});
+  }
+
+  @override
   Future<void> changeSavingTitle({
     required String savingId,
     required String newTitle,
@@ -95,10 +96,6 @@ class SavingsRepository implements AbstractSavingsRepository {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     final savingsPath = 'users/$userId/savings';
     final savingCollection = firestore.collection(savingsPath);
-    savingCollection
-        .doc(savingId)
-        .update({'goal': newTitle})
-        .then((value) => print("Saving Updated"))
-        .catchError((er) => print("Failed to update Saving: $er"));
+    savingCollection.doc(savingId).update({'goal': newTitle});
   }
 }

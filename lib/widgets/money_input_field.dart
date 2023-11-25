@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 
 class MoneyInputField extends StatelessWidget {
   const MoneyInputField({
@@ -12,18 +11,26 @@ class MoneyInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: TextField(
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          FilteringTextInputFormatter.deny(RegExp(r'^0+'))
-        ],
-        controller: _addController,
-        decoration: InputDecoration(
-          labelText: translate('add'),
-          border: const OutlineInputBorder(),
+    return TextField(
+      keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        FilteringTextInputFormatter.deny(RegExp(r'^0+'))
+      ],
+      controller: _addController,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
         ),
       ),
     );

@@ -32,8 +32,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       await FirebaseAuth.instance.sendPasswordResetEmail(
         email: emailTextInputController.text.trim(),
       );
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
+    } on FirebaseAuthException {
+      const snackBar = SnackBar(
+        content: Text('Произошла ошибка. Попробуйте позже'),
+        backgroundColor: Colors.red,
+      );
+
+      scaffoldMassager.showSnackBar(snackBar);
+      return;
     }
 
     const snackBar = SnackBar(
@@ -41,9 +47,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       backgroundColor: Colors.green,
     );
 
-    scaffoldMassager.showSnackBar(snackBar);
-
-    context.router.pop();
+    scaffoldMassager.showSnackBar(snackBar).closed.then((_) {
+      context.router.pop();
+    });
   }
 
   @override

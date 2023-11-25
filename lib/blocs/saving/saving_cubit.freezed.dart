@@ -19,6 +19,7 @@ mixin _$SavingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() refresh,
     required TResult Function(List<Saving> savings) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
@@ -27,6 +28,7 @@ mixin _$SavingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
+    TResult? Function()? refresh,
     TResult? Function(List<Saving> savings)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
@@ -35,6 +37,7 @@ mixin _$SavingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? refresh,
     TResult Function(List<Saving> savings)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
@@ -44,6 +47,7 @@ mixin _$SavingState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
     required TResult Function(_Empty value) empty,
@@ -52,6 +56,7 @@ mixin _$SavingState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
     TResult? Function(_Empty value)? empty,
@@ -60,6 +65,7 @@ mixin _$SavingState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     TResult Function(_Empty value)? empty,
@@ -124,6 +130,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() refresh,
     required TResult Function(List<Saving> savings) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
@@ -135,6 +142,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
+    TResult? Function()? refresh,
     TResult? Function(List<Saving> savings)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
@@ -146,6 +154,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? refresh,
     TResult Function(List<Saving> savings)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
@@ -161,6 +170,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
     required TResult Function(_Empty value) empty,
@@ -172,6 +182,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
     TResult? Function(_Empty value)? empty,
@@ -183,6 +194,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     TResult Function(_Empty value)? empty,
@@ -197,6 +209,125 @@ class _$_Loading implements _Loading {
 
 abstract class _Loading implements SavingState {
   const factory _Loading() = _$_Loading;
+}
+
+/// @nodoc
+abstract class _$$_RefreshCopyWith<$Res> {
+  factory _$$_RefreshCopyWith(
+          _$_Refresh value, $Res Function(_$_Refresh) then) =
+      __$$_RefreshCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RefreshCopyWithImpl<$Res>
+    extends _$SavingStateCopyWithImpl<$Res, _$_Refresh>
+    implements _$$_RefreshCopyWith<$Res> {
+  __$$_RefreshCopyWithImpl(_$_Refresh _value, $Res Function(_$_Refresh) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Refresh implements _Refresh {
+  const _$_Refresh();
+
+  @override
+  String toString() {
+    return 'SavingState.refresh()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Refresh);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() refresh,
+    required TResult Function(List<Saving> savings) loaded,
+    required TResult Function(String message) error,
+    required TResult Function() empty,
+  }) {
+    return refresh();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function()? refresh,
+    TResult? Function(List<Saving> savings)? loaded,
+    TResult? Function(String message)? error,
+    TResult? Function()? empty,
+  }) {
+    return refresh?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? refresh,
+    TResult Function(List<Saving> savings)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Refresh value) refresh,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Empty value) empty,
+  }) {
+    return refresh(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Refresh value)? refresh,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Empty value)? empty,
+  }) {
+    return refresh?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Refresh value)? refresh,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
+    TResult Function(_Empty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Refresh implements SavingState {
+  const factory _Refresh() = _$_Refresh;
 }
 
 /// @nodoc
@@ -268,6 +399,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() refresh,
     required TResult Function(List<Saving> savings) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
@@ -279,6 +411,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
+    TResult? Function()? refresh,
     TResult? Function(List<Saving> savings)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
@@ -290,6 +423,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? refresh,
     TResult Function(List<Saving> savings)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
@@ -305,6 +439,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
     required TResult Function(_Empty value) empty,
@@ -316,6 +451,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
     TResult? Function(_Empty value)? empty,
@@ -327,6 +463,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     TResult Function(_Empty value)? empty,
@@ -411,6 +548,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() refresh,
     required TResult Function(List<Saving> savings) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
@@ -422,6 +560,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
+    TResult? Function()? refresh,
     TResult? Function(List<Saving> savings)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
@@ -433,6 +572,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? refresh,
     TResult Function(List<Saving> savings)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
@@ -448,6 +588,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
     required TResult Function(_Empty value) empty,
@@ -459,6 +600,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
     TResult? Function(_Empty value)? empty,
@@ -470,6 +612,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     TResult Function(_Empty value)? empty,
@@ -528,6 +671,7 @@ class _$_Empty implements _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() refresh,
     required TResult Function(List<Saving> savings) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
@@ -539,6 +683,7 @@ class _$_Empty implements _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
+    TResult? Function()? refresh,
     TResult? Function(List<Saving> savings)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
@@ -550,6 +695,7 @@ class _$_Empty implements _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? refresh,
     TResult Function(List<Saving> savings)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
@@ -565,6 +711,7 @@ class _$_Empty implements _Empty {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
     required TResult Function(_Empty value) empty,
@@ -576,6 +723,7 @@ class _$_Empty implements _Empty {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
     TResult? Function(_Empty value)? empty,
@@ -587,6 +735,7 @@ class _$_Empty implements _Empty {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     TResult Function(_Empty value)? empty,

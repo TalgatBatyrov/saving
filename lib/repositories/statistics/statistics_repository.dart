@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../models/saving/saving.dart';
-import 'abstract_statistics_repository.dart';
 import '../../models/statistic/statistic.dart';
+import 'abstract_statistics_repository.dart';
 
 class StatisticsRepository implements AbstractStatisticsRepository {
   final FirebaseFirestore _firestore;
@@ -73,13 +74,7 @@ class StatisticsRepository implements AbstractStatisticsRepository {
         'users/$userId/savings/${statistic.savingId}/transactions';
     final statisticsCollection = _firestore.collection(statisticPath);
 
-    statisticsCollection
-        .doc(statistic.id)
-        .delete()
-        .then((value) => print("Statistic Deleted"))
-        .catchError(
-          (error) => print("Failed to delete user: $error"),
-        );
+    statisticsCollection.doc(statistic.id).delete();
   }
 
   @override
@@ -90,12 +85,6 @@ class StatisticsRepository implements AbstractStatisticsRepository {
         'users/$userId/savings/${statistic.savingId}/transactions';
     final statisticsCollection = _firestore.collection(statisticPath);
 
-    statisticsCollection
-        .doc(statistic.id)
-        .update(statistic.toJson())
-        .then((value) => print("Statistic Updated"))
-        .catchError(
-          (error) => print("Failed to update user: $error"),
-        );
+    statisticsCollection.doc(statistic.id).update(statistic.toJson());
   }
 }

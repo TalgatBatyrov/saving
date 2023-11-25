@@ -5,6 +5,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
 import 'package:saving/blocs/statistic_changes/statistic_changes_cubit.dart';
 import 'package:saving/utilities/dialogs/delete_dialog.dart';
+
 import '../models/statistic/statistic.dart';
 
 class StatisticTile extends StatefulWidget {

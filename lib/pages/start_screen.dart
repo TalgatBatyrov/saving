@@ -25,10 +25,11 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   void isWatchOnboarding() async {
+    final router = context.router;
     final isFirstTime = await _isFirstTimeUser();
     isFirstTime
-        ? context.router.replace(const OnBoardingRoute())
-        : context.router.replace(const SplashRoute());
+        ? router.replace(const OnBoardingRoute())
+        : router.replace(const SplashRoute());
   }
 
   @override

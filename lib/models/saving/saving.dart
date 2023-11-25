@@ -14,7 +14,11 @@ class Saving with _$Saving {
     @HiveField(2) required int total,
     @HiveField(3) required int current,
     @HiveField(4) required String userId,
+    @HiveField(5) required String? image,
   }) = _Saving;
+
+  // @override
+  // String get imageUrl => 'uploads/$id';
 
   int get percent => ((current / total) * 100).clamp(0, 100).ceil();
 

@@ -15,12 +15,9 @@ class ActionIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: IconButton(
-        onPressed: onPressed,
-        icon: Lottie.asset(button.asset, width: 50, height: 50),
-      ),
+    return IconButton(
+      onPressed: onPressed,
+      icon: Lottie.asset(button.asset, width: 50, height: 50),
     );
   }
 }

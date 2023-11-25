@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'abstract_auth_repository.dart';
+
 import '../../models/auth_user/auth_user.dart';
+import 'abstract_auth_repository.dart';
 
 class AuthRepository implements AbstractAuthRepository {
   final FirebaseAuth _firebaseAuth;
@@ -98,7 +99,7 @@ class AuthRepository implements AbstractAuthRepository {
 
   @override
   Future<void> signOut() async {
-    await _firebaseAuth.signOut().whenComplete(() => print('Signed out'));
+    await _firebaseAuth.signOut();
   }
 
   @override
