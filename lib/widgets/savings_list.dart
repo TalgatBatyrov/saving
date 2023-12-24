@@ -1,5 +1,6 @@
-import 'package:saving/widgets/saving_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:saving/widgets/saving_tile.dart';
+
 import '../models/saving/saving.dart';
 
 class SavingsList extends StatelessWidget {
@@ -8,7 +9,8 @@ class SavingsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, i) => const Divider(),
       padding: const EdgeInsets.all(8),
       physics: const BouncingScrollPhysics(),
       itemCount: savings.length,

@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:saving/blocs/profile_cubit/profile_cubit.dart';
@@ -112,7 +110,6 @@ class SavingCubit extends Cubit<SavingState> {
       }
 
       await _savingsRepository.deleteSaving(saving);
-      await FirebaseStorage.instance.ref(saving.id).delete();
 
       _statisticCubit.deleteStatistics(saving);
     } catch (e) {
@@ -153,42 +150,6 @@ class SavingCubit extends Cubit<SavingState> {
       }
     } catch (e) {
       emit(SavingState.error(e.toString()));
-    }
-  }
-
-  Future<void> updateSavingImage({
-    required String savingId,
-    required String? image,
-  }) async {
-    try {
-      if (state is! _Loaded) {
-        emit(const SavingState.loading());
-      }
-
-      await _savingsRepository.updateSavingImage(
-        savingId: savingId,
-        image: image,
-      );
-    } catch (e) {
-      emit(SavingState.error(e.toString()));
-    }
-  }
-
-  Future<void> uploadImage(String savingId, File file) async {
-    try {
-      final ref = FirebaseStorage.instance.ref(savingId);
-      final uploadTask = ref.putFile(file);
-
-      final snapshot = await uploadTask;
-      final String downloadURL = await snapshot.ref.getDownloadURL();
-
-      updateSavingImage(
-        savingId: savingId,
-        image: downloadURL,
-      );
-    } on FirebaseException {
-      // Handle error
-      rethrow;
     }
   }
 

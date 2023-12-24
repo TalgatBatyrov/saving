@@ -30,8 +30,6 @@ mixin _$Saving {
   int get current => throw _privateConstructorUsedError;
   @HiveField(4)
   String get userId => throw _privateConstructorUsedError;
-  @HiveField(5)
-  String? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,8 +46,7 @@ abstract class $SavingCopyWith<$Res> {
       @HiveField(1) String goal,
       @HiveField(2) int total,
       @HiveField(3) int current,
-      @HiveField(4) String userId,
-      @HiveField(5) String? image});
+      @HiveField(4) String userId});
 }
 
 /// @nodoc
@@ -70,7 +67,6 @@ class _$SavingCopyWithImpl<$Res, $Val extends Saving>
     Object? total = null,
     Object? current = null,
     Object? userId = null,
-    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -93,10 +89,6 @@ class _$SavingCopyWithImpl<$Res, $Val extends Saving>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -112,8 +104,7 @@ abstract class _$$_SavingCopyWith<$Res> implements $SavingCopyWith<$Res> {
       @HiveField(1) String goal,
       @HiveField(2) int total,
       @HiveField(3) int current,
-      @HiveField(4) String userId,
-      @HiveField(5) String? image});
+      @HiveField(4) String userId});
 }
 
 /// @nodoc
@@ -131,7 +122,6 @@ class __$$_SavingCopyWithImpl<$Res>
     Object? total = null,
     Object? current = null,
     Object? userId = null,
-    Object? image = freezed,
   }) {
     return _then(_$_Saving(
       id: null == id
@@ -154,10 +144,6 @@ class __$$_SavingCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -170,8 +156,7 @@ class _$_Saving extends _Saving {
       @HiveField(1) required this.goal,
       @HiveField(2) required this.total,
       @HiveField(3) required this.current,
-      @HiveField(4) required this.userId,
-      @HiveField(5) required this.image})
+      @HiveField(4) required this.userId})
       : super._();
 
   factory _$_Saving.fromJson(Map<String, dynamic> json) =>
@@ -192,13 +177,10 @@ class _$_Saving extends _Saving {
   @override
   @HiveField(4)
   final String userId;
-  @override
-  @HiveField(5)
-  final String? image;
 
   @override
   String toString() {
-    return 'Saving(id: $id, goal: $goal, total: $total, current: $current, userId: $userId, image: $image)';
+    return 'Saving(id: $id, goal: $goal, total: $total, current: $current, userId: $userId)';
   }
 
   @override
@@ -210,14 +192,13 @@ class _$_Saving extends _Saving {
             (identical(other.goal, goal) || other.goal == goal) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.current, current) || other.current == current) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, goal, total, current, userId, image);
+      Object.hash(runtimeType, id, goal, total, current, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -239,8 +220,7 @@ abstract class _Saving extends Saving {
       @HiveField(1) required final String goal,
       @HiveField(2) required final int total,
       @HiveField(3) required final int current,
-      @HiveField(4) required final String userId,
-      @HiveField(5) required final String? image}) = _$_Saving;
+      @HiveField(4) required final String userId}) = _$_Saving;
   _Saving._() : super._();
 
   factory _Saving.fromJson(Map<String, dynamic> json) = _$_Saving.fromJson;
@@ -260,9 +240,6 @@ abstract class _Saving extends Saving {
   @override
   @HiveField(4)
   String get userId;
-  @override
-  @HiveField(5)
-  String? get image;
   @override
   @JsonKey(ignore: true)
   _$$_SavingCopyWith<_$_Saving> get copyWith =>

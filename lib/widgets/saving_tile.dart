@@ -43,6 +43,12 @@ class _SavingTileState extends State<SavingTile>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<SavingCubit, SavingState>(
       builder: (context, state) => BlocProvider(

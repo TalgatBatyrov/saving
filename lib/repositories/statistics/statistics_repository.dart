@@ -16,10 +16,8 @@ class StatisticsRepository implements AbstractStatisticsRepository {
     final statisticPath = 'users/$userId/savings/$savingId/transactions';
     final statisticsCollection = _firestore.collection(statisticPath);
 
-    final response = await statisticsCollection
-        .where('savingId', isEqualTo: savingId)
-        .orderBy('date', descending: true)
-        .get();
+    final response =
+        await statisticsCollection.orderBy('date', descending: true).get();
 
     final statistiscList = response.docs.map((e) {
       return Statistic.fromJson(e.data());

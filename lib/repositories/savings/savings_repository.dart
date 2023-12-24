@@ -48,7 +48,6 @@ class SavingsRepository implements AbstractSavingsRepository {
       total: total,
       current: 0,
       userId: userId,
-      image: null,
     );
 
     savingCollection.doc(docId).set(saving.toJson());
@@ -76,17 +75,17 @@ class SavingsRepository implements AbstractSavingsRepository {
     savingCollection.doc(savingId).update({'current': money});
   }
 
-  @override
-  Future<void> updateSavingImage({
-    required String savingId,
-    required String? image,
-  }) async {
-    final userId = FirebaseAuth.instance.currentUser!.uid;
-    final savingsPath = 'users/$userId/savings';
-    final savingCollection = firestore.collection(savingsPath);
+  // @override
+  // Future<void> updateSavingImage({
+  //   required String savingId,
+  //   required String? image,
+  // }) async {
+  //   final userId = FirebaseAuth.instance.currentUser!.uid;
+  //   final savingsPath = 'users/$userId/savings';
+  //   final savingCollection = firestore.collection(savingsPath);
 
-    savingCollection.doc(savingId).update({'image': image});
-  }
+  //   savingCollection.doc(savingId).update({'image': image});
+  // }
 
   @override
   Future<void> changeSavingTitle({

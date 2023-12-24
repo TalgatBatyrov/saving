@@ -22,14 +22,13 @@ class SavingAdapter extends TypeAdapter<Saving> {
       total: fields[2] as int,
       current: fields[3] as int,
       userId: fields[4] as String,
-      image: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Saving obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -39,9 +38,7 @@ class SavingAdapter extends TypeAdapter<Saving> {
       ..writeByte(3)
       ..write(obj.current)
       ..writeByte(4)
-      ..write(obj.userId)
-      ..writeByte(5)
-      ..write(obj.image);
+      ..write(obj.userId);
   }
 
   @override
@@ -65,7 +62,6 @@ _$_Saving _$$_SavingFromJson(Map<String, dynamic> json) => _$_Saving(
       total: json['total'] as int,
       current: json['current'] as int,
       userId: json['userId'] as String,
-      image: json['image'] as String?,
     );
 
 Map<String, dynamic> _$$_SavingToJson(_$_Saving instance) => <String, dynamic>{
@@ -74,5 +70,4 @@ Map<String, dynamic> _$$_SavingToJson(_$_Saving instance) => <String, dynamic>{
       'total': instance.total,
       'current': instance.current,
       'userId': instance.userId,
-      'image': instance.image,
     };

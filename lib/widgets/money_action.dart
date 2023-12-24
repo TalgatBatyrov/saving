@@ -45,6 +45,8 @@ class _MoneyActionState extends State<MoneyAction> {
     }
     _addController.clear();
     Navigator.pop(context);
+
+    context.popRoute();
   }
 
   @override
@@ -83,7 +85,7 @@ class _MoneyActionState extends State<MoneyAction> {
                                   addController: _addController)),
                           ActionIconButton(
                             button: ActionButton.add,
-                            onPressed: () => addSaving(savingCubit, false),
+                            onPressed: () => addSaving(savingCubit, true),
                           ),
                           ActionIconButton(
                             button: ActionButton.remove,
@@ -107,31 +109,6 @@ class _MoneyActionState extends State<MoneyAction> {
               context.router.push(StatisticRoute(saving: widget.saving)),
           icon: const Icon(Icons.bar_chart),
         ),
-        // GestureDetector(
-        //   onTap: () async {
-        //     showDialog<bool>(
-        //       context: context,
-        //       builder: (context) {
-        //         return AlertDialog(
-        //           insetPadding: const EdgeInsets.symmetric(horizontal: 16),
-        //           iconPadding: const EdgeInsets.only(top: 6, right: 12),
-        //           icon: Align(
-        //             alignment: Alignment.topRight,
-        //             child: IconButton(
-        //               onPressed: () => Navigator.pop(context),
-        //               icon: const Icon(Icons.close),
-        //             ),
-        //           ),
-        //           contentPadding: const EdgeInsets.all(16),
-        //           content: OrderPhotoModal(savingId: widget.saving.id),
-        //         );
-        //       },
-        //     );
-        //   },
-        //   child: const Center(
-        //     child: Icon(Icons.camera),
-        //   ),
-        // ),
       ],
     );
   }
