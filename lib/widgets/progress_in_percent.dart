@@ -13,25 +13,25 @@ class ProgressInPercent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Visibility(
+          replacement: Text(
+            '${saving.percent.ceil()}%',
+            style: const TextStyle(
+              fontSize: 18,
+              shadows: [
+                Shadow(
+                  color: Colors.black54,
+                  offset: Offset(1, 1),
+                  blurRadius: 2,
+                ),
+              ],
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           visible: saving.isCompleted,
           child: Text(translate('goal_achieved')),
-        ),
-        Text(
-          '${saving.percent.ceil()}%',
-          style: const TextStyle(
-            fontSize: 18,
-            shadows: [
-              Shadow(
-                color: Colors.black54,
-                offset: Offset(1, 1),
-                blurRadius: 2,
-              ),
-            ],
-            fontWeight: FontWeight.bold,
-          ),
         ),
       ],
     );

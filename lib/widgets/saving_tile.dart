@@ -5,8 +5,6 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/widgets/dismiss_widget.dart';
 import 'package:saving/widgets/money_action.dart';
-import 'package:saving/widgets/progress_in_percent.dart';
-import 'package:saving/widgets/saving_item.dart';
 import 'package:saving/widgets/start_action_pane.dart';
 
 import '../blocs/toggle/toggle_cubit.dart';
@@ -89,39 +87,37 @@ class _SavingTileState extends State<SavingTile>
                     ),
                   ],
                   borderRadius: const BorderRadius.all(Radius.circular(12)),
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Colors.blue,
-                      animation.value!,
-                    ],
-                  ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ChangeGoalNameScreen(saving: widget.saving),
                       const SizedBox(height: 5),
-                      ProgressInPercent(saving: widget.saving),
-                      LinearProgressScreen(saving: widget.saving),
-                      const SizedBox(height: 5),
-                      SavingItem(
-                          title: translate('target'),
-                          value: widget.saving.total),
-                      const SizedBox(height: 5),
-                      SavingItem(
-                          title: translate('accumulated'),
-                          value: widget.saving.current),
-                      const SizedBox(height: 5),
-                      SavingItem(
-                          title: translate('left'),
-                          value: widget.saving.remainder),
-                      const SizedBox(height: 5),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 10,
+                        runSpacing: 10,
+                        verticalDirection: VerticalDirection.down,
+                        children: [
+                          SavingContainer(
+                            title: translate('target'),
+                            value: widget.saving.total,
+                          ),
+                          SavingContainer(
+                            title: translate('accumulated'),
+                            value: widget.saving.current,
+                          ),
+                          SavingContainer(
+                            title: translate('left'),
+                            value: widget.saving.remainder,
+                          ),
+                          LinearProgressScreen(saving: widget.saving),
+                        ],
+                      ),
                       MoneyAction(saving: widget.saving),
                     ],
                   ),
@@ -130,6 +126,50 @@ class _SavingTileState extends State<SavingTile>
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SavingContainer extends StatelessWidget {
+  final String title;
+  final int value;
+  const SavingContainer({
+    super.key,
+    required this.title,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      width: 150,
+      height: 150,
+      decoration: const BoxDecoration(
+        color: Colors.black38,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            value.toString(),
+            style: const TextStyle(
+              fontSize: 50,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }

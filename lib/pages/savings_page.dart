@@ -91,12 +91,12 @@ class SavingsPage extends StatelessWidget {
         ),
         body: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.blue, Colors.green],
-            ),
-          ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.topRight,
+              //   end: Alignment.bottomLeft,
+              //   colors: [Colors.blue, Colors.green],
+              // ),
+              ),
           child: BlocBuilder<SavingCubit, SavingState>(
             builder: (context, state) {
               return state.when(

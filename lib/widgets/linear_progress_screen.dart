@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saving/widgets/progress_in_percent.dart';
 
 import '../models/saving/saving.dart';
 
@@ -17,28 +18,30 @@ class LinearProgressScreen extends StatelessWidget {
       duration: const Duration(seconds: 1),
       builder: (context, value, child) {
         return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: const Offset(0, 3),
-              ),
-            ],
+          padding: const EdgeInsets.all(16),
+          width: 150,
+          height: 150,
+          decoration: const BoxDecoration(
+            color: Colors.black38,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: LinearProgressIndicator(
-              backgroundColor:
-                  saving.isCompleted ? Colors.green[100] : Colors.red[100],
-              valueColor: AlwaysStoppedAnimation<Color>(
-                saving.isCompleted ? Colors.green : Colors.red,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
+            fit: StackFit.expand,
+            children: [
+              CircularProgressIndicator(
+                strokeWidth: 10,
+                backgroundColor:
+                    saving.isCompleted ? Colors.green[100] : Colors.red[100],
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  saving.isCompleted ? Colors.green : Colors.red,
+                ),
+                // minHeight: 15,
+                value: value,
               ),
-              minHeight: 15,
-              value: value,
-            ),
+              ProgressInPercent(saving: saving),
+            ],
           ),
         );
       },
