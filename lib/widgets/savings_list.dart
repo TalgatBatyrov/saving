@@ -11,7 +11,6 @@ class SavingsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       separatorBuilder: (context, i) => const Divider(),
-      padding: const EdgeInsets.all(8),
       physics: const BouncingScrollPhysics(),
       itemCount: savings.length,
       itemBuilder: (context, i) => SavingTile(saving: savings[i]),

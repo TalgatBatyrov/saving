@@ -17,7 +17,7 @@ class ActionIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      icon: Lottie.asset(button.asset, width: 50, height: 50),
+      icon: Lottie.asset(button.asset, width: 100, height: 100),
     );
   }
 }

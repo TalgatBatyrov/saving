@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
+import 'package:saving/router/router.dart';
 import 'package:saving/widgets/dismiss_widget.dart';
 import 'package:saving/widgets/money_action.dart';
 import 'package:saving/widgets/start_action_pane.dart';
@@ -76,49 +78,63 @@ class _SavingTileState extends State<SavingTile>
           child: AnimatedBuilder(
             animation: animation,
             builder: (context, child) {
-              return Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 2,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+              return GestureDetector(
+                onTap: () {
+                  context.router.push(StatisticRoute(saving: widget.saving));
+                },
+                child: SizedBox(
+                  width: double.infinity,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      const SizedBox(height: 10),
                       ChangeGoalNameScreen(saving: widget.saving),
-                      const SizedBox(height: 5),
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        spacing: 10,
-                        runSpacing: 10,
-                        verticalDirection: VerticalDirection.down,
+                      const SizedBox(height: 10),
+                      Stack(
+                        alignment: Alignment.center,
                         children: [
-                          SavingContainer(
-                            title: translate('target'),
-                            value: widget.saving.total,
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 10,
+                            runSpacing: 10,
+                            verticalDirection: VerticalDirection.down,
+                            children: [
+                              SavingContainer(
+                                  title: translate('target'),
+                                  value: widget.saving.total,
+                                  color: const Color.fromARGB(190, 20, 20, 20),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(50),
+                                    topRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(50),
+                                  )),
+                              SavingContainer(
+                                  title: translate('accumulated'),
+                                  value: widget.saving.current,
+                                  color: const Color.fromARGB(190, 20, 20, 20),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    topRight: Radius.circular(50),
+                                    bottomLeft: Radius.circular(50),
+                                    bottomRight: Radius.circular(12),
+                                  )),
+                              SavingContainer(
+                                title: translate('left'),
+                                value: widget.saving.remainder,
+                                color: const Color.fromARGB(190, 20, 20, 20),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(50),
+                                  bottomLeft: Radius.circular(50),
+                                  bottomRight: Radius.circular(12),
+                                ),
+                              ),
+                              LinearProgressScreen(saving: widget.saving),
+                            ],
                           ),
-                          SavingContainer(
-                            title: translate('accumulated'),
-                            value: widget.saving.current,
-                          ),
-                          SavingContainer(
-                            title: translate('left'),
-                            value: widget.saving.remainder,
-                          ),
-                          LinearProgressScreen(saving: widget.saving),
+                          MoneyAction(saving: widget.saving),
                         ],
                       ),
-                      MoneyAction(saving: widget.saving),
                     ],
                   ),
                 ),
@@ -133,11 +149,15 @@ class _SavingTileState extends State<SavingTile>
 
 class SavingContainer extends StatelessWidget {
   final String title;
+  final Color color;
   final int value;
+  final BorderRadiusGeometry borderRadius;
   const SavingContainer({
     super.key,
     required this.title,
     required this.value,
+    required this.color,
+    required this.borderRadius,
   });
 
   @override
@@ -146,25 +166,27 @@ class SavingContainer extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       width: 150,
       height: 150,
-      decoration: const BoxDecoration(
-        color: Colors.black38,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: borderRadius,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(height: 10),
           Text(
             title,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 20,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
+            textAlign: TextAlign.center,
             value.toString(),
             style: const TextStyle(
-              fontSize: 50,
+              fontSize: 30,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

@@ -49,7 +49,6 @@ class SavingsPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
           title: BlocBuilder<ProfileCubit, ProfileState>(
             builder: (context, state) {
               return state.when(
@@ -89,25 +88,16 @@ class SavingsPage extends StatelessWidget {
             ),
           ],
         ),
-        body: Container(
-          decoration: const BoxDecoration(
-              // gradient: LinearGradient(
-              //   begin: Alignment.topRight,
-              //   end: Alignment.bottomLeft,
-              //   colors: [Colors.blue, Colors.green],
-              // ),
-              ),
-          child: BlocBuilder<SavingCubit, SavingState>(
-            builder: (context, state) {
-              return state.when(
-                refresh: () => const AppLoading(),
-                loading: () => const AppLoading(),
-                loaded: (savings) => SavingsList(savings: savings),
-                error: (errorMessage) => AppError(message: errorMessage),
-                empty: () => AppEmpty(message: translate('no_targets')),
-              );
-            },
-          ),
+        body: BlocBuilder<SavingCubit, SavingState>(
+          builder: (context, state) {
+            return state.when(
+              refresh: () => const AppLoading(),
+              loading: () => const AppLoading(),
+              loaded: (savings) => SavingsList(savings: savings),
+              error: (errorMessage) => AppError(message: errorMessage),
+              empty: () => AppEmpty(message: translate('no_targets')),
+            );
+          },
         ),
       ),
     );

@@ -12,6 +12,11 @@ class MoneyInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
       keyboardType: TextInputType.number,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
@@ -28,6 +33,9 @@ class MoneyInputField extends StatelessWidget {
           ),
         ),
         focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),

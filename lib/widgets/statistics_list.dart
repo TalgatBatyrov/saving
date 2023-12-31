@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/currency/currency_cubit.dart';
-import 'package:saving/widgets/currency_selection_modal.dart';
 import 'package:saving/widgets/statistic_tile.dart';
 
 import '../models/saving/saving.dart';
@@ -32,32 +31,46 @@ class StatisticsList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Card(
-          color: const Color.fromARGB(255, 27, 202, 176),
+          color: const Color.fromARGB(105, 20, 20, 20),
           elevation: 4,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
-                leading: IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) => const CurrencySelectionModal(),
-                    );
+                textColor: Colors.white,
+                title: Text(translate('average_value'),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+                trailing: BlocBuilder<CurrencyCubit, Currency>(
+                  builder: (context, state) {
+                    return Text('${average.round()} ${state.name}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ));
                   },
-                  icon: BlocBuilder<CurrencyCubit, Currency>(
-                    builder: (context, state) {
-                      return Text(state.name);
-                    },
-                  ),
                 ),
-                title: Text(translate('average_value')),
-                trailing: Text('${average.round()}'),
               ),
               average != 0
                   ? ListTile(
-                      leading: Text(translate('days')),
-                      title: Text(translate('pace_yet')),
-                      trailing: Text('${dayForOver > 0 ? dayForOver : 0}'),
+                      textColor: Colors.white,
+                      title: Text(translate('pace_yet'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      trailing: Text(
+                          '${dayForOver > 0 ? dayForOver : 0} ${translate('days')}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
                     )
                   : const SizedBox.shrink(),
             ],

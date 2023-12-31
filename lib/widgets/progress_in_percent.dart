@@ -12,28 +12,27 @@ class ProgressInPercent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Visibility(
-          replacement: Text(
-            '${saving.percent.ceil()}%',
-            style: const TextStyle(
-              fontSize: 18,
-              shadows: [
-                Shadow(
-                  color: Colors.black54,
-                  offset: Offset(1, 1),
-                  blurRadius: 2,
-                ),
-              ],
-              fontWeight: FontWeight.bold,
-            ),
+    return Visibility(
+      replacement: Center(
+        child: Text(
+          '${saving.percent.ceil()}%',
+          style: const TextStyle(
+            fontSize: 30,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
-          visible: saving.isCompleted,
-          child: Text(translate('goal_achieved')),
         ),
-      ],
+      ),
+      visible: saving.isCompleted,
+      child: Center(
+        child: Text(translate('goal_achieved'),
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )),
+      ),
     );
   }
 }

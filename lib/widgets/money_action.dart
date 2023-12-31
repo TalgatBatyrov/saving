@@ -5,7 +5,6 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:saving/blocs/saving/saving_cubit.dart';
 import 'package:saving/models/saving/saving.dart';
 import 'package:saving/repositories/fcm/fcm_repository.dart';
-import 'package:saving/router/router.dart';
 import 'package:saving/utilities/enums/app_enums.dart';
 import 'package:saving/widgets/action_icon_button.dart';
 import 'package:saving/widgets/money_input_field.dart';
@@ -53,63 +52,49 @@ class _MoneyActionState extends State<MoneyAction> {
   Widget build(BuildContext context) {
     final savingCubit = context.read<SavingCubit>();
 
-    return Row(
-      children: [
-        const Spacer(),
-        ActionIconButton(
-          button: ActionButton.add,
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return Container(
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [Colors.blue, Colors.green],
-                    ),
+    return ActionIconButton(
+      button: ActionButton.add,
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: const EdgeInsets.all(16.0),
+              color: const Color.fromARGB(190, 20, 20, 20),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: MoneyInputField(addController: _addController),
                   ),
-                  child: Column(
+                  Row(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              child: MoneyInputField(
-                                  addController: _addController)),
-                          ActionIconButton(
-                            button: ActionButton.add,
-                            onPressed: () => addSaving(savingCubit, true),
-                          ),
-                          ActionIconButton(
-                            button: ActionButton.remove,
-                            onPressed: () => addSaving(savingCubit, false),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(translate('cancel')),
-                          ),
-                        ],
+                      ActionIconButton(
+                        button: ActionButton.add,
+                        onPressed: () => addSaving(savingCubit, true),
+                      ),
+                      ActionIconButton(
+                        button: ActionButton.remove,
+                        onPressed: () => addSaving(savingCubit, false),
+                      ),
+                      OutlinedButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(translate('cancel'),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            )),
                       ),
                     ],
                   ),
-                );
-              },
+                  const Spacer(),
+                ],
+              ),
             );
           },
-        ),
-        IconButton(
-          onPressed: () =>
-              context.router.push(StatisticRoute(saving: widget.saving)),
-          icon: const Icon(Icons.bar_chart),
-        ),
-      ],
+        );
+      },
     );
   }
 }

@@ -67,7 +67,9 @@ class _StatisticTileState extends State<StatisticTile> {
         ],
       ),
       child: Card(
-        color: widget.statistic.money > 0 ? Colors.green : Colors.red,
+        color: widget.statistic.money > 0
+            ? const Color.fromARGB(190, 20, 20, 20)
+            : Colors.red,
         elevation: 4,
         child: isEdit
             ? Padding(
