@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:saving/blocs/statistic/statistic_cubit.dart';
-import 'package:saving/repositories/statistics/abstract_statistics_repository.dart';
-import 'package:saving/repositories/statistics/statistics_repository.dart';
+import 'package:saving/features/statistic/bloc/statistic/statistic_cubit.dart';
+import 'package:saving/features/statistic/repository/abstract_statistics_repository.dart';
+import 'package:saving/features/statistic/repository/statistics_repository.dart';
 
 void main() {
   group('StatisticCubit', () {

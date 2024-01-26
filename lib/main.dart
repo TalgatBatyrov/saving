@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:saving/services/push_notifications.dart';
+import 'package:saving/core/services/push_notifications.dart';
 
+import 'app/app.dart';
+import 'core/services/local_cache.dart';
 import 'firebase_options.dart';
-import 'local_cache.dart';
-import 'savings_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ void main() async {
   runApp(
     LocalizedApp(
       delegate,
-      const SavingsApp(),
+      const App(),
     ),
   );
 }
