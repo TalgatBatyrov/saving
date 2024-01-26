@@ -14,7 +14,6 @@ class GoalTitle extends StatelessWidget {
     return Text(
       saving.goal,
       style: const TextStyle(
-        color: Colors.white,
         fontSize: 25,
         fontWeight: FontWeight.bold,
       ),

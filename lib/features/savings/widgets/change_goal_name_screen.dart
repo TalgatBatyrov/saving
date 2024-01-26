@@ -47,10 +47,6 @@ class _ChangeGoalNameScreenState extends State<ChangeGoalNameScreen> {
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width * 0.8,
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(190, 20, 20, 20),
-            borderRadius: BorderRadius.circular(10),
-          ),
           child: Visibility(
             replacement: GoalTitle(saving: widget.saving),
             visible: state,
@@ -62,7 +58,6 @@ class _ChangeGoalNameScreenState extends State<ChangeGoalNameScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
                       style: const TextStyle(
-                        color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -71,19 +66,14 @@ class _ChangeGoalNameScreenState extends State<ChangeGoalNameScreen> {
                         contentPadding: const EdgeInsets.all(8),
                         labelText: translate('target_name'),
                         labelStyle: const TextStyle(
-                          color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                         border: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
+                          borderSide: BorderSide(),
                         ),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
+                          borderSide: BorderSide(),
                         ),
                       ),
                     ),
@@ -98,7 +88,7 @@ class _ChangeGoalNameScreenState extends State<ChangeGoalNameScreen> {
                       );
                       context.read<ToggleVisibilityChangeGoalCubit>().toggle();
                     },
-                    icon: const Icon(Icons.edit, color: Colors.white),
+                    icon: const Icon(Icons.edit),
                   ),
                 ),
               ],
